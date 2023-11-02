@@ -20,6 +20,7 @@ formData.append('source_url', document.getElementById("source_url").value);
      
       formData.append('original_lead_submit_date', document.getElementById('original_lead_submit_date').value);
       formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+      formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
       formData.append('traffic_source_id', document.getElementById('traffic_source_id').value);
       formData.append('lead_token', document.getElementById('lead_token').value);
 
