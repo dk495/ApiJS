@@ -5,8 +5,8 @@
             formData.append('key', '52097ea3-a539-454a-b9b3-4726aedd066c');
             formData.append('caller_number', phone_home);
             formData.append('call_time_stamp', document.getElementById('call_time_stamp').value);  
-            formData.append('first_name', document.getElementById('first_name').value);
-            formData.append('last_name', document.getElementById('last_name').value);              
+            formData.append('firstname', document.getElementById('first_name').value);
+            formData.append('lastname', document.getElementById('last_name').value);              
             formData.append('email', document.getElementById('email').value);
             formData.append('accident_date', document.getElementById('accident_date').value);
            
