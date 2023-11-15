@@ -65,9 +65,4 @@
 
 
 
-  <!-- Custom script for form submission and notification -->
-   <script>
-        document.addEventListener("contextmenu", function (e) {
-            e.preventDefault(); // Prevent the context menu from appearing
-        });
-</script>
+
