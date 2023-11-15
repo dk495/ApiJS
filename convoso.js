@@ -63,7 +63,7 @@
         });
 
 
-</script>
+
 
   <!-- Custom script for form submission and notification -->
    <script>
