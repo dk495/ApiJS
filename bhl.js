@@ -8,7 +8,7 @@
 
      
       formData.append('zip', document.getElementById('zip').value);
-      formData.append('city', document.getElementById('city').value);
+      
       formData.append('state', document.getElementById('state').value);
 
         
