@@ -9,7 +9,7 @@ formData.append('first_name', document.getElementById('first_name').value);
 formData.append('last_name', document.getElementById('last_name').value);
 formData.append('dob', document.getElementById('dob').value);
 formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
-formData.append('trusted_form', document.getElementById('trusted_form').value);
+
 
 
 
