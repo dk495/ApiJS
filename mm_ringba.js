@@ -13,7 +13,7 @@ formData.append('tcpa_opt_in', document.getElementById('tcpa_opt_in').value);
      
      
 
-      const url = 'https://display.ringba.com/enrich/2289569401365595892?lead_token=24f5d74cc5184fd9921db0109a123c47&traffic_source_id=11197?' + new URLSearchParams(formData).toString();
+      const url = 'https://display.ringba.com/enrich/2289569401365595892?lead_token=24f5d74cc5184fd9921db0109a123c47&traffic_source_id=11197&' + new URLSearchParams(formData).toString();
 
       const xhr = new XMLHttpRequest();
       xhr.open('POST', url);
