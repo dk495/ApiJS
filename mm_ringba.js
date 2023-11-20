@@ -1,7 +1,7 @@
 document.getElementById('leadForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const phone_home = '1' + document.getElementById('caller_id').value;
-      const formData = new FormData(this);
+      const formData = new FormData();
    
       formData.append('callerid', phone_home);
 
