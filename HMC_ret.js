@@ -2,8 +2,11 @@ function getCurrentTimeESTMinus3Days() {
   // Get current time in UTC
   var currentUTCTime = new Date();
 
-  // Convert to Eastern Standard Time (EST)
-  var currentESTTime = new Date(currentUTCTime.toLocaleString("en-US", { timeZone: "America/New_York" }));
+  // Get UTC offset for Eastern Standard Time (EST) in minutes
+  var estOffsetMinutes = -5 * 60; // EST is UTC-5
+
+  // Calculate the EST time by adding the offset
+  var currentESTTime = new Date(currentUTCTime.getTime() + estOffsetMinutes * 60 * 1000);
 
   // Subtract 3 days
   currentESTTime.setDate(currentESTTime.getDate() - 3);
@@ -15,6 +18,10 @@ function getCurrentTimeESTMinus3Days() {
 
   return formattedResult;
 }
+
+// Call the function and log the result
+
+
 
 // Call the function and log the result
 console.log(getCurrentTimeESTMinus3Days());
