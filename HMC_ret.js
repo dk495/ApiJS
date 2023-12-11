@@ -13,14 +13,12 @@ function getCurrentTimeESTMinus3Days() {
 
   // Format the result in YYYY-MM-DDTHH:mmZZ format
   var formattedResult =
-    currentESTTime.toISOString().slice(0, 19).replace('T', ' ') +
+    currentESTTime.toISOString().slice(0, 10) + 'T' +
+    currentESTTime.toISOString().slice(11, 19) +
     'EST';
 
   return formattedResult;
 }
-
-
-
 
 // Call the function and log the result
 
