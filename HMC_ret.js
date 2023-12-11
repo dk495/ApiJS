@@ -1,3 +1,30 @@
+function getCurrentTimestampMinus3Days() {
+  // Get current timestamp in milliseconds
+  var currentTimestamp = new Date().getTime();
+
+  // Subtract 3 days (in milliseconds)
+  var threeDaysInMillis = 3 * 24 * 60 * 60 * 1000;
+  var newTimestamp = currentTimestamp - threeDaysInMillis;
+
+  // Create a new Date object with the adjusted timestamp
+  var adjustedDate = new Date(newTimestamp);
+
+  // Format the result in HH:MM:SS DD-MM-YYYY format
+  var formattedResult =
+    ('0' + adjustedDate.getHours()).slice(-2) +
+    ':' +
+    ('0' + adjustedDate.getMinutes()).slice(-2) +
+    ':' +
+    ('0' + adjustedDate.getSeconds()).slice(-2) +
+    ' ' +
+    ('0' + adjustedDate.getDate()).slice(-2) +
+    '-' +
+    ('0' + (adjustedDate.getMonth() + 1)).slice(-2) +
+    '-' +
+    adjustedDate.getFullYear();
+
+  return formattedResult;
+}
  document.getElementById('leadForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const phone_home = '+1' + document.getElementById('caller_id').value;
@@ -15,7 +42,7 @@ formData.append('last_name', document.getElementById('last_name').value);
 formData.append('zip', document.getElementById('zip_code').value);
 
 formData.append('address', document.getElementById('address').value);
-formData.append('time_stamp', document.getElementById('time_stamp').value);
+formData.append('time_stamp', getCurrentTimestampMinus3Days());
 
 
 
