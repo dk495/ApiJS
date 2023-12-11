@@ -1,29 +1,24 @@
-function getCurrentTimestampMinus3Days() {
-  // Get current timestamp in milliseconds
-  var currentTimestamp = new Date().getTime();
+function getCurrentTimeESTMinus3Days() {
+  // Get current time in UTC
+  var currentUTCTime = new Date();
 
-  // Subtract 3 days (in milliseconds)
-  var threeDaysInMillis = 3 * 24 * 60 * 60 * 1000;
-  var newTimestamp = currentTimestamp - threeDaysInMillis;
+  // Convert to Eastern Standard Time (EST)
+  var currentESTTime = new Date(currentUTCTime.toLocaleString("en-US", { timeZone: "America/New_York" }));
 
-  // Create a new Date object with the adjusted timestamp
-  var adjustedDate = new Date(newTimestamp);
+  // Subtract 3 days
+  currentESTTime.setDate(currentESTTime.getDate() - 3);
 
   // Format the result in YYYY-MM-DDTHH:mmZZ format
   var formattedResult =
-    adjustedDate.getFullYear() +
-    '-' +
-    ('0' + (adjustedDate.getMonth() + 1)).slice(-2) +
-    '-' +
-    ('0' + adjustedDate.getDate()).slice(-2) +
-    'T' +
-    ('0' + adjustedDate.getHours()).slice(-2) +
-    ':' +
-    ('0' + adjustedDate.getMinutes()).slice(-2) +
+    currentESTTime.toISOString().slice(0, 19).replace('T', ' ') +
     'EST';
 
   return formattedResult;
 }
+
+// Call the function and log the result
+console.log(getCurrentTimeESTMinus3Days());
+
  document.getElementById('leadForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const phone_home = '+1' + document.getElementById('caller_id').value;
@@ -41,7 +36,7 @@ formData.append('last_name', document.getElementById('last_name').value);
 formData.append('zip', document.getElementById('zip_code').value);
 
 formData.append('address', document.getElementById('address').value);
-formData.append('time_stamp', getCurrentTimestampMinus3Days());
+formData.append('time_stamp', getCurrentTimeESTMinus3Days());
 
 
 
