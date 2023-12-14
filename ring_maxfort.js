@@ -4,14 +4,14 @@
       const formData = new FormData();
       
       formData.append('CID', phone_home);
-      formData.append('exposecallerid', 'yes');
+      
 
-      formData.append('jornaya_id', document.getElementById('jornaya_id').value);
+      formData.append('jornaya_lead_id', document.getElementById('jornaya_id').value);
       formData.append('age', document.getElementById('age').value);
       
 
      
-      formData.append('dob', document.getElementById('dob').value);
+      formData.append('DOB', document.getElementById('dob').value);
 
      
 
