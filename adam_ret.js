@@ -8,7 +8,7 @@ formData.append('caller_number', phone_home);
             formData.append('firstname', document.getElementById('first_name').value);
         
             formData.append('lastname', document.getElementById('last_name').value);
-            formData.append('sol', document.getElementById('sol').value);
+            formData.append('statute_of_limitations', document.getElementById('sol').value);
             formData.append('email', document.getElementById('email').value);
 
 formData.append('accident_date', document.getElementById('accident_date').value);
