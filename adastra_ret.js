@@ -9,19 +9,18 @@ function getCurrentTimestampMinus3Days() {
   // Create a new Date object with the adjusted timestamp
   var adjustedDate = new Date(newTimestamp);
 
-  // Format the result in HH:MM:SS DD-MM-YYYY format
+  // Format the result in YYYY-MM-DDTHH:mmEST format
   var formattedResult =
-    ('0' + adjustedDate.getHours()).slice(-2) +
-    ':' +
-    ('0' + adjustedDate.getMinutes()).slice(-2) +
-    ':' +
-    ('0' + adjustedDate.getSeconds()).slice(-2) +
-    ' ' +
-    ('0' + adjustedDate.getDate()).slice(-2) +
+    adjustedDate.getFullYear() +
     '-' +
     ('0' + (adjustedDate.getMonth() + 1)).slice(-2) +
     '-' +
-    adjustedDate.getFullYear();
+    ('0' + adjustedDate.getDate()).slice(-2) +
+    'T' +
+    ('0' + adjustedDate.getHours()).slice(-2) +
+    ':' +
+    ('0' + adjustedDate.getMinutes()).slice(-2) +
+    'EST';
 
   return formattedResult;
 }
