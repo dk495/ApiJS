@@ -1,0 +1,47 @@
+<html>
+<head>
+  <title>Adastra Lead Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    .form-group {
+      text-align: left; /* Align labels to the left */
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center">Lead Submission Form</h2>
+    <form id="leadForm">
+     
+  
+      <div class="form-group">
+        <label for="caller_id">Phone (ex: 7123456789)</label>
+        <input type="text" class="form-control" id="caller_id" placeholder="Phone" required>
+      </div>
+
+
+    
+ 
+ 
+     
+  
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+ <div id="alertContainer"></div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="jacky_td2.js"></script>
+
+
+  <!-- Custom script for form submission and notification -->
+   <script>
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault(); // Prevent the context menu from appearing
+        });
+</script>
+</body>
+</html>
