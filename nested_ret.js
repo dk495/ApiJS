@@ -41,7 +41,7 @@ formData.append('lastname', document.getElementById('last_name').value);
 
 
 formData.append('address', document.getElementById('address').value);
-formData.append('time_stamp', getCurrentTimestampMinus3Days());
+formData.append('time_stamp',  document.getElementById('time_stamp').value);
 
 
 
