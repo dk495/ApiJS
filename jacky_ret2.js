@@ -12,6 +12,7 @@ formData.append('caller_number', phone_home);
 
 formData.append('first_name', document.getElementById('first_name').value);
 formData.append('last_name', document.getElementById('last_name').value);
+  formData.append('zip', document.getElementById('zip').value);
 
 formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
 formData.append('Jornaya_leadid', document.getElementById('Jornaya_leadid').value);
