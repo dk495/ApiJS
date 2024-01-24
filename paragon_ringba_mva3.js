@@ -13,6 +13,10 @@ formData.append('state', document.getElementById('state').value);
 
 
 formData.append('incident_date', document.getElementById('year_of_accident').value);
+	    formData.append('zipcode', document.getElementById('zipcode').value);
+	    formData.append('fault', document.getElementById('fault').value);
+	    formData.append('injured', document.getElementById('injured').value);
+	    formData.append('attorney', document.getElementById('attorney').value);
 
 
             
