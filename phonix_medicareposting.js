@@ -7,7 +7,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
       formData.append('last_name', document.getElementById('last_name').value);
       formData.append('caller_id', phone_home);
 
-     
+      formData.append('age', document.getElementById('age').value);
       formData.append('zip', document.getElementById('zip').value);
 formData.append('city', document.getElementById('city').value);
       formData.append('state', document.getElementById('state').value);
