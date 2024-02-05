@@ -7,6 +7,8 @@ formData.append('traffic_source_id', '100033');
             formData.append('first_name', document.getElementById('first_name').value);
             formData.append('last_name', document.getElementById('last_name').value);
             formData.append('caller_id', phone_home);
+        formData.append('city', document.getElementById('city').value);
+        formData.append('state', document.getElementById('state').value);
 formData.append('address', document.getElementById('address').value);
             formData.append('time_stamp', document.getElementById('time_stamp').value);
         formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
