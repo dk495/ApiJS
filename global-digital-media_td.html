@@ -1,0 +1,68 @@
+<html>
+<head>
+  <title>Global digital Lead Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    .form-group {
+      text-align: left; /* Align labels to the left */
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center">Lead Form</h2>
+    <form id="leadForm">
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input type="text" class="form-control" id="first_name" placeholder="First Name">
+      </div>
+      <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input type="text" class="form-control" id="last_name" placeholder="Last Name">
+      </div>
+      <div class="form-group">
+        <label for="caller_id">Phone (ex: 7123456789)</label>
+        <input type="text" class="form-control" id="caller_id" placeholder="Phone">
+      </div>
+
+
+<div class="form-group">
+        <label for="city">Zipcode</label>
+        <input type="text" class="form-control" id="zip" placeholder="5 digits zipcode">
+      </div>
+<div class="form-group">
+        <label for="state">State</label>
+        <input type="text" class="form-control" id="state" placeholder="TX, CA">
+      </div>
+<div class="form-group">
+        <label for="traffic_source_id">Traffic Source ID</label>
+        <input type="text" class="form-control" id="traffic_source_id" placeholder="traffic_source_id">
+      </div>
+
+<div class="form-group">
+        <label for="jornaya_leadid">Jornaya leadid</label>
+        <input type="text" class="form-control" id="jornaya_leadid" placeholder="">
+      </div>
+
+
+     
+  
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+ <div id="alertContainer"></div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="global-digital-media_td.js"></script>
+
+  <!-- Custom script for form submission and notification -->
+   <script>
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault(); // Prevent the context menu from appearing
+        });
+    </script>
+</body>
+</html>
