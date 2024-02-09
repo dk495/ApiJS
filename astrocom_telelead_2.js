@@ -1,8 +1,8 @@
     document.getElementById('leadForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const phone_home = document.getElementById('caller_id').value;
-            const formData = new FormData(this);
-            formData.append('key', '76490506-a580-43de-b793-037f09cf0dd5');
+            const formData = new FormData();
+            formData.append('key', '51a1f3fa-80b4-4624-9990-f28bf3cfee6c');
 formData.append('uid', '6819248f-199f-4a17-bded-3fb2a2d78230');
             formData.append('first_name', document.getElementById('first_name').value);
             formData.append('last_name', document.getElementById('last_name').value);
@@ -12,11 +12,14 @@ formData.append('adress', document.getElementById('adress').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('city', document.getElementById('city').value);
 formData.append('zip_code', document.getElementById('zipcode').value);
-formData.append('year_of_accident', document.getElementById('year_of_accident').value);
+formData.append('opt-in', document.getElementById('opt-in').value);
+formData.append('date_of_accident', document.getElementById('year_of_accident').value);
 formData.append('were_you_injured', document.getElementById('were_you_injured').value);
 formData.append('was_the_accident_your_fault', document.getElementById('was_the_accident_your_fault').value);
 formData.append('do_you_have_an_attorney', document.getElementById('do_you_have_an_attorney').value);
 formData.append('describe_what_happened', document.getElementById('describe_what_happened').value);
+formData.append('trusted_form', document.getElementById('trusted_form').value);
+formData.append('journaya', document.getElementById('journaya').value);
             
            
     
