@@ -18,7 +18,7 @@ formData.append('city', document.getElementById('city').value);
 
  
 
-      const url = 'https://massnexus-llc.trackdrive.com/api/v1/leads?' + new URLSearchParams(formData).toString();
+      const url = 'https://adolicious-llc.trackdrive.com/api/v1/leads?' + new URLSearchParams(formData).toString();
 
       fetch(url, {
         method: 'POST'
