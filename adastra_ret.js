@@ -26,13 +26,13 @@ function getCurrentTimestampMinus3Days() {
 }
  document.getElementById('leadForm').addEventListener('submit', function(event) {
       event.preventDefault();
-      const phone_home = '+1' + document.getElementById('caller_id').value;
-      const formData = new FormData(this);
+      const phone_home = '1' + document.getElementById('caller_id').value;
+      const formData = new FormData();
       
       
    
      
-      formData.append('key', '84ea8105-2633-4d50-93ce-a17ecf141d51');
+      formData.append('key', '9a8ca829-adf2-4d8f-b084-252c56386450');
 formData.append('caller_number', phone_home);
 
 formData.append('firstname', document.getElementById('first_name').value);
@@ -40,6 +40,7 @@ formData.append('lastname', document.getElementById('last_name').value);
 
 
 formData.append('address', document.getElementById('address').value);
+   formData.append('zip', document.getElementById('zip').value);
 formData.append('time_stamp', getCurrentTimestampMinus3Days());
 
 
