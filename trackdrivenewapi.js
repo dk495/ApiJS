@@ -21,7 +21,7 @@ formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').valu
             
            
     
-            const url = "https://elite-calls-com.trackdrive.com/api/v1/leads?" + new URLSearchParams(formData).toString();
+            const url = 'https://elite-calls-com.trackdrive.com/api/v1/leads?' + new URLSearchParams(formData).toString();
     
             fetch(url, {
                 method: 'POST'
