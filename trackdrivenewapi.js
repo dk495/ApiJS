@@ -11,8 +11,8 @@ formData.append('caller_id', document.getElementById('caller_id').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('zip', document.getElementById('zip').value);
 formData.append('dob_mm', document.getElementById('dob_mm').value);
-formData.append('dob_dd', document.getElementById('dob_dd’).value);
-formData.append('dob_yyyy', document.getElementById('dob_yyyy’).value);
+formData.append('dob_dd', document.getElementById('dob_dd').value);
+formData.append('dob_yyyy', document.getElementById('dob_yyyy').value);
 
 formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
 
