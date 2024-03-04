@@ -1,0 +1,97 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red139\green24\blue30;\red246\green190\blue192;\red38\green38\blue38;
+\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c61961\c15294\c15294;\cssrgb\c97647\c79608\c79608;\cssrgb\c20000\c20000\c20000;
+\cssrgb\c100000\c100000\c100000;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww37900\viewh20740\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0     document.getElementById('leadForm').addEventListener('submit', function(event) \{\
+            event.preventDefault();\
+            const phone_home = '+1' + document.getElementById('caller_id').value;\
+            const formData = new FormData();\
+            formData.append('lead_token', '
+\f1\fs22 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 951953f512034bcc9feb1721847d6df1
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 ');\
+formData.append('traffic_source_id', '
+\f1\fs22 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 10717
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 ');\
+           formData.append('first_name', document.getElementById('first_name').value);\
+formData.append('last_name', document.getElementById('last_name').value);\
+formData.append('caller_id', document.getElementById('caller_id').value);\
+\
+formData.append('state', document.getElementById('state').value);\
+formData.append('zip', document.getElementById('zip').value);\
+formData.append(\'91dob_mm\'92, document.getElementById('dob_mm').value);\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 formData.append(\'91dob_dd\'92, document.getElementById('dob_dd\'92).value);\
+formData.append(\'91dob_yyyy\'92, document.getElementById('dob_yyyy\'92).value);\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+formData.append('
+\f1\fs22 \cf4 \cb5 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 jornaya_leadid
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 ', document.getElementById('
+\f1\fs22 \cf4 \cb5 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 jornaya_leadid
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 ').value);\
+\
+            \
+           \
+    \
+            const url = '
+\f1\fs28 \cf4 \cb5 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 https://elite-calls-com.trackdrive.com/api/v1/leads?
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \'92 + new URLSearchParams(formData).toString();\
+    \
+            fetch(url, \{\
+                method: 'POST'\
+            \})\
+            .then(response => \{\
+                if (response.status === 200) \{\
+                    response.text().then(responseBody => \{\
+                        const successAlert = `\
+                            <div class="alert alert-success" role="alert">\
+                                200 : Form submitted successfully! Response Body: $\{responseBody\}\
+                            </div>`;\
+                        document.getElementById('alertContainer').innerHTML = '';\
+                        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);\
+                    \});\
+                    // Clear form fields\
+                    document.getElementById('leadForm').reset();\
+                \} else if (response.status === 201) \{\
+                    response.text().then(responseBody => \{\
+                        const successAlert = `\
+                            <div class="alert alert-success" role="alert">\
+                                201 : Form submitted successfully! Response Body: $\{responseBody\}\
+                            </div>`;\
+                        document.getElementById('alertContainer').innerHTML = '';\
+                        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);\
+                    \});\
+                    // Clear form fields\
+                    document.getElementById('leadForm').reset();\
+                \} else if (response.status === 422) \{\
+                    response.json().then(data => \{\
+                        const errorAlert = `\
+                            <div class="alert alert-danger" role="alert">\
+                                Error. Response Body: $\{JSON.stringify(data)\}\
+                            </div>`;\
+                        document.getElementById('alertContainer').innerHTML = '';\
+                        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);\
+                    \});\
+                \} else \{\
+                    response.text().then(responseBody => \{\
+                        const errorAlert = `\
+                            <div class="alert alert-danger" role="alert">\
+                                Form submission failed. Please try again. Response Body: $\{responseBody\}\
+                            </div>`;\
+                        document.getElementById('alertContainer').innerHTML = '';\
+                        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);\
+                    \});\
+                \}\
+            \})\
+            .catch(error => console.error('Error:', error));\
+        \});}
