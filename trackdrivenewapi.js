@@ -7,7 +7,7 @@ formData.append('traffic_source_id', '10717');
            formData.append('first_name', document.getElementById('first_name').value);
 formData.append('last_name', document.getElementById('last_name').value);
 formData.append('caller_id', document.getElementById('caller_id').value);
-
+formData.append('email', document.getElementById('email').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('zip', document.getElementById('zip').value);
 formData.append('dob_mm', document.getElementById('dob_mm').value);
