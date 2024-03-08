@@ -79,7 +79,7 @@ function postPingId() {
             response.text().then(responseBody => {
                 const successAlert = `
                     <div class="alert alert-success" role="alert">
-                        Ping/Post successfully! Response Body: ${responseBody}
+                        Call has been accepted, please transfer the call. Response Body: ${responseBody}
                     </div>`;
                 document.getElementById('alertContainer').innerHTML = '';
                 document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
