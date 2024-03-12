@@ -7,12 +7,18 @@ function pingAPI() {
     var caller_id = document.getElementById('caller_id').value;
     var state = document.getElementById('state').value;
     var apiUrl = Url + caller_id + '&state=' + state;
-const Newurl = 'https://corsproxy.org/?' + encodeURIComponent(apiUrl);
+    const newUrl = 'https://corsproxy.org/?' + encodeURIComponent(apiUrl);
+
     // Fetch data from the API
-    fetch(Newurl)
-        .then(response => response.json())
+    fetch(newUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
-            // Check if ping was successful
+            console.log(data); // Log response data for debugging
             if (data.success === true && data.status === 'rejected') {
                 // Enable submit button
                 document.getElementById('submitBtn').disabled = false;
@@ -42,29 +48,26 @@ const Newurl = 'https://corsproxy.org/?' + encodeURIComponent(apiUrl);
             document.getElementById("apiResponse").innerHTML = "Error fetching data from the API.";
             document.getElementById("apiResponse").classList.add("alert-danger");
             document.getElementById("apiResponse").classList.remove("alert-info");
+            console.error('Error:', error);
         });
 }
 
 function postPingId() {
-   
-const formData = new FormData();
-formData.append('pid', 'AF931e95e3b3054b55a018cb389a7f639a');
-	formData.append('cid', 'CAce309013251447b3b99ce8f0c68445cf');  
-  formData.append('first_name', document.getElementById('first_name').value);
-      formData.append('last_name', document.getElementById('last_name').value);
-      formData.append('caller_id', phone_home);
-
-     
-      formData.append('zip', document.getElementById('zip').value);
-formData.append('city', document.getElementById('city').value);
-      formData.append('state', document.getElementById('state').value);
+    const formData = new FormData();
+    formData.append('pid', 'AF931e95e3b3054b55a018cb389a7f639a');
+    formData.append('cid', 'CAce309013251447b3b99ce8f0c68445cf');
+    formData.append('first_name', document.getElementById('first_name').value);
+    formData.append('last_name', document.getElementById('last_name').value);
+    formData.append('caller_id', phone_home);
+    formData.append('zip', document.getElementById('zip').value);
+    formData.append('city', document.getElementById('city').value);
+    formData.append('state', document.getElementById('state').value);
 
     const originalUrl = 'https://tracker.salespoint.ai/post?' + new URLSearchParams(formData).toString();
-const url = 'https://corsproxy.org/?' + encodeURIComponent(originalUrl);
+    const url = 'https://corsproxy.org/?' + encodeURIComponent(originalUrl);
 
     fetch(url, {
         method: "POST"
-       
     })
     .then(response => {
         // Handle response based on status
@@ -109,7 +112,9 @@ const url = 'https://corsproxy.org/?' + encodeURIComponent(originalUrl);
             });
         }
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 document.getElementById('leadForm').addEventListener('submit', function(event) {
