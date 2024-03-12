@@ -7,9 +7,9 @@ function pingAPI() {
     var caller_id = document.getElementById('caller_id').value;
     var state = document.getElementById('state').value;
     var apiUrl = Url + caller_id + '&state=' + state;
-
+const Newurl = 'https://corsproxy.org/?' + encodeURIComponent(apiUrl);
     // Fetch data from the API
-    fetch(apiUrl)
+    fetch(Newurl)
         .then(response => response.json())
         .then(data => {
             // Check if ping was successful
@@ -46,26 +46,25 @@ function pingAPI() {
 }
 
 function postPingId() {
-    const postData = {
-               
-        pid:'AF931e95e3b3054b55a018cb389a7f639a',
-        cid:'CAce309013251447b3b99ce8f0c68445cf',
-        caller_id: document.getElementById('caller_id').value,
-        first_name: document.getElementById('first_name').value,
-        last_name: document.getElementById('last_name').value,
-        state: document.getElementById('state').value,
-        zip: document.getElementById('zip').value,
-        city: document.getElementById('city').value
-    };
+   
+const formData = new FormData();
+formData.append('pid', 'AF931e95e3b3054b55a018cb389a7f639a');
+	formData.append('cid', 'CAce309013251447b3b99ce8f0c68445cf');  
+  formData.append('first_name', document.getElementById('first_name').value);
+      formData.append('last_name', document.getElementById('last_name').value);
+      formData.append('caller_id', phone_home);
 
-    const url = 'https://tracker.salespoint.ai/post';
+     
+      formData.append('zip', document.getElementById('zip').value);
+formData.append('city', document.getElementById('city').value);
+      formData.append('state', document.getElementById('state').value);
+
+    const originalUrl = 'https://tracker.salespoint.ai/post?' + new URLSearchParams(formData).toString();
+const url = 'https://corsproxy.org/?' + encodeURIComponent(originalUrl);
 
     fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(postData)
+        method: "POST"
+       
     })
     .then(response => {
         // Handle response based on status
