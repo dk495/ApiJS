@@ -58,7 +58,7 @@ function postPingId() {
         city: document.getElementById('city').value
     };
 
-    const url = 'https://api.allorigins.win/raw?url=https://tracker.salespoint.ai/post';
+    const url = 'https://api.allorigins.win/get?callback=myFunc&url=https://tracker.salespoint.ai/post';
 
     fetch(url, {
         method: "POST",
