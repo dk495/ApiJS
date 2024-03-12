@@ -58,7 +58,7 @@ function postPingId() {
     formData.append('cid', 'CAce309013251447b3b99ce8f0c68445cf');
     formData.append('first_name', document.getElementById('first_name').value);
     formData.append('last_name', document.getElementById('last_name').value);
-    formData.append('caller_id', phone_home);
+    formData.append('caller_id', document.getElementById('caller_id').value);
     formData.append('zip', document.getElementById('zip').value);
     formData.append('city', document.getElementById('city').value);
     formData.append('state', document.getElementById('state').value);
