@@ -3,7 +3,7 @@ function pingAPI() {
     document.getElementById('submitBtn').disabled = true;
 
     // Your API URL
-    var Url = "https://corsproxy.org/?https://tracker.salespoint.ai/ping?pid=AF931e95e3b3054b55a018cb389a7f639a&cid=CAce309013251447b3b99ce8f0c68445cf&caller_id=";
+    var Url = "https://tracker.salespoint.ai/ping?pid=AF931e95e3b3054b55a018cb389a7f639a&cid=CAce309013251447b3b99ce8f0c68445cf&caller_id=";
     var caller_id = document.getElementById('caller_id').value;
     var state = document.getElementById('state').value;
     var apiUrl = Url + caller_id + '&state=' + state;
@@ -58,7 +58,7 @@ function postPingId() {
         city: document.getElementById('city').value
     };
 
-    const url = 'https://corsproxy.org/?https://tracker.salespoint.ai/post';
+    const url = 'https://tracker.salespoint.ai/post';
 
     fetch(url, {
         method: "POST",
