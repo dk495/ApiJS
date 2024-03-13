@@ -23,7 +23,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         
         if (success) {
             alertType = 'success';
-            alertMessage = `${response.status} : Form submitted successfully! Response Body: ${responseBody}`;
+            alertMessage = `${data.status} : Form submitted successfully! Response Body: ${responseBody}`;
         } else {
             alertType = 'danger';
             alertMessage = `Error. Response Body: ${responseBody}`;
