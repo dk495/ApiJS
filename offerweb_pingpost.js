@@ -13,7 +13,7 @@ formData.append('zip', document.getElementById('zip').value);
     formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
     formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
 const originalUrl = 'https://offerweb.trackdrive.com/api/v1/inbound_webhooks/ping/check_offerweb_buyers_medicare?' + new URLSearchParams(formData).toString();
-    const apiUrl = 'https://corsproxy.org/?' + encodeURIComponent(apiUrl);
+    const apiUrl = 'https://corsproxy.org/?' + encodeURIComponent(originalUrl);
 
     // Fetch data from the API
    fetch(apiUrl)
