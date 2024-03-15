@@ -9,6 +9,7 @@ function pingAPI() {
     
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
 formData.append('zip', document.getElementById('zip').value);
+	formData.append('scope_of_appointment_timestamp', document.getElementById('scope_of_appointment.timestamp').value + '.123Z');
     formData.append('ip_address', document.getElementById('ip_address').value);
     formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
     formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
@@ -54,7 +55,8 @@ function postPingId(pingId) {
 	trusted_form_cert_url: document.getElementById('trusted_form_cert_url').value,
 	post:'true',
 	zipcode_overide:document.getElementById('zip').value,
-	caller_zip:document.getElementById('zip').value
+	caller_zip:document.getElementById('zip').value,
+	    scope_of_appointment_timestamp: document.getElementById('scope_of_appointment.timestamp').value + '.123Z',
 
     };
 
