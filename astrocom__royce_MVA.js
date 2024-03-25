@@ -24,7 +24,7 @@ formData.append('Landing_Page', document.getElementById('Landing_Page').value);
             
            
     
-            const url = 'https://grow.royceagency.com/new_api/api.php?Test_Lead=1&' + new URLSearchParams(formData).toString();
+            const url = 'https://grow.royceagency.com/new_api/api.php?' + new URLSearchParams(formData).toString();
     
             fetch(url, {
                 method: 'POST'
