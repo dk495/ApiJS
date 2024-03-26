@@ -8,8 +8,9 @@ formData.append('TYPE', '32');
 formData.append('SRC', 'astro');
            formData.append('firstname', document.getElementById('first_name').value);
 formData.append('lastname', document.getElementById('last_name').value);
-formData.append('caller_id', document.getElementById('caller_id').value);
+formData.append('phone', document.getElementById('caller_id').value);
 formData.append('email', document.getElementById('email').value);
+        formData.append('zip', document.getElementById('zip').value);
 
 formData.append('IP_Address', document.getElementById('IP_Address').value);
 formData.append('Has_Attorney', document.getElementById('Has_Attorney').value);
