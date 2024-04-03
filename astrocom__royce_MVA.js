@@ -20,6 +20,7 @@ formData.append('Found_at_Fault', document.getElementById('Found_at_Fault').valu
 formData.append('Injury_Caused_by_MVA', document.getElementById('Injury_Caused_by_MVA').value);
 
 formData.append('Landing_Page', document.getElementById('Landing_Page').value);
+        formData.append('Pub_ID', 'Inbound');
         formData.append('xxTrustedFormCertUrl', document.getElementById('xxTrustedFormCertUrl').value);
 
 
