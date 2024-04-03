@@ -12,6 +12,7 @@ formData.append('email', document.getElementById('email').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('zip', document.getElementById('zip').value);
 formData.append('dob_mm', document.getElementById('dob_mm').value);
+        formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
 
         formData.append('dob_dd', document.getElementById('dob_dd').value);
 
