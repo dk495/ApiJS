@@ -6,6 +6,7 @@
 
     formData.append('apiId', '004A06F35D2B44B7A34099405CBC6D8D');
     formData.append('apiPassword', '9924b6942f772e722308be404488');
+	    formData.append('productId', '18');
     api_tester(document.getElementById('phone').value);
     formData.append('phoneNumber', phone_home);
     formData.append('firstName', document.getElementById('first_name').value);
