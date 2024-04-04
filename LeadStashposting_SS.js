@@ -20,7 +20,7 @@
     formData.append('unsecuredDebt', document.getElementById('unsecured_debt_total').value);
     formData.append('jornayaLeadId', document.getElementById('jornaya_leadid').value);
 
-    const url = 'https://corsproxy.io/?https://leads.leadtree.global/store/getdata';
+    const url = 'https://corsproxy.io/?https://leads.leadtree.global/store/setdata';
    
 
     fetch(url, {
