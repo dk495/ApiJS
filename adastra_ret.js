@@ -40,7 +40,7 @@ formData.append('lastname', document.getElementById('last_name').value);
 
 
 formData.append('address', document.getElementById('address').value);
-   formData.append('zip', document.getElementById('zip').value);
+   
 formData.append('time_stamp', getCurrentTimestampMinus3Days());
 
 
