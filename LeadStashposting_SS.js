@@ -16,6 +16,7 @@
     formData.append('city', document.getElementById('city').value);
     formData.append('state', document.getElementById('state').value);
     formData.append('address', document.getElementById('address').value);
+	    formData.append('dob', document.getElementById('dob').value);
     formData.append('incomeNetMonthly', document.getElementById('incomeNetMonthly').value);
     formData.append('unsecuredDebt', document.getElementById('unsecured_debt_total').value);
     formData.append('jornayaLeadId', document.getElementById('jornaya_leadid').value);
