@@ -8,7 +8,7 @@ function pingAPI() {
     formData.append('traffic_source_id', '1063');
     
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
-formData.append('zip', document.getElementById('zip').value);
+
 formData.append('state', document.getElementById('state').value);
 formData.append('city', document.getElementById('city').value);
 	api_tester(document.getElementById('caller_id').value);
@@ -51,7 +51,6 @@ function postPingId(pingId) {
         traffic_source_id: "1063",
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId,
-	zip: document.getElementById('zip').value,
 	state: document.getElementById('state').value,
 	city: document.getElementById('city').value,
 	first_name: document.getElementById('first_name').value,
