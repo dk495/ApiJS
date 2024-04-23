@@ -12,7 +12,7 @@ api_tester(document.getElementById('caller_id').value);
     formData.append('caller_number', phone_home);
     formData.append('caller_state', document.getElementById('state').value);
        formData.append('email', document.getElementById('email').value);
-    formData.append('date_of_birth', document.getElementById('dob').value);
+    formData.append('age', document.getElementById('age').value);
        formData.append('caller_city', document.getElementById('city').value);
     
 
