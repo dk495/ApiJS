@@ -10,6 +10,7 @@ api_tester(document.getElementById('phone_home').value);
 formData.append('lp_response', 'JSON');
             formData.append('first_name', document.getElementById('first_name').value);
 formData.append('last_name', document.getElementById('last_name').value);
+        formData.append('zip_code', document.getElementById('zip_code').value);
             formData.append('trusted_form_cert_id', document.getElementById('trusted_form_cert_id').value);
             formData.append('jornaya_lead_id', document.getElementById('jornaya_lead_id').value);
             
