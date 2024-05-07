@@ -2,7 +2,7 @@
             event.preventDefault();
             
             const formData = new FormData();
-            formData.append('key', '838a51e3-d8e4-47f6-88dc-fa10472d3800');
+            formData.append('key', '8cdcf42c-5baa-4d20-aa47-183deea88f51');
 formData.append('uid', '6819248f-199f-4a17-bded-3fb2a2d78230');
                 formData.append('first_name', document.getElementById('first_name').value);
     formData.append('last_name', document.getElementById('last_name').value);
