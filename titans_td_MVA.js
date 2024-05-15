@@ -1,5 +1,6 @@
     document.getElementById('leadForm').addEventListener('submit', function(event) {
             event.preventDefault();
+document.getElementById('submitBtn').disabled = true;
             const phone_home = '+1' + document.getElementById('caller_id').value;
             const formData = new FormData();
             formData.append('lead_token', 'c0619a24cbaf4abdbf080fd8ba11c12e');
@@ -45,6 +46,7 @@ formData.append('ip_address', document.getElementById('ip_address').value);
                             </div>`;
                         document.getElementById('alertContainer').innerHTML = '';
                         document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
+document.getElementById('submitBtn').disabled = false;
                     });
                     // Clear form fields
                     document.getElementById('leadForm').reset();
@@ -56,6 +58,7 @@ formData.append('ip_address', document.getElementById('ip_address').value);
                             </div>`;
                         document.getElementById('alertContainer').innerHTML = '';
                         document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
+document.getElementById('submitBtn').disabled = false;
                     });
                     // Clear form fields
                     document.getElementById('leadForm').reset();
@@ -67,6 +70,7 @@ formData.append('ip_address', document.getElementById('ip_address').value);
                             </div>`;
                         document.getElementById('alertContainer').innerHTML = '';
                         document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+document.getElementById('submitBtn').disabled = false;
                     });
                 } else {
                     response.text().then(responseBody => {
@@ -76,6 +80,7 @@ formData.append('ip_address', document.getElementById('ip_address').value);
                             </div>`;
                         document.getElementById('alertContainer').innerHTML = '';
                         document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+document.getElementById('submitBtn').disabled = false;
                     });
                 }
             })
