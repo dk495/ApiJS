@@ -10,6 +10,13 @@ api_tester(document.getElementById('caller_id').value);
             formData.append('first_name', document.getElementById('first_name').value);
             formData.append('last_name', document.getElementById('last_name').value);
             formData.append('caller_id', phone_home);
+formData.append('email', document.getElementById('email').value);
+formData.append('zip', document.getElementById('zip').value);
+formData.append('FinanceProduct', document.getElementById('FinanceProduct').value);
+formData.append('lead_transactionid', document.getElementById('lead_transactionid').value);
+formData.append('dialed_tollfree', document.getElementById('dialed_tollfree').value);
+formData.append('UserID', document.getElementById('UserID').value);
+formData.append('Password', document.getElementById('Password').value);
 
 
 
