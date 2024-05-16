@@ -6,10 +6,16 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('lp_campaign_key', 'YfVNCpWDd6MxjXwc4PRy');
     formData.append('phone_home', document.getElementById('phone_home').value);
     formData.append('lp_caller_id', document.getElementById('phone_home').value);
+formData.append('first_name', document.getElementById('first_name').value);
+formData.append('last_name', document.getElementById('last_name').value);
+const datetimeLocal = document.getElementById('datetime').value; 
+const date = new Date(datetimeLocal);
+const isoString = date.toISOString();
+formData.append('optin_date_time', isoString);
     api_tester(document.getElementById('phone_home').value);
     formData.append('lp_response', 'JSON');
 
-    const url = 'https://api.codetabs.com/v1/proxy/?quest=https://edmleadnetwork.leadspediatrack.com/call-ping.do?' + new URLSearchParams(formData).toString();
+    const url = 'https://corsproxy.io/?https://edmleadnetwork.leadspediatrack.com/call-ping.do?' + new URLSearchParams(formData).toString();
 
     fetch(url, {
         method: 'POST'
