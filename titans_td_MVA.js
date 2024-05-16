@@ -21,7 +21,7 @@ formData.append('trusted_form_cert_url', document.getElementById('trusted_form_c
 
 formData.append('person_at_fault', document.getElementById('person_at_fault').value);
 
-formData.append('auto_accident_in_past_12_months', document.getElementById('auto_accident_in_past_12_months').value);
+formData.append('auto_accident_in_past_2_years', document.getElementById('auto_accident_in_past_2_years').value);
 formData.append('injury_type', document.getElementById('injury_type').value);
 formData.append('spoken_language', document.getElementById('spoken_language').value);
 formData.append('ip_address', document.getElementById('ip_address').value);
