@@ -15,7 +15,7 @@ formData.append('optin_date_time', isoString);
     api_tester(document.getElementById('phone_home').value);
     formData.append('lp_response', 'JSON');
 
-    const url = 'https://api.codetabs.com/v1/proxy/?quest=https://edmleadnetwork.leadspediatrack.com/call-ping.do?' + new URLSearchParams(formData).toString();
+    const url = 'http://api.allorigins.win/get?url=https://edmleadnetwork.leadspediatrack.com/call-ping.do?' + new URLSearchParams(formData).toString();
 
     fetch(url, {
         method: 'POST'
