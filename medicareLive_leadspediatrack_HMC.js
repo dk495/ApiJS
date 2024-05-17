@@ -1,3 +1,29 @@
+function getCurrentTimestampMinus3Days() {
+  // Get current timestamp in milliseconds
+  var currentTimestamp = new Date().getTime();
+
+  // Subtract 3 days (in milliseconds)
+  var threeDaysInMillis = 4 * 24 * 60 * 60 * 1000;
+  var newTimestamp = currentTimestamp - threeDaysInMillis;
+
+  // Create a new Date object with the adjusted timestamp
+  var adjustedDate = new Date(newTimestamp);
+
+  // Format the result in YYYY-MM-DDTHH:mmEST format
+  var formattedResult =
+    adjustedDate.getFullYear() +
+    '-' +
+    ('0' + (adjustedDate.getMonth() + 1)).slice(-2) +
+    '-' +
+    ('0' + adjustedDate.getDate()).slice(-2) +
+    'T' +
+    ('0' + adjustedDate.getHours()).slice(-2) +
+    ':' +
+    ('0' + adjustedDate.getMinutes()).slice(-2) +
+    'Z';
+
+  return formattedResult;
+}
 document.getElementById('leadForm').addEventListener('submit', function(event) {
     event.preventDefault();
     
@@ -8,10 +34,8 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('caller_id', document.getElementById('phone_home').value);
 formData.append('first_name', document.getElementById('first_name').value);
 formData.append('last_name', document.getElementById('last_name').value);
-const datetimeLocal = document.getElementById('datetime').value; 
-const date = new Date(datetimeLocal);
-const isoString = date.toISOString();
-formData.append('optin_date_time', isoString);
+
+formData.append('optin_date_time', getCurrentTimestampMinus3Days());
     api_tester(document.getElementById('phone_home').value);
     formData.append('lp_response', 'JSON');
 
