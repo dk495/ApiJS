@@ -14,7 +14,11 @@ formData.append('city', document.getElementById('city').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('postal_code', document.getElementById('zip').value);
 formData.append('ip_address', document.getElementById('ip_address').value);
-formData.append('attorney', document.getElementById('attorney').value);
+formData.append('needs_attorney', document.getElementById('needs_attorney').value);
+        formData.append('hospitalized_or_treated', document.getElementById('hospitalized_or_treated').value);
+        formData.append('currently_represented', document.getElementById('currently_represented').value);
+        formData.append('auto_accident_in_past_12_months', document.getElementById('auto_accident_in_past_12_months').value);
+        formData.append('spoken_language', document.getElementById('spoken_language').value);
 formData.append('source_url', document.getElementById('source_url').value);
 formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
 
