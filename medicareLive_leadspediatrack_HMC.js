@@ -32,8 +32,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('lp_campaign_key', 'qg9dWxh8JY3HkFbnrTfj');
     formData.append('phone_home', document.getElementById('phone_home').value);
     formData.append('caller_id', document.getElementById('phone_home').value);
-formData.append('first_name', document.getElementById('first_name').value);
-formData.append('last_name', document.getElementById('last_name').value);
+formData.append('zip', document.getElementById('zip').value);
 
 formData.append('optin_date_time', getCurrentTimestampMinus3Days());
     api_tester(document.getElementById('phone_home').value);
