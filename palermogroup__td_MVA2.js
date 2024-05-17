@@ -1,5 +1,6 @@
     document.getElementById('leadForm').addEventListener('submit', function(event) {
             event.preventDefault();
+        document.getElementById('submitBtn').disabled = true;
             const phone_home = '+1' + document.getElementById('caller_id').value;
             const formData = new FormData();
             formData.append('lead_token', '4396af4591cf420884d5a463022ca4b4');
@@ -40,6 +41,7 @@ formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').valu
                 method: 'POST'
             })
             .then(response => {
+                document.getElementById('submitBtn').disabled = false;
                 if (response.status === 200) {
                     response.text().then(responseBody => {
                         const successAlert = `
