@@ -13,7 +13,7 @@ formData.append('city', document.getElementById('city').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('address', document.getElementById('address').value);
 formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
-formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
+formData.append('trusted_form_cert_url', document.getElementById('jornaya_leadid').value);
 
 
 
