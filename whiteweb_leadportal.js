@@ -30,7 +30,7 @@ formData.append('Jornaya_Form_URL', document.getElementById('jornaya_leadid').va
 
 
 
-formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+
 
       const url = 'https://momentumdigital.leadportal.com/new_api/api.php?Mode=full&' + new URLSearchParams(formData).toString();
 
