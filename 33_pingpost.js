@@ -19,10 +19,11 @@ formData.append('zip', document.getElementById('zip').value);
     })
     .then(response => response.json().then(responseBody => {
         let alertClass = 'alert-success';
-        let alertMessage = 'Form submitted successfully! Response Body: ' + JSON.stringify(responseBody);
+        let alertMessage = 'Ping successfully!';
 
         if (!responseBody.supported==1) {
             alertClass = 'alert-danger';
+            
         }
 
         const alert = `
