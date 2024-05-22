@@ -44,16 +44,20 @@ formData.append('optin_date_time', getCurrentTimestampMinus3Days());
         method: 'POST'
     })
     .then(response => response.json().then(responseBody => {
-        let alertClass = 'alert-success';
-        let alertMessage = 'Form submitted successfully! Response Body: ' + JSON.stringify(responseBody);
+         let alertClass = 'alert-success';
+        let alertMessage = 'Form submitted successfully!';
 
         if (!responseBody.success) {
             alertClass = 'alert-danger';
+            alertMessage = 'Form submission Successfully, but rejected by buyer due to below reason: ' + responseBody.message;
+        } else {
+            alertMessage += ' Ping Accepted. Making second API call...';
+            fetchSecondApi(responseBody.request_number_url);
         }
 
         const alert = `
             <div class="alert ${alertClass}" role="alert">
-                ${response.status} : ${alertMessage}
+                ${alertMessage}
             </div>`;
         
         document.getElementById('alertContainer').innerHTML = '';
