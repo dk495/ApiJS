@@ -65,9 +65,7 @@ formData.append('optin_date_time', getCurrentTimestampMinus3Days());
 
         document.getElementById('leadForm').reset();
         if (response.status === 200 || response.status === 201) {
- if (responseBody.success) {
-            fetchSecondApi(responseBody.request_number_url);
-        }
+
             document.getElementById('leadForm').reset();
         }
     }))
