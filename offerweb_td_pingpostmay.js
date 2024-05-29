@@ -9,6 +9,7 @@ api_tester(document.getElementById('caller_id').value);
     formData.append('traffic_source_id', '514485');
     
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
+	formData.append('zip', document.getElementById('zip').value);
 
 const originalUrl = 'https://offerweb.trackdrive.com/api/v1/inbound_webhooks/ping/check_offerweb_buyers_medicare?' + new URLSearchParams(formData).toString();
     const apiUrl = 'https://corsproxy.io/?' + originalUrl;
@@ -43,7 +44,7 @@ function postPingId(pingId) {
     const postData = {
         trackdrive_number: "+18444130320",
         traffic_source_id: "514485",
-	
+	zip: document.getElementById('zip').value,
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId
 	
