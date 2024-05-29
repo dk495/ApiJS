@@ -7,6 +7,18 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
 	  api_tester(document.getElementById('caller_id').value);
      formData.append('traffic_source_id', '28822');
       formData.append('lead_token', 'f615963ff6e14387805a4b799afaeac7');
+formData.append('first_name', document.getElementById('first_name').value);
+formData.append('last_name', document.getElementById('last_name').value);
+formData.append('email', document.getElementById('email').value);
+formData.append('callerid', document.getElementById('caller_id').value);
+formData.append('state', document.getElementById('state').value);
+formData.append('zip', document.getElementById('zip').value);
+formData.append('source_url', document.getElementById('source_url').value);
+formData.append('lead_debt', document.getElementById('lead_debt').value);
+formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
+
+formData.append('ip_address', document.getElementById('ip_address').value);
+
 
  
 
