@@ -21,7 +21,7 @@
     formData.append('unsecuredDebt', document.getElementById('unsecured_debt_total').value);
     formData.append('jornayaLeadId', document.getElementById('jornaya_leadid').value);
 
-    const url = 'https://corsproxy.io/?https://leads-inst219-client.phonexa.com/store/getdata';
+    const url = 'https://corsproxy.io/?https://leads-inst219-client.phonexa.com/store/setdata';
    
 
     fetch(url, {
