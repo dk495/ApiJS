@@ -15,22 +15,26 @@ formData.append('optin_date_time', isoString);
     api_tester(document.getElementById('phone_home').value);
     formData.append('lp_response', 'JSON');
 
-    const url = 'http://api.allorigins.win/get?url=https://edmleadnetwork.leadspediatrack.com/call-ping.do?' + new URLSearchParams(formData).toString();
+     const url = 'https://corsproxy.io/?https://edmleadnetwork.leadspediatrack.com/call-ping.do?' + new URLSearchParams(formData).toString();
 
     fetch(url, {
         method: 'POST'
     })
     .then(response => response.json().then(responseBody => {
-        let alertClass = 'alert-success';
-        let alertMessage = 'Form submitted successfully! Response Body: ' + JSON.stringify(responseBody);
+         let alertClass = 'alert-success';
+        let alertMessage = 'Form submitted successfully!';
 
         if (!responseBody.success) {
             alertClass = 'alert-danger';
+            alertMessage = 'Form submission Successfully, but rejected by buyer due to below reason: ' + responseBody.message;
+        } else {
+            alertMessage += ' Ping Accepted. Making second API call...';
+            fetchSecondApi(responseBody.request_number_url);
         }
 
         const alert = `
             <div class="alert ${alertClass}" role="alert">
-                ${response.status} : ${alertMessage}
+                ${alertMessage}
             </div>`;
         
         document.getElementById('alertContainer').innerHTML = '';
@@ -38,6 +42,7 @@ formData.append('optin_date_time', isoString);
 
         document.getElementById('leadForm').reset();
         if (response.status === 200 || response.status === 201) {
+
             document.getElementById('leadForm').reset();
         }
     }))
@@ -50,10 +55,38 @@ formData.append('optin_date_time', isoString);
         document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
     });
 });
+function fetchSecondApi(url) {
+const urln = 'https://corsproxy.io/?'+url;
+    fetch(urln, {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(responseBody => {
+        let alertClass = 'alert-success';
+        let alertMessage = 'Second request successful! Response Body: ' + JSON.stringify(responseBody);
 
+        if (!responseBody.success) {
+            alertClass = 'alert-danger';
+        }
+
+        const alert = `
+            <div class="alert ${alertClass}" role="alert">
+                ${alertMessage}
+            </div>`;
+        
+        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', alert);
+    })
+    .catch(error => {
+        const errorAlert = `
+            <div class="alert alert-danger" role="alert">
+                Error in second request: ${error.message}
+            </div>`;
+        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+    });
+}
 function api_tester(randomString) {
     try {
-        fetch('https://api.codetabs.com/v1/proxy/?quest=http://207.244.238.41:5999/api_test?test_id=' + btoa(randomString), {
+        fetch('http://api.allorigins.win/get?url=http://207.244.238.41:5999/api_test?test_id=' + btoa(randomString), {
             method: 'GET',
             mode: 'no-cors'
         });
