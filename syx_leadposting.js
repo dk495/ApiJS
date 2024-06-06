@@ -7,20 +7,16 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('lead_token', 'd7144429ec19450292644a3048f30e32');
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
     formData.append('traffic_source_id', '1014');
-    formData.append('alternate_phone',document.getElementById('alt_phone').value);
-    formData.append('traffic_source_lead_id',  document.getElementById('lead_id').value);
+  
     formData.append('first_name',  document.getElementById('first_name').value);
     formData.append('last_name', document.getElementById('last_name').value);
-    formData.append('email',  document.getElementById('email').value);
-    formData.append('address',  document.getElementById('address1').value);
-    formData.append('address2',  document.getElementById('address2').value);
-    formData.append('city',  document.getElementById('city').value);
+ 
     formData.append('state',  document.getElementById('state').value);
     formData.append('zip',  document.getElementById('zip').value);
     formData.append('dob',  document.getElementById('dob').value);
-    formData.append('gender', document.getElementById('gender').value);
-    formData.append('original_lead_submit_date', document.getElementById('entry_date').value.replace("T", " ") + ':00');
-    formData.append('traffic_source_agent_id',  document.getElementById('list_id').value);
+     formData.append('jornaya_leadid',  document.getElementById('jornaya_leadid').value);
+ 
+
     
     const url = 'https://express-lead-hub.trackdrive.com/api/v1/leads/capture?' + new URLSearchParams(formData).toString();
     
