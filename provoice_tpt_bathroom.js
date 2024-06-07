@@ -18,6 +18,7 @@ formData.append('landing_page', document.getElementById('landing_page').value);
 formData.append('ip_address', document.getElementById('ip_address').value);
 formData.append('bathroom_service', document.getElementById('bathroom_service').value);
 formData.append('zip_code', document.getElementById('zip_code').value);
+        formData.append('call_recording_url', document.getElementById('call_recording_url').value);
 formData.append('tcpa_language', 'English');
 
             formData.append('trusted_form_cert_id', document.getElementById('trusted_form_cert_id').value);
