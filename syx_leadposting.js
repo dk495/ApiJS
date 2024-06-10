@@ -4,9 +4,9 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     document.getElementById('submitBtn').disabled = true;
     
     const formData = new FormData();
-    formData.append('lead_token', 'd7144429ec19450292644a3048f30e32');
+    formData.append('lead_token', '0c7400289dfe4b18aa2bcf10da3fe1c6');
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
-    formData.append('traffic_source_id', '1014');
+    formData.append('traffic_source_id', '2407');
   
     formData.append('first_name',  document.getElementById('first_name').value);
     formData.append('last_name', document.getElementById('last_name').value);
@@ -18,7 +18,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
  
 
     
-    const url = 'https://express-lead-hub.trackdrive.com/api/v1/leads/capture?' + new URLSearchParams(formData).toString();
+    const url = 'https://global-digital-media.trackdrive.com/api/v1/leads' + new URLSearchParams(formData).toString();
     
     fetch(url, {
         method: 'POST'
