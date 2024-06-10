@@ -18,7 +18,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
  
 
     
-    const url = 'https://global-digital-media.trackdrive.com/api/v1/leads' + new URLSearchParams(formData).toString();
+    const url = 'https://global-digital-media.trackdrive.com/api/v1/leads?' + new URLSearchParams(formData).toString();
     
     fetch(url, {
         method: 'POST'
