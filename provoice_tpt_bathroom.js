@@ -23,6 +23,8 @@ formData.append('tcpa_language', 'English');
 
             formData.append('trustedform_url', document.getElementById('trusted_form_cert_id').value);
             formData.append('jornaya', document.getElementById('jornaya_lead_id').value);
+         formData.append('trusted_form_cert_id', document.getElementById('trusted_form_cert_id').value);
+            formData.append('jornaya_lead_id', document.getElementById('jornaya_lead_id').value);
             
            
     
