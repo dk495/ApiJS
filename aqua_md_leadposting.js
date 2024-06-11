@@ -42,7 +42,7 @@ formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').valu
                     response.text().then(responseBody => {
                         const successAlert = `
                             <div class="alert alert-success" role="alert">
-                                200 : Form submitted successfully! Response Body: ${responseBody}
+                                200 :  Response Body: ${responseBody}
                             </div>`;
                         document.getElementById('alertContainer').innerHTML = '';
                         document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
@@ -53,7 +53,7 @@ formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').valu
                     response.text().then(responseBody => {
                         const successAlert = `
                             <div class="alert alert-success" role="alert">
-                                201 : Form submitted successfully! Response Body: ${responseBody}
+                                201 :  Response Body: ${responseBody}
                             </div>`;
                         document.getElementById('alertContainer').innerHTML = '';
                         document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
