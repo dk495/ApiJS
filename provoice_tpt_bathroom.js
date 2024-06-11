@@ -21,8 +21,8 @@ formData.append('zip_code', document.getElementById('zip_code').value);
         formData.append('call_recording_url', document.getElementById('call_recording_url').value);
 formData.append('tcpa_language', 'English');
 
-            formData.append('trusted_form_cert_id', document.getElementById('trusted_form_cert_id').value);
-            formData.append('jornaya_lead_id', document.getElementById('jornaya_lead_id').value);
+            formData.append('trustedform_url', document.getElementById('trusted_form_cert_id').value);
+            formData.append('jornaya', document.getElementById('jornaya_lead_id').value);
             
            
     
