@@ -15,7 +15,7 @@ formData.append('zip', document.getElementById('zip').value);
 formData.append('attorney', document.getElementById('attorney').value);
 
 formData.append('fault', document.getElementById('person_at_fault').value);
-
+formData.append('auto_accident_in_past_2_years', document.getElementById('auto_accident_in_past_2_years').value);
 formData.append('injured', document.getElementById('injured').value);
 formData.append('injury_type', document.getElementById('injury_type').value);
 formData.append('incident_date', document.getElementById('incident_date').value);
