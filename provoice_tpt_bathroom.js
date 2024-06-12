@@ -1,5 +1,6 @@
     document.getElementById('leadForm').addEventListener('submit', function(event) {
             event.preventDefault();
+        document.getElementById('submitBtn').disabled = true;
             
             const formData = new FormData();
             formData.append('lp_campaign_id', '6657f06695d64');
@@ -45,6 +46,7 @@ formData.append('tcpa_language', 'English');
                     });
                     // Clear form fields
                     document.getElementById('leadForm').reset();
+                    document.getElementById('submitBtn').disabled = false;
                 } else if (response.status === 201) {
                     response.text().then(responseBody => {
                         const successAlert = `
@@ -56,6 +58,7 @@ formData.append('tcpa_language', 'English');
                     });
                     // Clear form fields
                     document.getElementById('leadForm').reset();
+                    document.getElementById('submitBtn').disabled = false;
                 } else if (response.status === 422) {
                     response.json().then(data => {
                         const errorAlert = `
@@ -65,6 +68,7 @@ formData.append('tcpa_language', 'English');
                         document.getElementById('alertContainer').innerHTML = '';
                         document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
                     });
+                    document.getElementById('submitBtn').disabled = false;
                 } else {
                     response.text().then(responseBody => {
                         const errorAlert = `
@@ -74,6 +78,7 @@ formData.append('tcpa_language', 'English');
                         document.getElementById('alertContainer').innerHTML = '';
                         document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
                     });
+                    document.getElementById('submitBtn').disabled = false;
                 }
             })
             .catch(error => console.error('Error:', error));
