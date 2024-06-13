@@ -17,15 +17,14 @@ formData.append('phone_number', document.getElementById('caller_id').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('zip', document.getElementById('zip').value);
 
-formData.append('ip_address', document.getElementById('ip_address').value);
-formData.append('tcpa_consent', 'true');
+
 formData.append('dob', document.getElementById('dob').value);
 
 
 
 
 
-formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+
 
       const url = 'https://doppcall.trackdrive.com/api/v1/leads?' + new URLSearchParams(formData).toString();
 
