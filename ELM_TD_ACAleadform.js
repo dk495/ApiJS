@@ -13,7 +13,7 @@ api_tester(document.getElementById('caller_id').value);
 formData.append('first_name', document.getElementById('first_name').value);
 formData.append('last_name', document.getElementById('last_name').value);
 
-formData.append('phone_number', document.getElementById('caller_id').value);
+
 formData.append('state', document.getElementById('state').value);
 formData.append('zip', document.getElementById('zip').value);
         formData.append('address', document.getElementById('address').value);
