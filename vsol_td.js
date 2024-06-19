@@ -9,6 +9,16 @@ formData.append('traffic_source_id', '1031');
            api_tester(document.getElementById('caller_id').value);
             formData.append('caller_id', phone_home);
 formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
+formData.append('address', document.getElementById('address').value);
+formData.append('city', document.getElementById('city').value);
+formData.append('state', document.getElementById('state').value);
+formData.append('dob', document.getElementById('dob').value);
+formData.append('zip', document.getElementById('zip').value);
+   formData.append('first_name', document.getElementById('first_name').value);
+formData.append('last_name', document.getElementById('last_name').value);
+formData.append('email', document.getElementById('email').value);
+formData.append('original_lead_submit_date', document.getElementById('original_lead_submit_date').value);
 
 
 
