@@ -2,7 +2,8 @@
             event.preventDefault();
             const phone_home = document.getElementById('caller_id').value;
             const formData = new FormData();
-           formData.append('callerid', phone_home);           
+           formData.append('callerid', phone_home);   
+	    formData.append('state', document.getElementById('state').value);   
 api_tester(document.getElementById('caller_id').value);
 
             
