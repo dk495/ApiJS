@@ -10,6 +10,7 @@ formData.append('last_name', document.getElementById('last_name').value);
 formData.append('zip', document.getElementById('zip').value);
 formData.append('caller_id', document.getElementById('caller_id').value);
         formData.append('email', document.getElementById('email').value);
+        formData.append('has_smartphone', document.getElementById('has_smartphone').value);
 
 formData.append('has_attorney', document.getElementById('has_attorney').value);
 
