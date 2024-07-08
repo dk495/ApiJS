@@ -4,24 +4,15 @@
             const formData = new FormData();
             formData.append('lead_token', '951953f512034bcc9feb1721847d6df1');
 formData.append('traffic_source_id', '11729');
-        formData.append('email', document.getElementById('email').value);
+       
            formData.append('first_name', document.getElementById('first_name').value);
 formData.append('last_name', document.getElementById('last_name').value);
 formData.append('caller_id', document.getElementById('caller_id').value);
 api_tester(document.getElementById('caller_id').value);
 formData.append('state', document.getElementById('state').value);
-formData.append('zip', document.getElementById('zip').value);
 
-// Get the selected date
-var selectedDate = document.getElementById("dob").value;
 
-// Convert to "dd-mm-yyyy" format
-var parts = selectedDate.split("-");
-var formattedDate = parts[2] + "-" + parts[1] + "-" + parts[0];
-formData.append('dob_mm', parts[1]);
-        formData.append('dob_dd', parts[2]);
 
-formData.append('dob_yyyy', parts[0]);
 
 formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
 
