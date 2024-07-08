@@ -12,6 +12,7 @@ formData.append('post_key', '58dc2779ffffc3f46d215ebd34cc28b2');
 formData.append('zipcode', document.getElementById('zip').value);
 
 formData.append('state', document.getElementById('state').value);
+        formData.append('dob', document.getElementById('dob').value);
 
 
 
