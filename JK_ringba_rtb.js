@@ -33,12 +33,16 @@ document.querySelectorAll('button[type="button"]').forEach(button => {
     })
     .then(response => response.json())
     .then(data => {
-      if (data.bidAmount && data.phoneNumber && data.phoneNumberNoPlus) {
+     if (data.bidAmount && data.phoneNumber && data.phoneNumberNoPlus) {
+        const callMinDuration = data.bidTerms.find(term => term.code === 100)?.callMinDuration || 'N/A';
         const successAlert = `
           <div class="alert alert-success" role="alert">
             Form submitted successfully!<br>
             Phone Number: ${data.phoneNumber}<br>
-            Phone Number (No Plus): ${data.phoneNumberNoPlus}
+            Phone Number (No Plus): ${data.phoneNumberNoPlus}<br>
+            Call Min Duration: ${callMinDuration}<br>
+            Expire In Seconds: ${data.expireInSeconds}<br>
+            Bid Expire DT: ${data.bidExpireDT}
           </div>`;
         document.getElementById('alertContainer').innerHTML = '';
         document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
