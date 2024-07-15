@@ -8,8 +8,16 @@ document.getElementById('submitBtn').disabled = true;
 
            api_tester(document.getElementById('caller_id').value);
             formData.append('caller_number', phone_home);
+ formData.append('first_name', document.getElementById('first_name').value);
+            formData.append('last_name', document.getElementById('last_name').value);
+formData.append('zip_code', document.getElementById('zip').value);
 
 
+
+formData.append('address', document.getElementById('address').value);
+formData.append('birthday', document.getElementById('dob').value);
+formData.append('householdincome', document.getElementById('householdincome').value);
+formData.append('householdsize', document.getElementById('householdsize').value);
 
 
 
