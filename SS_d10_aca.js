@@ -12,16 +12,22 @@ formData.append('city', document.getElementById('city').value);
 formData.append('email', document.getElementById('email').value);
 api_tester(document.getElementById('caller_id').value);
 formData.append('address', document.getElementById('address').value);
-formData.append('birthDate', document.getElementById('dob').value);
-formData.append('householdincome', document.getElementById('householdincome').value);
-formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+	    formData.append('gender', document.getElementById('gender').value);
+
+formData.append('houseHoldIncome', document.getElementById('householdincome').value);
+formData.append('lead_id', document.getElementById('jornaya_leadid').value);
+	    const [year, month, day] = document.getElementById('dob').value.split('-');
+
+            // Reformat the date string to MM/DD/YYYY
+            const formattedDate = `${month}/${day}/${year}`;
+	    formData.append('birthDate',formattedDate);
             
 	
 
             
            
     
-            const url = 'https://display.ringba.com/enrich/2457461580619580496?' + new URLSearchParams(formData).toString();
+            const url = 'https://display.ringba.com/enrich/2450301035151886212?' + new URLSearchParams(formData).toString();
 
       const xhr = new XMLHttpRequest();
       xhr.open('POST', url);
