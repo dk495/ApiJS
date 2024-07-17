@@ -8,6 +8,8 @@ document.getElementById('submitBtn').disabled = true;
 formData.append('traffic_source_id', '1006');
            api_tester(document.getElementById('caller_id').value);
             formData.append('caller_id', phone_home);
+	    formData.append('state', document.getElementById('state').value);
+	    formData.append('zip', document.getElementById('zip').value);
 
 
 
