@@ -44,7 +44,7 @@ formData.append('traffic_source_id', '1001');
             
            
     
-            const url = 'https://zat-technologies-llc.trackdrive.com/api/v1/lead?' + new URLSearchParams(formData).toString();
+            const url = 'https://zat-technologies-llc.trackdrive.com/api/v1/leads/capture?' + new URLSearchParams(formData).toString();
     
             fetch(url, {
                 method: 'POST'
