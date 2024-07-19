@@ -36,7 +36,7 @@ pingData.append('trustedform_url', document.getElementById('trusted_form_cert_id
             const ping_id = pingResponse.ping_id;
 
             const formData = new FormData();
-                   formData.append('lp_campaign_id', '667c02c2e533b');
+                   formData.append('lp_campaign_id', '667c02c2e533b'); 
 formData.append('lp_campaign_key', 'bqpfCLQdD3PTKtH6B9Gk');
  formData.append('phone_home', document.getElementById('phone_home').value);
 formData.append('lp_caller_id', document.getElementById('phone_home').value);
