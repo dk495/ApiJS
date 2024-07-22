@@ -21,6 +21,7 @@ formData.append('incident_date', document.getElementById('incident_date').value)
 formData.append('hospitalized_or_treated', document.getElementById('hospitalized_or_treated').value);
 formData.append('source_url', document.getElementById('source_url').value);
         formData.append('police_report', document.getElementById('police_report').value);
+        formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
 
 
             
