@@ -31,8 +31,8 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('still_being_treated', document.getElementById('still_being_treated').value);
     formData.append('hospitalized', document.getElementById('hospitalized').value);
     formData.append('treatment_needed', document.getElementById('treatment_needed').value);
-    formData.append('transported_in_ambulance', document.getElementById('transported_in_ambulance').value);
-    formData.append('uninsured_motorist_coverage', document.getElementById('uninsured_motorist_coverage').value);
+    formData.append('tranported_in_ambulance', document.getElementById('transported_in_ambulance').value);
+    formData.append('uninured_motorist_coverage', document.getElementById('uninsured_motorist_coverage').value);
     formData.append('where_were_you_injured', document.getElementById('where_were_you_injured').value);
 
     const url = 'https://retreaverdata.com/data_writing?' + new URLSearchParams(formData).toString();
