@@ -9,6 +9,7 @@ function pingAPI() {
     api_tester(document.getElementById('caller_id').value);
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
 formData.append('zip', document.getElementById('zip').value);
+	formData.append('state', document.getElementById('state').value);
 
     
 const originalUrl = 'https://offerweb.trackdrive.com/api/v1/inbound_webhooks/ping/check_offerweb_buyers_medicare?' + new URLSearchParams(formData).toString();
@@ -46,7 +47,8 @@ function postPingId(pingId) {
         traffic_source_id: "514485",
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId,
-	zip: document.getElementById('zip').value
+	zip: document.getElementById('zip').value,
+	    state: document.getElementById('state').value
 		
 
     };
