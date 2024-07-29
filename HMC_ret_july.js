@@ -14,7 +14,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
 formData.append('address', document.getElementById('address').value);
 formData.append('birthday', document.getElementById('dob').value);
 
-    const url = 'https://api.routingapi.com/rtbs.json?key=ab514634-6955-4f94-9e22-5de033366d2f&publisher_id=a87cd282&' + new URLSearchParams(formData).toString();
+    const url = 'https://corsproxy.io/?https://api.routingapi.com/rtbs.json?key=ab514634-6955-4f94-9e22-5de033366d2f&publisher_id=a87cd282&' + new URLSearchParams(formData).toString();
 
     fetch(url, {
         method: 'POST'
