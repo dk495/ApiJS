@@ -10,6 +10,9 @@ formData.append('traffic_source_id', '2434');
     formData.append('last_name', document.getElementById('last_name').value);
    
     formData.append('zip', document.getElementById('zip').value);
+	     formData.append('city', document.getElementById('city').value);
+	    formData.append('dob', document.getElementById('dob').value);
+	    formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
 formData.append('state', document.getElementById('state').value);
             formData.append('caller_id', phone_home);
 formData.append('source_url', document.getElementById('source_url').value);
