@@ -6,13 +6,9 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     document.getElementById('alertContainer').innerHTML = '';
 
     api_tester(document.getElementById('caller_id').value);
-    formData.append('first_name', document.getElementById('first_name').value);
-    formData.append('last_name', document.getElementById('last_name').value);
-    formData.append('product', document.getElementById('product').value);
+ 
     formData.append('zip', document.getElementById('zip').value);
-    formData.append('email', document.getElementById('email').value);
-formData.append('address', document.getElementById('address').value);
-formData.append('birthday', document.getElementById('dob').value);
+
 
     const url = 'https://corsproxy.io/?https://api.routingapi.com/rtbs.json?key=ab514634-6955-4f94-9e22-5de033366d2f&publisher_id=a87cd282&' + new URLSearchParams(formData).toString();
 
