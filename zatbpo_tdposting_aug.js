@@ -7,9 +7,12 @@ document.getElementById('submitBtn').disabled = true;
             formData.append('lead_token', '95a265dbb4214ac88f4ce28c0affee06');
 formData.append('traffic_source_id', '1001');
            api_tester(document.getElementById('caller_id').value);
-            formData.append('caller_id', phone_home);
-formData.append('source_url', document.getElementById('source_url').value);
-formData.append('original_lead_submit_date', document.getElementById('original_lead_submit_date').value);optin_date_time
+          formData.append('source_url', document.getElementById('source_url').value);
+formData.append('original_lead_submit_date', document.getElementById('original_lead_submit_date').value);
+formData.append('first_name', document.getElementById('first_name').value);
+    formData.append('last_name', document.getElementById('last_name').value);
+	    formData.append('state', document.getElementById('state').value);
+	    formData.append('zip', document.getElementById('zip').value);
 
 
 
