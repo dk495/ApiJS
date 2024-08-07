@@ -12,7 +12,7 @@ formData.append('traffic_source_id', '1001');
 formData.append('original_lead_submit_date', document.getElementById('original_lead_submit_date').value);
 formData.append('first_name', document.getElementById('first_name').value);
     formData.append('last_name', document.getElementById('last_name').value);
-	    formData.append('state', document.getElementById('state').value);optin_date_time
+	    formData.append('state', document.getElementById('state').value);
 	    formData.append('zip', document.getElementById('zip').value);
 	    formData.append('optin_date_time', document.getElementById('original_lead_submit_date').value);
 
