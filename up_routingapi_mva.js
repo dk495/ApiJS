@@ -14,6 +14,9 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('person_at_fault', document.getElementById('person_at_fault').value);
     formData.append('currently_represented', document.getElementById('currently_represented').value);
     formData.append('hospitalized_or_treated', document.getElementById('hospitalized_or_treated').value);
+    formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+    formData.append('source_url', document.getElementById('source_url').value);
+    formData.append('address', document.getElementById('address').value);
  
 
     const url = 'https://corsproxy.io/?https://api.routingapi.com/rtbs.json?key=cf232004-b824-4935-a2b7-caae2799e1f3&publisher_id=b7d288d4&' + new URLSearchParams(formData).toString();
