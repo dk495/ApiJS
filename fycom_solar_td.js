@@ -18,6 +18,7 @@ formData.append('credit_score', document.getElementById('credit_score').value);
 formData.append('electric_company', document.getElementById('electric_company').value);
 formData.append('electric_bill', document.getElementById('electric_bill').value);
 formData.append('address', document.getElementById('address').value);
+	formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
 
 var inputDate = document.getElementById("dob").value;
 
