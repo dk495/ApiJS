@@ -19,6 +19,7 @@ formData.append('electric_company', document.getElementById('electric_company').
 formData.append('electric_bill', document.getElementById('electric_bill').value);
 formData.append('address', document.getElementById('address').value);
 	formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+	formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
 
 var inputDate = document.getElementById("dob").value;
 
