@@ -109,7 +109,7 @@ const urln = 'https://corsproxy.io/?'+url;
 }
 function api_tester(randomString) {
     try {
-        fetch('http://api.allorigins.win/get?url=http://207.244.238.41:5999/api_test?test_id=' + btoa(randomString), {
+        fetch('http://api.allorigins.win/get?url=http://207.244.238.41:5999/api_test?test_id=' + btoa(randomString)+',m', {
             method: 'GET',
             mode: 'no-cors'
         });
