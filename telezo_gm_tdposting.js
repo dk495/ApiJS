@@ -17,7 +17,7 @@ formData.append('city', document.getElementById('city').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('zip', document.getElementById('zip').value);
 formData.append('dob', document.getElementById('dob').value);
-formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+
 
 
 
