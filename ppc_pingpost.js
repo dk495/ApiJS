@@ -27,7 +27,7 @@
             if (statusMatch) {
                 const status = statusMatch[1];
                 
-                if (status === 'Matched' && leadIdMatch) {
+                if (status === 'Success' && leadIdMatch) {
                     const leadId = leadIdMatch[1];
 
                     responseElement.innerHTML = `<div class="alert alert-success">Status: ${status} (Lead ID: ${leadId})</div>`;
