@@ -11,7 +11,7 @@
         const originPhoneAreaCode = originPhone.substring(0, 3);  // Get the first three digits of Origin_Phone
 
         // Perform Ping Request using HTTP GET
-        const pingUrl = `https://percallpro.leadportal.com/new_api/api.php?Mode=full&Key=${apiKey}&API_Action=pingPostLead&TYPE=9&SRC=${src}&State=${state}&ZIP=${zip}&Project=${project}&Origin_Phone=${originPhone}&Terminating_Phone=7277617936&Origin_Phone_Area_Code=${originPhoneAreaCode}&Origin_Phone_Prefix=+1&Origin_Phone_Suffix=US`;
+        const pingUrl = `https://percallpro.leadportal.com/new_api/api.php?Mode=full&Key=${apiKey}&API_Action=iprSubmitLead&TYPE=9&SRC=${src}&State=${state}&ZIP=${zip}&Project=${project}&Origin_Phone=${originPhone}&Terminating_Phone=7277617936&Origin_Phone_Area_Code=${originPhoneAreaCode}&Origin_Phone_Prefix=+1&Origin_Phone_Suffix=US`;
 
         fetch(pingUrl, {
             method: 'GET'
@@ -33,7 +33,7 @@
                     responseElement.innerHTML = `<div class="alert alert-success">Status: ${status} (Lead ID: ${leadId})</div>`;
 
                     // Perform Post Request using HTTP GET if Matched
-                    const postUrl = `https://percallpro.leadportal.com/new_api/api.php?Mode=post&Key=${apiKey}&API_Action=pingPostLead&Lead_ID=${leadId}&TYPE=9&SRC=${src}&Origin_Phone=${originPhone}&Terminating_Phone=7277617936`;
+                    const postUrl = `https://percallpro.leadportal.com/new_api/api.php?Mode=post&Key=${apiKey}&API_Action=iprSubmitLead&Lead_ID=${leadId}&TYPE=9&SRC=${src}&Origin_Phone=${originPhone}&Terminating_Phone=7277617936`;
 
                     return fetch(postUrl, { method: 'GET' });
                 } else if (status === 'Unmatched') {
