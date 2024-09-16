@@ -16,7 +16,14 @@ formData.append('address2', document.getElementById('address2').value);
 formData.append('city', document.getElementById('city').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('zip', document.getElementById('zip').value);
-formData.append('dob', document.getElementById('dob').value);
+var inputDate = document.getElementById("dob").value;
+
+ 
+  var parts = inputDate.split('-');
+
+    formData.append('dob_mm', parts[1]);
+formData.append('dob_dd', parts[2]);
+formData.append('dob_yyyy', parts[0]);
 formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
 
 
