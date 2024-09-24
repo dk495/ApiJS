@@ -21,7 +21,7 @@ formData.append('debt', document.getElementById('debt_amount').value);
 
 formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
 
-      const url = 'https://login.forthcrm.com/post/350746bc1a2ab3ce976d24a64681429e630f1cac/?' + new URLSearchParams(formData).toString();
+      const url = 'https://corsproxy.io/?https://login.forthcrm.com/post/350746bc1a2ab3ce976d24a64681429e630f1cac/?' + new URLSearchParams(formData).toString();
 
     
             fetch(url, {
