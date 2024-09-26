@@ -15,7 +15,7 @@ formData.append('city', document.getElementById('city').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('email_address', document.getElementById('email').value);
 formData.append('address', document.getElementById('address').value);
-formData.append('landing_page', document.getElementById('landing_page').value);
+formData.append('landing_page', 'https://myhomerevamp.com/window/');
 
 formData.append('windows_service', document.getElementById('windows_service').value);
 formData.append('windows_number', document.getElementById('windows_number').value);
