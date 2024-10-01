@@ -10,7 +10,7 @@ formData.append('state', document.getElementById('state').value);
 formData.append('jornaya', document.getElementById('jornaya').value);
 formData.append('debt_amount', document.getElementById('debt_amount').value);
 formData.append('email', document.getElementById('email').value);
-formData.append('landing_page', document.getElementById('https://thinkcallsllc.com/').value);
+formData.append('landing_page', document.getElementById('https://thinkcallsllc.com/');
 formData.append('ip_address', document.getElementById('ip_address').value);
             
 	
