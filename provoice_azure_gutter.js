@@ -13,7 +13,7 @@ document.getElementById('submitBtn').disabled = true;
         address: document.getElementById('address').value,
         ip_address: document.getElementById('ip_address').value,
         gutters_service: document.getElementById('gutters_service').value,
-        gutters_material: document.getElementById('gutters_​material').value,
+        gutters_material: document.getElementById('gutters_material').value,
         zip_code: document.getElementById('zip_code').value,
         call_recording: document.getElementById('call_recording').value
     };
