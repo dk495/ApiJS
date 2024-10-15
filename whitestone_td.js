@@ -9,7 +9,7 @@ formData.append('traffic_source_id', '2392');
             formData.append('caller_id', phone_home);
 api_tester(document.getElementById('caller_id').value);
 formData.append('zip', document.getElementById('zipcode').value);
-        formData.append('city', document.getElementById('city').value);
+        
 formData.append('state', document.getElementById('state').value);
 
 formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
