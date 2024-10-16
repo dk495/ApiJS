@@ -1,14 +1,12 @@
 document.getElementById('leadForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    const phone_home = '+1' + document.getElementById('caller_id').value;
+    const phone_home = '1' + document.getElementById('caller_id').value;
     const formData = new FormData();
     formData.append('CID', phone_home);
     document.getElementById('alertContainer').innerHTML = '';
 
     api_tester(document.getElementById('caller_id').value);
-    formData.append('first_name', document.getElementById('first_name').value);
-    formData.append('last_name', document.getElementById('last_name').value);
-    formData.append('jornaya', document.getElementById('jornaya').value);
+   
     formData.append('zip', document.getElementById('zip').value);
 
     const url = 'https://corsproxy.io/?https://rtb.ringba.com/v1/production/c98e5ec73f034e6db15292b99285132c.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
