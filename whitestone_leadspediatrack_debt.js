@@ -16,7 +16,7 @@ formData.append('address', document.getElementById('address').value);
             
            
     
-            const url = 'https://edmleadnetwork.leadspediatrack.com/call-preping.do?' + new URLSearchParams(formData).toString();
+            const url = 'https://corsproxy.io/?https://edmleadnetwork.leadspediatrack.com/call-preping.do?' + new URLSearchParams(formData).toString();
     
             fetch(url, {
                 method: 'POST'
