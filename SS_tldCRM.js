@@ -8,7 +8,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     api_tester(document.getElementById('caller_id').value);
    
 
-    const url = 'https://ris.tldcrm.com/api/public/dialer/ready/'+phone_home+'?ava=1&ing=SRI_&sta=true';
+    const url = 'https://corsproxy.io/?https://ris.tldcrm.com/api/public/dialer/ready/'+phone_home+'?ava=1&ing=SRI_&sta=true';
 
     fetch(url, {
         method: 'GET'
