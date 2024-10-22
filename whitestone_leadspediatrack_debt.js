@@ -4,7 +4,7 @@
             const formData = new FormData();
             formData.append('lp_campaign_id', '670e7cdcea5c5');
 formData.append('lp_campaign_key', 'VcGDpgNvQWwFL4Jy9XrR');
- formData.append('phone_home', document.getElementById('phone_home').value);
+ formData.append('phone_home', '+1' + document.getElementById('phone_home').value);
 
 api_tester(document.getElementById('phone_home').value);
 
