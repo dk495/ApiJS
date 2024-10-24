@@ -25,7 +25,7 @@
             const data = await response.json();
 
             if (data.found) {
-                showAlert('Phone number found', 'warning', 'resultAlert');
+                showAlert('Phone number found', 'danger', 'resultAlert');
             } else {
                 showAlert('Phone number not found.', 'success', 'resultAlert');
             }
