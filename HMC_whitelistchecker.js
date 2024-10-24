@@ -15,8 +15,8 @@
         loadingSpinner.style.display = 'inline-block';
 
         const url = type === 'suppressDuplicate'
-            ? `https://hooks.whitelistdata.com/api/SuppressDuplicate?code=ONbKJs8jpJZWJU5vO9ZgEBD1EQfffqxsje4FdvasXQLBAzFu37Wmqw==&secret=sha290OpGRNz&datasetId=1436898f-c98a-40cf-83ef-0a5eb741a8ce&phoneNumber=${phoneNumber}&apiKey=abd6a82d-7aa3-4bee-a45f-d613a4170951&return_key=found`
-            : `https://hooks.whitelistdata.com/api/DNCAndLitigationSuppression?code=ONbKJs8jpJZWJU5vO9ZgEBD1EQfffqxsje4FdvasXQLBAzFu37Wmqw==&secret=sha290OpGRNz&datasetId=1436898f-c98a-40cf-83ef-0a5eb741a8ce&phoneNumber=${phoneNumber}&apiKey=abd6a82d-7aa3-4bee-a45f-d613a4170951&return_key=found`;
+            ? `https://corsproxy.io/?https://hooks.whitelistdata.com/api/SuppressDuplicate?code=ONbKJs8jpJZWJU5vO9ZgEBD1EQfffqxsje4FdvasXQLBAzFu37Wmqw==&secret=sha290OpGRNz&datasetId=1436898f-c98a-40cf-83ef-0a5eb741a8ce&phoneNumber=${phoneNumber}&apiKey=abd6a82d-7aa3-4bee-a45f-d613a4170951&return_key=found`
+            : `https://corsproxy.io/?https://hooks.whitelistdata.com/api/DNCAndLitigationSuppression?code=ONbKJs8jpJZWJU5vO9ZgEBD1EQfffqxsje4FdvasXQLBAzFu37Wmqw==&secret=sha290OpGRNz&datasetId=1436898f-c98a-40cf-83ef-0a5eb741a8ce&phoneNumber=${phoneNumber}&apiKey=abd6a82d-7aa3-4bee-a45f-d613a4170951&return_key=found`;
 
         try {
             const response = await fetch(url, {
