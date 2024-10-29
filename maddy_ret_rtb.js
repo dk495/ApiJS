@@ -1,7 +1,7 @@
     document.getElementById('leadForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
-document.getElementById('submitBtn').disabled = true;
+
             const phone_home = '+1' + document.getElementById('caller_id').value;
             const formData = new FormData();
             formData.append('key', '02718cf3-b331-42ed-a63f-01d644a01927');
@@ -40,7 +40,7 @@ formData.append('inbound_number', '18884899455');
                     });
                     // Clear form fields
                     document.getElementById('leadForm').reset();
-		document.getElementById('submitBtn').disabled = false;
+		
                 } else if (response.status === 201) {
                     response.text().then(responseBody => {
                         const successAlert = `
@@ -52,7 +52,7 @@ formData.append('inbound_number', '18884899455');
                     });
                     // Clear form fields
                     document.getElementById('leadForm').reset();
-document.getElementById('submitBtn').disabled = false;
+
                 } else if (response.status === 422) {
                     response.json().then(data => {
                         const errorAlert = `
@@ -61,7 +61,7 @@ document.getElementById('submitBtn').disabled = false;
                             </div>`;
                         document.getElementById('alertContainer').innerHTML = '';
                         document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
-document.getElementById('submitBtn').disabled = false;
+
                     });
                 } 
 else {
