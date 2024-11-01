@@ -1,6 +1,6 @@
 function pingAPI() {
     // Disable submit button
-    document.getElementById('submitBtn').disabled = true;
+   
 
     // Your API URL
     const formData = new FormData();
@@ -31,7 +31,7 @@ formData.append('driver1_relationship_to_applicant', document.getElementById('dr
 formData.append('driver1_credit_rating', document.getElementById('driver1_credit_rating').value);
 formData.append('driver1_license_state', document.getElementById('driver1_license_state').value);
 formData.append('driver1_sr22_required', document.getElementById('driver1_sr22_required').value);
-formData.append('auto_insurance_quote_request', 'Y');
+
 
 formData.append('original_lead_submit_date', document.getElementById('original_lead_submit_date').value);
 
@@ -98,7 +98,7 @@ function postPingId(pingId) {
     driver1_license_state: document.getElementById('driver1_license_state').value,
     driver1_sr22_required: document.getElementById('driver1_sr22_required').value,
     original_lead_submit_date: document.getElementById('original_lead_submit_date').value,
-    auto_insurance_quote_request : 'Y'
+    
 };
 
     const originalUrl = 'https://pegasus-leads.trackdrive.com/api/v1/inbound_webhooks/post/check_for_available_agents?' + new URLSearchParams(postData).toString();;
