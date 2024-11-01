@@ -5,7 +5,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     const formData = new FormData();
     formData.append('key', '4f24ad6b-d8e9-4cdb-9e21-75678844aa93');
     formData.append('publisher_id', '2005');
-    formData.append('inbound_number', '18882269434');
+    
 
     api_tester(document.getElementById('caller_id').value);
     formData.append('caller_number', phone_home);
