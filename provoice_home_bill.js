@@ -25,9 +25,8 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
     formData.append('tcpaText', 'By completing the form, I hereby affirm my acceptance of the Terms and Conditions, CCPA , and Privacy Policy . I grant permission to myhomeRevamp, their contractors, and partners (refer to our partners list) to communicate with me through email, phone, and text messages using the provided contact number. I consent to receiving offers from these entities, even if my contacts are listed on the "State and Federal Do Not Call List." I acknowledge that these marketing communications may be transmitted using an automatic telephone dialing system or pre-recorded messages. I understand that my consent is not a prerequisite for making a purchase and that I retain the right to revoke it at any time. This declaration includes compliance with the California Notice.');
 
     try {
-        const response = await fetch('https://leads.billy-partners.com/fullpost/', {
-            method: 'POST',
-            body: formData
+        const response = await fetch('https://corsproxy.io/?https://leads.billy-partners.com/fullpost/?'+ new URLSearchParams(formData).toString(), {
+            method: 'POST'
         });
 
         if (response.ok) {
