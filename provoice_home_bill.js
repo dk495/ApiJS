@@ -34,7 +34,7 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
             const { status, ...responseData } = responseBody;
             if (status !== 'reject') {
                 document.getElementById('leadForm').reset();
-                delete responseData.price;
+                
             }
             showAlert(`Form submitted successfully! Response Body: ${JSON.stringify(responseData)}`, 'success');
         } else {
