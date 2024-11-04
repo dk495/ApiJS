@@ -21,6 +21,7 @@ formData.append('primary_phone', document.getElementById('primary_phone').value)
 formData.append('dob', document.getElementById('dob').value);
 formData.append('marital_status', document.getElementById('marital_status').value);
 formData.append('gender', document.getElementById('gender').value);
+    formData.append('insurance_company', document.getElementById('insurance_company').value);
 formData.append('residence_status', document.getElementById('residence_status').value);
 formData.append('vehicle1_year', document.getElementById('vehicle1_year').value);
 formData.append('vehicle1_make', document.getElementById('vehicle1_make').value);
