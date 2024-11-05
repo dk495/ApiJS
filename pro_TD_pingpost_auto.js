@@ -26,6 +26,9 @@ formData.append('residence_status', document.getElementById('residence_status').
 formData.append('vehicle1_year', document.getElementById('vehicle1_year').value);
 formData.append('vehicle1_make', document.getElementById('vehicle1_make').value);
 formData.append('vehicle1_model', document.getElementById('vehicle1_model').value);
+    formData.append('vehicle2_year', document.getElementById('vehicle1_year').value);
+formData.append('vehicle2_make', document.getElementById('vehicle1_make').value);
+formData.append('vehicle2_model', document.getElementById('vehicle1_model').value);
 formData.append('driver1_relationship_to_applicant', document.getElementById('driver1_relationship_to_applicant').value);
  formData.append('driver1_first_name', document.getElementById('first_name').value);
     formData.append('driver1_last_name', document.getElementById('last_name').value);
@@ -92,6 +95,9 @@ function postPingId(pingId) {
     vehicle1_year: document.getElementById('vehicle1_year').value,
     vehicle1_make: document.getElementById('vehicle1_make').value,
     vehicle1_model: document.getElementById('vehicle1_model').value,
+    vehicle2_year: document.getElementById('vehicle1_year').value,
+    vehicle2_make: document.getElementById('vehicle1_make').value,
+    vehicle2_model: document.getElementById('vehicle1_model').value,
     driver1_relationship_to_applicant: document.getElementById('driver1_relationship_to_applicant').value,
     driver1_first_name: document.getElementById('first_name').value,
     driver1_last_name: document.getElementById('last_name').value,
