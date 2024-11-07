@@ -8,13 +8,12 @@ api_tester(document.getElementById('phone').value);
 formData.append('age', document.getElementById('age').value);
 formData.append('phone', document.getElementById('phone').value);
 formData.append('email', document.getElementById('email').value);
-formData.append('consent', document.getElementById('consent').value);
 formData.append('first_name', document.getElementById('first_name').value);
 formData.append('last_name', document.getElementById('last_name').value);
 formData.append('ip_address', document.getElementById('ip_address').value);
-formData.append('jornaya_lead_id', document.getElementById('jornaya_lead_id').value);
+formData.append('jornaya', document.getElementById('jornaya_lead_id').value);
 formData.append('optin_timestamp', document.getElementById('optin_timestamp').value);
-formData.append('optin_url', document.getElementById('optin_url').value);
+formData.append('landing_page', document.getElementById('optin_url').value);
 formData.append('zip', document.getElementById('zip').value);
            
             
