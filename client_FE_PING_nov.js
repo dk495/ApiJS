@@ -60,7 +60,7 @@ const url = 'https://corsproxy.io/?' + originalUrl;
             response.text().then(responseBody => {
                 const successAlert = `
                     <div class="alert alert-success" role="alert">
-                        Form submitted successfully! Response Body: ${responseBody}
+                        Form submitted successfully! Transfer Call Please
                     </div>`;
                 document.getElementById('alertContainer').innerHTML = '';
                 document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
