@@ -8,6 +8,7 @@ function pingAPI() {
     formData.append('traffic_source_id', '10717');
     api_tester(document.getElementById('caller_id').value);
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
+	 formData.append('jornaya_leadid',  document.getElementById('jornaya_leadid').value);
 
 
     
