@@ -10,7 +10,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
    
     formData.append('zipcode', document.getElementById('zip').value);
 
-    const url = 'https://corsproxy.io/?https://rtb.ringba.com/v1/production/'+campaign+'.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
+    const url = 'https://corsproxy.io/?https://rtb.ringba.com/v1/production/' + campaign + '.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
 
     fetch(url, {
         method: 'GET'
@@ -32,10 +32,14 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             document.getElementById('alertContainer').innerHTML = '';
             document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
         } else {
-            delete responseData.bidAmount;
+            // Only keep phoneNumber and phoneNumberNoPlus in the response
+            const successData = {
+                phoneNumber: responseData.phoneNumber,
+                phoneNumberNoPlus: responseData.phoneNumberNoPlus
+            };
             const successAlert = `
                 <div class="alert alert-success" role="alert">
-                    Success: ${JSON.stringify(responseData)}
+                    Success: ${JSON.stringify(successData)}
                 </div>`;
             document.getElementById('alertContainer').innerHTML = '';
             document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
