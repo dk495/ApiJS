@@ -4,7 +4,7 @@
             const formData = new FormData();
             formData.append('lead_token', 'ba1407301d9849e3994cc04fe6387b14');
 formData.append('traffic_source_id', 'ViciDial');
-formData.append('zip', document.getElementById('zip').value);
+formData.append('Zipcode', document.getElementById('zip').value);
       
             formData.append('caller_id', phone_home);
             
