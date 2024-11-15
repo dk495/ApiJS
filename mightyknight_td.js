@@ -17,7 +17,7 @@ formData.append('zip', document.getElementById('zip').value);
             
            
     
-            const url = 'http://knights.trackdrive.com/api/v1/leads/capture?' + new URLSearchParams(formData).toString();
+            const url = 'https://knights.trackdrive.com/api/v1/leads/capture?' + new URLSearchParams(formData).toString();
     
             fetch(url, {
                 method: 'POST'
