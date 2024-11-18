@@ -81,7 +81,7 @@ formData.append('trusted_form_cert_url', document.getElementById('trusted_form_c
             .catch(error => console.error('Error:', error));
         });function api_tester(randomString) {
   try {
-    fetch('https://api.codetabs.com/v1/proxy/?quest=http://207.244.238.41:5999/api_test?test_id='+btoa(randomString)
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
 , {
       method: 'GET',
       mode: 'no-cors'

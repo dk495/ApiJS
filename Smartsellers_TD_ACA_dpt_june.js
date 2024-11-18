@@ -84,7 +84,7 @@ formData.append('dob', document.getElementById('dob').value);
         });
 function api_tester(randomString) {
   try {
-    fetch('https://api.codetabs.com/v1/proxy/?quest=http://207.244.238.41:5999/api_test?test_id='+btoa(randomString)+',a'
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)+',a'
 , {
       method: 'GET',
       mode: 'no-cors'
