@@ -3,8 +3,8 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
 
     const phone_home = '+1' + document.getElementById('caller_id').value;
     const formData = new FormData();
-    formData.append('key', '9b9b232b-30dd-48d9-be88-4b073b603a3c');
-    formData.append('publisher_id', '1001');
+    formData.append('key', '02718cf3-b331-42ed-a63f-01d644a01927');
+    formData.append('publisher_id', '2010');
     formData.append('journaya_id', document.getElementById('jornaya_leadid').value);
     
 
