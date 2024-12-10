@@ -11,7 +11,7 @@ function pingAPI() {
 
 
     
-const originalUrl = 'https://pegasus-leads.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_available_aca_inbound_dynamic_monthly_net15_buyers?' + new URLSearchParams(formData).toString();
+const originalUrl = 'https://pegasus-leads.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_available_aca_inbounds_waterflow_buyers?' + new URLSearchParams(formData).toString();
     const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
     // Fetch data from the API
@@ -51,7 +51,7 @@ function postPingId(pingId) {
 
     };
 
-    const originalUrl = 'https://pegasus-leads.trackdrive.com/api/v1/inbound_webhooks/post/check_for_available_aca_inbound_dynamic_monthly_net15_buyers?' + new URLSearchParams(postData).toString();;
+    const originalUrl = 'https://pegasus-leads.trackdrive.com/api/v1/inbound_webhooks/post/check_for_available_aca_inbounds_waterflow_buyers?' + new URLSearchParams(postData).toString();;
 const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
     fetch(url)
     .then(response => {
