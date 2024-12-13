@@ -7,7 +7,7 @@ formData.append('traffic_source_id', '10014');
             formData.append('first_name', document.getElementById('first_name').value);
             formData.append('last_name', document.getElementById('last_name').value);
             formData.append('caller_id', phone_home);
-          formData.append('Terminating_Phone', '5614625827');
+        
 
 api_tester(document.getElementById('caller_id').value);
 formData.append('optin_timestamp', document.getElementById('optin_timestamp').value);
