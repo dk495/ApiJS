@@ -82,7 +82,7 @@ formData.append('Roof_Shade', document.getElementById('RoofShadeOptions').value)
 formData.append('Sunrooms', document.getElementById('SunroomsOptions').value);
 formData.append('Windows', document.getElementById('WindowsOptions').value);
 formData.append('Windows_Count', document.getElementById('WindowsCountOptions').value);
-    formData.append('SID', 'Others');
+    formData.append('SID', '');
 
     const pingUrl = 'https://offerweb.linktrustleadgen.com/Lead/436043/Ping?' + new URLSearchParams(formData).toString();
 
