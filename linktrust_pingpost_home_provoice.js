@@ -138,9 +138,10 @@ formData.append('Roof_Shade', document.getElementById('RoofShadeOptions').value)
 formData.append('Sunrooms', document.getElementById('SunroomsOptions').value);
 formData.append('Windows', document.getElementById('WindowsOptions').value);
 formData.append('Windows_Count', document.getElementById('WindowsCountOptions').value);
-    const postUrl = `https://offerweb.linktrustleadgen.com/Lead/436043/Post?PingId=${encodeURIComponent(pingId)}`;
+    const postUrl = `https://offerweb.linktrustleadgen.com/Lead/436043/Post?PingId=${encodeURIComponent(pingId)}` + new URLSearchParams(formData).toString();
 
-    fetch(postUrl, { method: 'POST', body: formData })
+
+    fetch(postUrl)
         .then(response => {
             if (response.ok) {
                 response.text().then(responseBody => {
