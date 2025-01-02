@@ -15,6 +15,7 @@ formData.append('optin_timestamp', document.getElementById('optin_timestamp').va
 formData.append('landing_page', document.getElementById('landing_page').value);
 formData.append('jornaya', document.getElementById('jornaya').value);
 formData.append('zip', document.getElementById('zip').value);
+    formData.append('ip_address', document.getElementById('ip_address').value);
 
     const url = 'https://rtb.ringba.com/v1/production/47c1ea214a2b43a38ca9ea8bf136493c.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
 const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(url);
