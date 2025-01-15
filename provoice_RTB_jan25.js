@@ -1,7 +1,7 @@
  const urls = {
-      btn1: 'https://display.ringba.com/enrich/2605196623352956627?',
-      btn2: 'https://display.ringba.com/enrich/2605196637965911765?',
-      btn3: 'https://display.ringba.com/enrich/2605193159939982737?'
+      btn1: 'https://display.ringba.com/enrich/2605196623352956627?',      
+      btn3: 'https://display.ringba.com/enrich/2605193159939982737?',
+  btn2: 'https://display.ringba.com/enrich/2605196637965911765?'
     };
 
     function api_tester(randomString) {
