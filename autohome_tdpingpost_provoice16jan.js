@@ -13,7 +13,6 @@ formData.append('last_name',  document.getElementById('last_name').value);
 formData.append('email', document.getElementById('email').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('address', document.getElementById('address').value);
-formData.append('insurance_company', document.getElementById('insurance_company').value);
 formData.append('homeowner', document.getElementById('homeowner').value);
 formData.append('seeking_standard_coverage', document.getElementById('seeking_standard_coverage').value);
 formData.append('not_an_existing_state_farm_customer', document.getElementById('not_an_existing_state_farm_customer').value);
