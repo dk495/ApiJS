@@ -7,7 +7,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
    
     formData.append('publisher_id', '4abd32bc');
  formData.append('caller_number', phone_home);
- formData.append('truecall_id', phone_home);
+ formData.append('truecall_id', document.getElementById('truecall_id').value);
  formData.append('dialed_number', phone_home);
 formData.append('first_name', document.getElementById('first_name').value);
 formData.append('last_name', document.getElementById('last_name').value);
