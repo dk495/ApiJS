@@ -12,8 +12,8 @@ document.getElementById('submitBtn').disabled = true;
         email_address: document.getElementById('email').value,
         address: document.getElementById('address').value,
         ip_address: document.getElementById('ip_address').value,
-        home_​type: document.getElementById('home_​type').value,
-square_​footage: document.getElementById('square_​footage').value,
+        home_type: document.getElementById('home_type').value,
+square_footage: document.getElementById('square_footage').value,
         zip_code: document.getElementById('zip_code').value,
 call_recording: document.getElementById('call_recording').value
     };
