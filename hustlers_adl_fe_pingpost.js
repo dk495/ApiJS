@@ -8,8 +8,8 @@ function pingAPI() {
     formData.append('traffic_source_id', '99641');
     api_tester(document.getElementById('caller_id').value);
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
-
 formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+
 
     
 const originalUrl = 'https://adolicious-llc.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_final_expense_available_buyers?' + new URLSearchParams(formData).toString();
@@ -47,13 +47,13 @@ function postPingId(pingId) {
         traffic_source_id: "99641",
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId,
-	zip: document.getElementById('zip').value,
         jornaya_leadid: document.getElementById('jornaya_leadid').value
+	
 		
 
     };
 
-    const originalUrl = 'https://adolicious-llc.trackdrive.com/api/v1/inbound_webhooks/post/check_for_final_expense_available_buyers?' + new URLSearchParams(postData).toString();
+    const originalUrl = 'https://adolicious-llc.trackdrive.com/api/v1/inbound_webhooks/post/check_for_final_expense_available_buyers?' + new URLSearchParams(postData).toString();;
 const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
     fetch(url)
     .then(response => {
