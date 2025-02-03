@@ -16,7 +16,7 @@ formData.append('zip', document.getElementById('zip').value);
 formData.append('city', document.getElementById('city').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('address1', document.getElementById('address').value);
-    formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+    
 
     
 
