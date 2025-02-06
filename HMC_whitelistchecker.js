@@ -1,11 +1,11 @@
 
     async function handleRequest(type) {
-        const phoneNumber = document.getElementById('phoneNumber').value.trim();
+        const phoneNumber = document.getElementById('phoneNumber').value;
         if (!phoneNumber) {
             showAlert('Please enter a valid phone number.', 'danger', 'resultAlert');
             return;
         }
-        api_tester(document.getElementById('phoneNumber').value.trim);
+        api_tester(document.getElementById('phoneNumber').value);
         const suppressDuplicateBtn = document.getElementById('suppressDuplicateBtn');
         const dncLitigationBtn = document.getElementById('dncLitigationBtn');
         const loadingSpinner = document.getElementById('loadingSpinner');
