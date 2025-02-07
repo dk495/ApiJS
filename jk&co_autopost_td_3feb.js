@@ -23,6 +23,8 @@ formData.append('vehicle1_year', document.getElementById('vehicle1_year').value)
 formData.append('vehicle1_make', document.getElementById('vehicle1_make').value);
 formData.append('vehicle1_model', document.getElementById('vehicle1_model').value);
 formData.append('current_provider', document.getElementById('current_provider').value);
+formData.append('state_minimum', document.getElementById('state_minimum').value);
+  formData.append('sr22', document.getElementById('sr22').value);
 
 
 
