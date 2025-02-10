@@ -18,7 +18,7 @@ formData.append('CurrentlyInsured', document.getElementById('currently_insured')
 formData.append('jornaya', document.getElementById('jornaya_leadid').value);
 formData.append('dob', document.getElementById('dob').value);
 formData.append('sr22', 'FALSE');
-formData.append('StateMinimum', 'TRUE');
+formData.append('StateMinimum', 'FALSE');
 formData.append('TrustedForm', '');
 
 
