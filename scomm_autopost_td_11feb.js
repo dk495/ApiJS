@@ -24,7 +24,7 @@ formData.append('state_minimum', document.getElementById('state_minimum').value)
   formData.append('driver1_sr22_required', document.getElementById('sr22').value);
     formData.append('currently_insured', document.getElementById('currently_insured').value);
     formData.append('homeowner', document.getElementById('homeowner').value);
-   formData.append('trusted_form_cert_url', '');
+   formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
 
 
 
