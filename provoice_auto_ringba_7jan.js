@@ -5,21 +5,22 @@ document.getElementById('submitBtn').disabled = true;
     const formData = new FormData();
     api_tester(document.getElementById('caller_id').value);
     formData.append('callerid', '+1' + document.getElementById('caller_id').value);
-formData.append('first_name', document.getElementById('first_name').value);
-formData.append('last_name', document.getElementById('last_name').value);
+formData.append('firstname', document.getElementById('first_name').value);
+formData.append('lastname', document.getElementById('last_name').value);
 formData.append('address', document.getElementById('address').value);
 formData.append('city', document.getElementById('city').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('email', document.getElementById('email').value);
 formData.append('CurrentProvider', document.getElementById('insurance_company').value);
 formData.append('HomeOwnership', document.getElementById('homeowner').value);
-formData.append('ip', document.getElementById('ip_address').value);
+formData.append('ip_address', document.getElementById('ip_address').value);
 formData.append('CurrentlyInsured', document.getElementById('currently_insured').value);
-formData.append('jornaya', document.getElementById('jornaya_leadid').value);
+formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+  formData.append('zipcode', document.getElementById('zip').value);
 formData.append('dob', document.getElementById('dob').value);
 formData.append('sr22', 'FALSE');
 formData.append('StateMinimum', 'FALSE');
-formData.append('TrustedForm', '');
+formData.append('trusted_id', '');
 
 
 
