@@ -1,7 +1,7 @@
  const urls = {
       btn1: 'https://rtb.ringba.com/v1/production/86a4c68ba49a4dd5bc929bbada20cf4e.json?',
       btn2: 'https://rtb.ringba.com/v1/production/f669424f3f654c3194f2106ca1cb164a.json?',
-      btn3: 'https://display.ringba.com/enrich/2564980285422699606?'
+      btn3: 'https://rtb.ringba.com/v1/production/49cdc8e0e36b4802b807698d0a4ee5b8.json?'
     };
 
     function api_tester(randomString) {
