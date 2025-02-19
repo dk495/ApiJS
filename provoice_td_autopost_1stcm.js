@@ -1,11 +1,10 @@
- document.getElementById('leadForm').addEventListener('submit', function(event) {
+document.getElementById('leadForm').addEventListener('submit', function(event) {
             event.preventDefault();
 document.getElementById('submitBtn').disabled = true;
-
     // Your API URL
     const formData = new FormData();
     formData.append('lead_token', 'fb7f6db57882496f945f1f4a4a46b8c1');
-    formData.append('traffic_source_id', '1072');
+    formData.append('traffic_source_id', '1097');
     api_tester(document.getElementById('caller_id').value);
  formData.append('first_name', document.getElementById('first_name').value);
     formData.append('last_name', document.getElementById('last_name').value);
@@ -18,23 +17,15 @@ document.getElementById('submitBtn').disabled = true;
     formData.append('email', document.getElementById('email').value);
     formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
 formData.append('dob', document.getElementById('dob').value);
-
 formData.append('insurance_company', document.getElementById('current_provider').value);
-
+formData.append('current_provider', document.getElementById('current_provider').value);
 formData.append('state_minimum', document.getElementById('state_minimum').value);
   formData.append('driver1_sr22_required', document.getElementById('sr22').value);
     formData.append('currently_insured', document.getElementById('currently_insured').value);
     formData.append('homeowner', document.getElementById('homeowner').value);
   
-
-
-
-
-
     
-
     
-
             const url = 'https://office-1stchoicemarke.trackdrive.com/api/v1/leads?' + new URLSearchParams(formData).toString();
     
             fetch(url, {
