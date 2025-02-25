@@ -13,6 +13,8 @@ document.getElementById('submitBtn').disabled = true;
     formData.append('zip', document.getElementById('zip').value);
     formData.append('city', document.getElementById('city').value);
     formData.append('state', document.getElementById('state').value);
+	 formData.append('current_provider', document.getElementById('current_provider').value);
+	 
     
  
     formData.append('email', document.getElementById('email').value);
