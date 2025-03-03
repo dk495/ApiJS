@@ -23,7 +23,14 @@ formData.append('state_minimum', document.getElementById('state_minimum').value)
   formData.append('driver1_sr22_required', document.getElementById('sr22').value);
     formData.append('currently_insured', document.getElementById('currently_insured').value);
     formData.append('homeowner', document.getElementById('homeowner').value);
+  	 formData.append('dui', document.getElementById('dui').value);
+	  formData.append('licensed', document.getElementById('licensed').value);
+	  formData.append('months_insured_continuously', document.getElementById('months_insured_continuously').value);
+	 formData.append('tcpa_url', 'https://proinsurancequotes.com/auto/');
+	 formData.append('tcpa_call_consent', 'TRUE');
+	 formData.append('tcpa_optin_consent_language', 'By completing the form, I hereby affirm my acceptance of the Terms and Conditions, CCPA, and Privacy Policy. I grant permission to proinsurancequotes, their contractors, and partners (refer to our partners list) to communicate with me through email, phone, and text messages using the provided contact number. I consent to receiving offers from these entities, even if my contacts are listed on the State and Federal Do Not Call List. I acknowledge that these marketing communications may be transmitted using an automatic telephone dialing system or pre-recorded messages. I understand that my consent is not a prerequisite for making a purchase and that I retain the right to revoke it at any time. This declaration includes compliance with the California Notice.');
   
+
     
     
             const url = 'https://office-1stchoicemarke.trackdrive.com/api/v1/leads?' + new URLSearchParams(formData).toString();
