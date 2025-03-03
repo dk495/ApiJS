@@ -19,8 +19,12 @@ formData.append('CurrentlyInsured', document.getElementById('currently_insured')
 formData.append('jornaya', document.getElementById('jornaya_leadid').value);
 
 formData.append('sr22', 'FALSE');
+  formData.append('sr22_coverage', 'FALSE');
 formData.append('StateMinimum', 'FALSE');
 formData.append('TrustedForm', document.getElementById('TrustedForm').value);
+  formData.append('dui', document.getElementById('dui').value);
+	  formData.append('licensed', document.getElementById('licensed').value);
+	  formData.append('months_insured_continuously', document.getElementById('months_insured_continuously').value);
 
 
 
