@@ -24,7 +24,9 @@ document.getElementById('submitBtn').disabled = true;
   formData.append('currently_insured', document.getElementById('currently_insured').value);
   formData.append('state_minimum', document.getElementById('state_minimum').value);
   formData.append('sr22', document.getElementById('sr22').value);
-
+  formData.append('dui', document.getElementById('dui').value);
+	  formData.append('licensed', document.getElementById('licensed').value);
+	  formData.append('months_insured_continuously', document.getElementById('months_insured_continuously').value);
 
 
 
