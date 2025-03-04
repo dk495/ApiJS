@@ -26,6 +26,10 @@ formData.append('state_minimum', document.getElementById('state_minimum').value)
     formData.append('homeowner', document.getElementById('homeowner').value);
    formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
 
+	 formData.append('dui', document.getElementById('dui').value);
+	  formData.append('licensed', document.getElementById('licensed').value);
+	  formData.append('months_insured_continuously', document.getElementById('months_insured_continuously').value);
+
 
 
 
