@@ -16,15 +16,10 @@ function pingAPI() {
     formData.append('address', document.getElementById('address').value);   
  
     formData.append('email', document.getElementById('email').value);
-    formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+    
 
 
-formData.append('current_provider', document.getElementById('current_provider').value);
-formData.append('state_minimum', document.getElementById('state_minimum').value);
-  formData.append('driver1_sr22_required', document.getElementById('sr22').value);
-    formData.append('currently_insured', document.getElementById('currently_insured').value);
-    formData.append('homeowner', document.getElementById('homeowner').value);
-   formData.append('trusted_form_cert_url',document.getElementById('trusted_form_cert_url').value);
+
 
     
 const originalUrl = 'https://kproinsurance.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_available_buyers_on_auto_insurance?' + new URLSearchParams(formData).toString();
@@ -64,20 +59,13 @@ function postPingId(pingId) {
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId,
 	zip: document.getElementById('zip').value,
-        jornaya_leadid: document.getElementById('jornaya_leadid').value,
         first_name:document.getElementById('first_name').value,
 last_name:document.getElementById('last_name').value,
 city:document.getElementById('city').value,
 state:document.getElementById('state').value,
 address:document.getElementById('address').value,
 email:document.getElementById('email').value,
-current_provider:document.getElementById('current_provider').value,
-state_minimum:document.getElementById('state_minimum').value,
-driver1_sr22_required:document.getElementById('driver1_sr22_required').value,
-currently_insured:document.getElementById('currently_insured').value,
-homeowner:document.getElementById('homeowner').value,
-trusted_form_cert_url:document.getElementById('trusted_form_cert_url').value,
-months_insured_continuously:document.getElementById('months_insured_continuously').value
+
 		
 
     };
