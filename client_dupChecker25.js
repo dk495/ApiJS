@@ -12,8 +12,8 @@ document.getElementById('submitBtn').disabled = true;
 
     
     
-            const url = 'https://api.convoso.com/v1/leads/search?auth_token=6u29hr6iv2hlhfbe92r79imr0pljmj5i&' + new URLSearchParams(formData).toString();
-    
+            const originalUrl = 'https://api.convoso.com/v1/leads/search?auth_token=6u29hr6iv2hlhfbe92r79imr0pljmj5i&' + new URLSearchParams(formData).toString();
+    const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
             fetch(url, {
                 method: 'POST'
             })
