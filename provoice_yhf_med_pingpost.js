@@ -48,7 +48,7 @@ function postPingId(pingId) {
         traffic_source_id: "1007",
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId,
-        jornaya_leadid: document.getElementById('jornaya_leadid').value
+        zip: document.getElementById('zip').value
 	
 		
 
