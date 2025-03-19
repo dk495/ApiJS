@@ -23,6 +23,8 @@ formData.append('current_provider', document.getElementById('current_provider').
     formData.append('currently_insured', document.getElementById('currently_insured').value);
     formData.append('homeowner', document.getElementById('homeowner').value);
   formData.append('state_minimum', document.getElementById('state_minimum').value);
+	  formData.append('email', document.getElementById('email').value);
+	  formData.append('address', document.getElementById('address').value);
   
 
 
