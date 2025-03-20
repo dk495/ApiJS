@@ -16,6 +16,7 @@ document.getElementById('submitBtn').disabled = true;
  
     formData.append('email', document.getElementById('email').value);
     formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+	formData.append('jornaya_provider_id', document.getElementById('jornaya_leadid').value);
 formData.append('dob', document.getElementById('dob').value);
 formData.append('insurance_company', document.getElementById('current_provider').value);
 formData.append('current_provider', document.getElementById('current_provider').value);
@@ -35,7 +36,9 @@ formData.append('source_url', 'https://proinsurancequotes.com');
 	 formData.append('tcpa_call_consent', 'TRUE');
 	 formData.append('tcpa_optin_consent_language', 'By completing the form, I hereby affirm my acceptance of the Terms and Conditions, CCPA, and Privacy Policy. I grant permission to proinsurancequotes, their contractors, and partners (refer to our partners list) to communicate with me through email, phone, and text messages using the provided contact number. I consent to receiving offers from these entities, even if my contacts are listed on the State and Federal Do Not Call List. I acknowledge that these marketing communications may be transmitted using an automatic telephone dialing system or pre-recorded messages. I understand that my consent is not a prerequisite for making a purchase and that I retain the right to revoke it at any time. This declaration includes compliance with the California Notice.');
   
-
+ formData.append('commercial_policy_type', document.getElementById('commercial_policy_type').value);
+	 formData.append('vehicle_count', document.getElementById('vehicle_count').value);
+	 
     
     
             const url = 'https://office-1stchoicemarke.trackdrive.com/api/v1/leads?' + new URLSearchParams(formData).toString();
