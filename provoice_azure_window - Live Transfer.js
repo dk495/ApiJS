@@ -19,7 +19,7 @@ windows_number: document.getElementById('windows_number').value,
     };
 
     // Set the POST URL
-    const url = 'https://prod-90.westus.logic.azure.com:443/workflows/52e33d1346e14e58bc5649a28ae3cd0f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=xXfvjlVJ9WU4C5A1pE3lo4-QhW4FLzPcYyq6RahBXzI ';
+    const url = 'https://prod-90.westus.logic.azure.com:443/workflows/52e33d1346e14e58bc5649a28ae3cd0f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=xXfvjlVJ9WU4C5A1pE3lo4-QhW4FLzPcYyq6RahBXzI';
     
             fetch(url, {
                 method: 'POST',
