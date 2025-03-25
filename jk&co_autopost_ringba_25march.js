@@ -16,7 +16,7 @@ formData.append('cell_phone', document.getElementById('caller_id').value);
 
     formData.append('email', document.getElementById('email').value);
     formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
-formData.append('trusted_form', document.getElementById('trusted_form').value);
+
 
 
 
