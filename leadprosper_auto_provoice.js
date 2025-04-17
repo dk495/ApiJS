@@ -7,6 +7,8 @@ pingData.append('lp_supplier_id', '74511');
 pingData.append('lp_key', 'mmedcdz0jbd2ly');
 pingData.append('SubID1', 'Provoice');
 
+
+
  
 pingData.append('first_name', document.getElementById('first_name').value);
 pingData.append('last_name', document.getElementById('last_name').value);
@@ -18,12 +20,19 @@ const [datePart, timePart] = inputValue.split("T"); // "2025-04-17", "00:54"
   const timeWithSeconds = timePart + ":00"; // Add seconds
   const formattedDate = `${month}/${day}/${year} ${timeWithSeconds}`;
 pingData.append('Lead_Creation_Date', formattedDate);
-
-           
+pingData.append('vehicle1_year', document.getElementById('vehicle1_year').value);
+pingData.append('vehicle1_make', document.getElementById('vehicle1_make').value);
+pingData.append('vehicle1_model', document.getElementById('vehicle1_model').value);
+            pingData.append('currently_insured', document.getElementById('currently_insured').value);
+    
+  	 pingData.append('dui', document.getElementById('dui').value);
 pingData.append('city', document.getElementById('city').value);
 pingData.append('state', document.getElementById('state').value);
-
-
+pingData.append('licensed', document.getElementById('licensed').value);
+pingData.append('sr22', document.getElementById('sr22').value);
+pingData.append('vehicle_count', document.getElementById('vehicle_count').value);
+pingData.append('tickets', document.getElementById('tickets').value);
+pingData.append('state_minimum', document.getElementById('state_minimum').value);
 pingData.append('zip_code', document.getElementById('zip_code').value);
 
         
@@ -46,15 +55,25 @@ headers: {
                   formData.append('lp_campaign_id', '26066');
 formData.append('lp_supplier_id', '74511');
 formData.append('lp_key', 'mmedcdz0jbd2ly');
+
             formData.append('first_name', document.getElementById('first_name').value);
 formData.append('last_name', document.getElementById('last_name').value);
 formData.append('city', document.getElementById('city').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('phone', document.getElementById('phone').value);
 formData.append('email', document.getElementById('email').value);
-
+formData.append('vehicle1_year', document.getElementById('vehicle1_year').value);
+formData.append('vehicle1_make', document.getElementById('vehicle1_make').value);
+formData.append('vehicle1_model', document.getElementById('vehicle1_model').value);
 formData.append('zip_code', document.getElementById('zip_code').value);
-
+ formData.append('currently_insured', document.getElementById('currently_insured').value);
+  
+formData.append('vehicle_count', document.getElementById('vehicle_count').value);
+formData.append('tickets', document.getElementById('tickets').value);
+  	 formData.append('dui', document.getElementById('dui').value);
+formData.append('licensed', document.getElementById('licensed').value);
+formData.append('sr22', document.getElementById('sr22').value);
+formData.append('state_minimum', document.getElementById('state_minimum').value);
             formData.append('jornaya_leadid', document.getElementById('jornaya_lead_id').value);
             formData.append('lp_ping_id', ping_id); // Include the ping_id from the ping response
 
