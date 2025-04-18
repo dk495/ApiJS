@@ -14,6 +14,7 @@ pingData.append('first_name', document.getElementById('first_name').value);
 pingData.append('last_name', document.getElementById('last_name').value);
 pingData.append('phone', document.getElementById('phone').value);
 pingData.append('email', document.getElementById('email').value);
+    pingData.append('date_of_birth', document.getElementById('date_of_birth').value);
 const inputValue = document.getElementById("leadcreationdate").value; 
 const [datePart, timePart] = inputValue.split("T"); // "2025-04-17", "00:54"
   const [year, month, day] = datePart.split("-");
@@ -67,7 +68,7 @@ formData.append('vehicle1_make', document.getElementById('vehicle1_make').value)
 formData.append('vehicle1_model', document.getElementById('vehicle1_model').value);
 formData.append('zip_code', document.getElementById('zip_code').value);
  formData.append('currently_insured', document.getElementById('currently_insured').value);
-  
+  formData.append('date_of_birth', document.getElementById('date_of_birth').value);
 formData.append('vehicle_count', document.getElementById('vehicle_count').value);
 formData.append('tickets', document.getElementById('tickets').value);
   	 formData.append('dui', document.getElementById('dui').value);
