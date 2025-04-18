@@ -14,13 +14,17 @@ pingData.append('phone', document.getElementById('phone').value);
 const inputValue = document.getElementById("leadcreationdate").value; 
 const formattedDate = inputValue.replace("T", " ") + ":00";
 pingData.append('leadcreationdate', formattedDate);
-
+ pingData.append('address', document.getElementById('address').value);
            
 pingData.append('city', document.getElementById('city').value);
 pingData.append('state', document.getElementById('state').value);
 
 
 pingData.append('zipcode', document.getElementById('zip_code').value);
+    pingData.append('dateofbirth', document.getElementById('dob').value);
+    pingData.append('propertytype', document.getElementById('propertytype').value);
+    pingData.append('insured', document.getElementById('insured').value);
+    pingData.append('stories', document.getElementById('stories').value);
 
         
             pingData.append('jornaya_leadid', document.getElementById('jornaya_lead_id').value);
@@ -47,7 +51,11 @@ formData.append('last_name', document.getElementById('last_name').value);
 formData.append('city', document.getElementById('city').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('phone', document.getElementById('phone').value);
-
+ formData.append('dateofbirth', document.getElementById('dob').value);
+    formData.append('propertytype', document.getElementById('propertytype').value);
+    formData.append('insured', document.getElementById('insured').value);
+    formData.append('stories', document.getElementById('stories').value);
+             formData.append('address', document.getElementById('address').value);
 
 formData.append('zipcode', document.getElementById('zip_code').value);
 
