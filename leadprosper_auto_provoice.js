@@ -72,6 +72,7 @@ formData.append('zip_code', document.getElementById('zip_code').value);
   formData.append('date_of_birth', document.getElementById('date_of_birth').value);
 formData.append('vehicle_count', document.getElementById('vehicle_count').value);
 formData.append('tickets', document.getElementById('tickets').value);
+            formData.append('address', document.getElementById('address').value);
   	 formData.append('dui', document.getElementById('dui').value);
 formData.append('licensed', document.getElementById('licensed').value);
 formData.append('sr22', document.getElementById('sr22').value);
