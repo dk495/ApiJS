@@ -5,7 +5,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
            pingData.append('lp_campaign_id', '26064');
 pingData.append('lp_supplier_id', '74509');
 pingData.append('lp_key', 'xvzltlqmntj1xd');
-pingData.append('sub1', 'Provoice');
+pingData.append('sub1', '1H');
 
  
 pingData.append('firstname', document.getElementById('first_name').value);
@@ -19,7 +19,9 @@ pingData.append('leadcreationdate', formattedDate);
            
 pingData.append('city', document.getElementById('city').value);
 pingData.append('state', document.getElementById('state').value);
-
+pingData.append('monthscontinuallyinsured', document.getElementById('monthscontinuallyinsured').value);
+    pingData.append('currentprovider', document.getElementById('currentprovider').value);
+    pingData.append('gender', document.getElementById('gender').value);
 
 pingData.append('zipcode', document.getElementById('zip_code').value);
     pingData.append('dateofbirth', document.getElementById('dob').value);
@@ -47,6 +49,7 @@ headers: {
                   formData.append('lp_campaign_id', '26064');
 formData.append('lp_supplier_id', '74509');
 formData.append('lp_key', 'xvzltlqmntj1xd');
+            formData.append('sub1', '1H');
             formData.append('firstname', document.getElementById('first_name').value);
 formData.append('lastname', document.getElementById('last_name').value);
 formData.append('city', document.getElementById('city').value);
@@ -59,7 +62,9 @@ formData.append('phone', document.getElementById('phone').value);
              formData.append('address', document.getElementById('address').value);
 formData.append('email', document.getElementById('email').value);
 formData.append('zipcode', document.getElementById('zip_code').value);
-
+formData.append('monthscontinuallyinsured', document.getElementById('monthscontinuallyinsured').value);
+    formData.append('currentprovider', document.getElementById('currentprovider').value);
+    formData.append('gender', document.getElementById('gender').value);
             formData.append('jornaya_leadid', document.getElementById('jornaya_lead_id').value);
             formData.append('lp_ping_id', ping_id); // Include the ping_id from the ping response
 
