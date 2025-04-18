@@ -22,6 +22,7 @@ const [datePart, timePart] = inputValue.split("T"); // "2025-04-17", "00:54"
   const formattedDate = `${month}/${day}/${year} ${timeWithSeconds}`;
 pingData.append('Lead_Creation_Date', formattedDate);
 pingData.append('vehicle1_year', document.getElementById('vehicle1_year').value);
+    pingData.append('address', document.getElementById('address').value);
 pingData.append('vehicle1_make', document.getElementById('vehicle1_make').value);
 pingData.append('vehicle1_model', document.getElementById('vehicle1_model').value);
             pingData.append('currently_insured', document.getElementById('currently_insured').value);
