@@ -8,8 +8,8 @@ pingData.append('lp_key', 'xvzltlqmntj1xd');
 pingData.append('sub1', 'Provoice');
 
  
-pingData.append('first_name', document.getElementById('first_name').value);
-pingData.append('last_name', document.getElementById('last_name').value);
+pingData.append('firstname', document.getElementById('first_name').value);
+pingData.append('lastname', document.getElementById('last_name').value);
 pingData.append('phone', document.getElementById('phone').value);
 const inputValue = document.getElementById("leadcreationdate").value; 
 const formattedDate = inputValue.replace("T", " ") + ":00";
@@ -47,8 +47,8 @@ headers: {
                   formData.append('lp_campaign_id', '26064');
 formData.append('lp_supplier_id', '74509');
 formData.append('lp_key', 'xvzltlqmntj1xd');
-            formData.append('first_name', document.getElementById('first_name').value);
-formData.append('last_name', document.getElementById('last_name').value);
+            formData.append('firstname', document.getElementById('first_name').value);
+formData.append('lastname', document.getElementById('last_name').value);
 formData.append('city', document.getElementById('city').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('phone', document.getElementById('phone').value);
