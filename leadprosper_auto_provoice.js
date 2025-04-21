@@ -68,6 +68,7 @@ formData.append('city', document.getElementById('city').value);
 formData.append('state', document.getElementById('state').value);
 formData.append('phone', document.getElementById('phone').value);
 formData.append('email', document.getElementById('email').value);
+            formData.append('Lead_Creation_Date', formattedDate);
 formData.append('vehicle1_year', document.getElementById('vehicle1_year').value);
 formData.append('vehicle1_make', document.getElementById('vehicle1_make').value);
 formData.append('vehicle1_model', document.getElementById('vehicle1_model').value);
