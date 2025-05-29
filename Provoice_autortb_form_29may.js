@@ -15,7 +15,7 @@ formData.append('address', document.getElementById('address').value);
 formData.append('city', document.getElementById('city').value); 
 formData.append('State', document.getElementById('state').value);
 formData.append('email', document.getElementById('email').value);
-formData.append('TrustedForm', document.getElementById('trusted_form').value);
+formData.append('jornaya', document.getElementById('jornaya').value);
 
    
 
