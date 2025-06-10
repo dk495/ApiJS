@@ -4,7 +4,7 @@
             const formData = new FormData();
             formData.append('lead_token', '31dfea6add50479db603466f0f9a64db');
             formData.append('traffic_source_id', '1036');
-           
+           formData.append('zip', document.getElementById('zip').value);
             formData.append('caller_id', phone_home);          
             api_tester(document.getElementById('caller_id').value);
             
