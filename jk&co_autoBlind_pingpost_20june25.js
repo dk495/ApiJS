@@ -9,6 +9,7 @@ function pingAPI() {
     api_tester(document.getElementById('caller_id').value);
 
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
+	formData.append('zip',  document.getElementById('zip').value);
    
 
 
@@ -54,7 +55,8 @@ function postPingId(pingId) {
         trackdrive_number: "+18444574378",
         traffic_source_id: "1005",
         caller_id: '+1' + document.getElementById('caller_id').value,
-        ping_id: pingId
+        ping_id: pingId,
+	zip: document.getElementById('caller_id').value
       
   
 		
