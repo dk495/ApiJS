@@ -9,7 +9,7 @@ document.getElementById('submitBtn').disabled = true;
     api_tester(document.getElementById('caller_id').value);
 
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
-    formData.append('zip', document.getElementById('zip').value);
+    formData.append('zipcode_overide', document.getElementById('zip').value);
    
  
 
