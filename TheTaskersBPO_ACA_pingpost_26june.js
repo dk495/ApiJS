@@ -57,7 +57,7 @@ function postPingId(pingId) {
         traffic_source_id: "12362",
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId,
-        first_name: document.getElementById('firstname').value
+        first_name: document.getElementById('firstname').value,
         last_name: document.getElementById('lastname').value
 
 	
