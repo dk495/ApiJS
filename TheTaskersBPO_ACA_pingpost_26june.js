@@ -9,8 +9,8 @@ function pingAPI() {
     api_tester(document.getElementById('caller_id').value);
 
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
-	formData.append('first_name',  document.getElementById('first_name').value);
-        formData.append('last_name',  document.getElementById('last_name').value);
+	formData.append('first_name',  document.getElementById('firstname').value);
+        formData.append('last_name',  document.getElementById('lastname').value);
    
 
 
@@ -57,8 +57,8 @@ function postPingId(pingId) {
         traffic_source_id: "12362",
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId,
-        first_name: document.getElementById('first_name').value
-        last_name: document.getElementById('last_name').value
+        first_name: document.getElementById('firstname').value
+        last_name: document.getElementById('lastname').value
 
 	
       
