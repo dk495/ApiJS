@@ -9,9 +9,9 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
    
     
 
-    const url = 'https://corsproxy.io/?https://rtb.ringba.com/v1/production/0fb97e7b9eb54989969c4b7a629abf6e.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
-
-    fetch(url, {
+    const url = 'https://rtb.ringba.com/v1/production/0fb97e7b9eb54989969c4b7a629abf6e.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
+const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(url);
+    fetch(apiUrl, {
         method: 'GET'
     })
     .then(response => response.text())
