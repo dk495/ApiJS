@@ -11,7 +11,7 @@ function pingAPI() {
 
 
     
-const originalUrl = 'https://adolicious-llc.trackdrive.com/api/v1/inbound_webhooks/ping/check_adolicious_buyers_aca?' + new URLSearchParams(formData).toString();
+const originalUrl = 'https://pay-per-call-program-corp.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_available_buyers_on_aca_transfer_sd?' + new URLSearchParams(formData).toString();
     const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
 
@@ -52,8 +52,8 @@ function postPingId(pingId) {
 
     };
 
-    const originalUrl = 'https://adolicious-llc.trackdrive.com/api/v1/inbound_webhooks/post/check_adolicious_buyers_aca?' + new URLSearchParams(postData).toString();;
-const url = 'https://corsproxy.io/?' + originalUrl;
+    const originalUrl = 'https://pay-per-call-program-corp.trackdrive.com/api/v1/inbound_webhooks/post/check_for_available_buyers_on_aca_transfer_sd?' + new URLSearchParams(postData).toString();;
+const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
     fetch(url)
     .then(response => {
         // Handle response based on status
