@@ -12,7 +12,8 @@ function pingAPI() {
 
     
 const originalUrl = 'https://adolicious-llc.trackdrive.com/api/v1/inbound_webhooks/ping/check_adolicious_buyers_aca?' + new URLSearchParams(formData).toString();
-    const apiUrl = 'https://corsproxy.io/?' + originalUrl;
+    const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
+
 
     // Fetch data from the API
    fetch(apiUrl)
