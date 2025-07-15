@@ -28,7 +28,7 @@ const originalUrl = 'https://rtb.ringba.com/v1/production/e36947e4ca1c419696e288
 const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
     fetch(apiUrl, {
-        method: 'POST'
+        method: 'GET'
     })
     .then(response => {
         if (response.status === 200 || response.status === 201) {
