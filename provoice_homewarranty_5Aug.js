@@ -19,7 +19,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('phone_number', document.getElementById('caller_id').value); 
     formData.append('ip_address', document.getElementById('ip_address').value);
     formData.append('tcpa_consent', "By completing the form, I hereby affirm my acceptance of the Terms and Conditions, CCPA, and Privacy Policy . I grant permission to myhomeRevamp, their contractors, and partners (refer to our partners list) to communicate with me through email, phone, and text messages using the provided contact number. I consent to receiving offers from these entities, even if my contacts are listed on the State and Federal Do Not Call List. I acknowledge that these marketing communications may be transmitted using an automatic telephone dialing system or pre-recorded messages. I understand that my consent is not a prerequisite for making a purchase and that I retain the right to revoke it at any time. This declaration includes compliance with the California Notice.");
-    formData.append('source_url', document.getElementById('landing_page_url').value);
+    formData.append('source_url', "https://myhomerevamp.com/");
     formData.append('jornaya_leadid', document.getElementById('jornaya_lead_id').value);
 
 
@@ -82,6 +82,7 @@ const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponen
         console.error('Error in api_tester:', error);
     }
 }
+
 
 
 
