@@ -36,7 +36,7 @@ const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponen
     if (responseData.bidAmount !== undefined && Number(responseData.bidAmount) < 10) {
         const lowBidAlert = `
             <div class="alert alert-danger" role="alert">
-                Success but Low Bid: ${JSON.stringify(responseData)}
+                Success but Low Bid: No need to transfer
             </div>`;
         document.getElementById('alertContainer').innerHTML = '';
         document.getElementById('alertContainer').insertAdjacentHTML('beforeend', lowBidAlert);
@@ -75,4 +75,5 @@ function api_tester(randomString) {
         console.error('Error in api_tester:', error);
     }
 }
+
 
