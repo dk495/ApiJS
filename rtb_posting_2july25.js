@@ -25,23 +25,34 @@ const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponen
         }
 
         if (responseData.rejectReason) {
-            const errorAlert = `
-                <div class="alert alert-danger" role="alert">
-                    Failure: ${JSON.stringify(responseData)}
-                </div>`;
-            document.getElementById('alertContainer').innerHTML = '';
-            document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
-        } else {
-            delete responseData.bidAmount;
-            const successAlert = `
-                <div class="alert alert-success" role="alert">
-                    Success: ${JSON.stringify(responseData)}
-                </div>`;
-            document.getElementById('alertContainer').innerHTML = '';
-            document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
-            // Clear form fields
-            document.getElementById('leadForm').reset();
-        }
+    const errorAlert = `
+        <div class="alert alert-danger" role="alert">
+            Failure: ${JSON.stringify(responseData)}
+        </div>`;
+    document.getElementById('alertContainer').innerHTML = '';
+    document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+} else {
+    // Check bidAmount before deleting it
+    if (responseData.bidAmount !== undefined && Number(responseData.bidAmount) < 10) {
+        const lowBidAlert = `
+            <div class="alert alert-danger" role="alert">
+                Success but Low Bid: ${JSON.stringify(responseData)}
+            </div>`;
+        document.getElementById('alertContainer').innerHTML = '';
+        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', lowBidAlert);
+    } else {
+        delete responseData.bidAmount;
+        const successAlert = `
+            <div class="alert alert-success" role="alert">
+                Success: ${JSON.stringify(responseData)}
+            </div>`;
+        document.getElementById('alertContainer').innerHTML = '';
+        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
+    }
+    // Clear form fields
+    document.getElementById('leadForm').reset();
+}
+
     })
     .catch(error => {
         const errorAlert = `
@@ -56,11 +67,12 @@ const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponen
 
 function api_tester(randomString) {
     try {
-        fetch('https://api.codetabs.com/v1/proxy/?quest=http://207.244.238.41:5999/api_test?test_id=' + btoa(randomString), {
+        fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString), {
             method: 'GET',
             mode: 'no-cors'
         });
     } catch (error) {
-        console.error('API Tester Error:', error);
+        console.error('Error in api_tester:', error);
     }
 }
+
