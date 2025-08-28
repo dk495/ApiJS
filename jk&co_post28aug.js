@@ -7,7 +7,7 @@ document.getElementById('submitBtn').disabled = true;
     api_tester(document.getElementById('caller_id').value);
     formData.append('phone', '+1' + document.getElementById('caller_id').value);
     formData.append('zip', document.getElementById('zip').value);
-    formData.append('State', document.getElementById('state').value);
+    formData.append('state', document.getElementById('state').value);
     formData.append('uuid', '68b078270e5f255f843db6fc');
 
 
@@ -71,3 +71,4 @@ function api_tester(randomString) {
         console.error('Error in api_tester:', error);
     }
 }
+
