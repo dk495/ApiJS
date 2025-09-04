@@ -33,7 +33,7 @@ const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponen
     document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
 } else {
     // Check bidAmount before deleting it
-    if (responseData.bidAmount !== undefined && Number(responseData.bidAmount) < 10) {
+    if (responseData.bidAmount !== undefined && Number(responseData.bidAmount) < 15) {
         const lowBidAlert = `
             <div class="alert alert-danger" role="alert">
                 Success but Low Bid: No need to transfer
@@ -75,5 +75,6 @@ function api_tester(randomString) {
         console.error('Error in api_tester:', error);
     }
 }
+
 
 
