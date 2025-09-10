@@ -7,6 +7,18 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('caller_id', '+1' + document.getElementById('phone_home').value);
     api_tester(document.getElementById('phone_home').value);
     formData.append('lp_response', 'JSON');
+    formData.append('first_name', document.getElementById('first_name').value);
+    formData.append('last_name',  document.getElementById('last_name').value);
+    formData.append('email_address', document.getElementById('email').value);
+    formData.append('address', document.getElementById('address').value);
+    formData.append('city', document.getElementById('city').value);
+    formData.append('state', document.getElementById('state').value);
+    formData.append('zip_code', document.getElementById('zip').value);
+    formData.append('dob', document.getElementById('dob').value);
+    formData.append('ip_address', document.getElementById('ip_address').value);
+    formData.append('gender', document.getElementById('gender').value);
+    formData.append('marital_status', document.getElementById('marital_status').value);
+    formData.append('jornaya_lead_id', document.getElementById('jornaya_leadid').value);
 
     const url = 'https://track.edmleadnetwork.com/call-preping.do?' + new URLSearchParams(formData).toString();
     const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(url);
