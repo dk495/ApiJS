@@ -14,7 +14,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('state', document.getElementById('state').value);
     formData.append('zip_code', document.getElementById('zip').value);
     formData.append('dob', document.getElementById('dob').value);
-    formData.append('ip_address', document.getElementById('ip_address').value);
+ 
     formData.append('gender', document.getElementById('gender').value);
     formData.append('marital_status', document.getElementById('marital_status').value);
     formData.append('jornaya_lead_id', document.getElementById('jornaya_leadid').value);
@@ -67,4 +67,5 @@ function api_tester(randomString) {
         console.error('Error in api_tester:', error);
     }
 }
+
 
