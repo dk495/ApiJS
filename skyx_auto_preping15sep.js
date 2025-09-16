@@ -6,7 +6,6 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('lp_campaign_key', 'FgR6nXDrNpZkTKC98YJv');
     formData.append('caller_id', '+1' + document.getElementById('phone_home').value);
     api_tester(document.getElementById('phone_home').value);
-    formData.append('lp_response', 'JSON');
     formData.append('first_name', document.getElementById('first_name').value);
     formData.append('last_name',  document.getElementById('last_name').value);
     formData.append('email_address', document.getElementById('email').value);
@@ -68,3 +67,4 @@ function api_tester(randomString) {
         console.error('Error in api_tester:', error);
     }
 }
+
