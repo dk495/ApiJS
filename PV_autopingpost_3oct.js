@@ -44,7 +44,7 @@ function postPingId(pingId) {
         traffic_source_id: "1007",
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId,
-        zip: document.getElementById('zip').value
+        zip: document.getElementById('zip').value,
   };
 
     const originalUrl = 'https://the-mountaintop-affiliate-network.trackdrive.com/api/v1/inbound_webhooks/post/check_for_agents_auto?' + new URLSearchParams(postData).toString();
@@ -97,3 +97,4 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         console.error('Error in api_tester:', error);
     }
 }
+
