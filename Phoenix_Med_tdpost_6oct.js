@@ -14,6 +14,7 @@
 	    formData.append('last_name', document.getElementById('last_name').value);
         formData.append('zip', document.getElementById('zip').value);
         formData.append('age', document.getElementById('age').value);
+		formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
            
     
             const url = 'https://l-v-capital-group-inc.trackdrive.com/api/v1/leads?' + new URLSearchParams(formData).toString();
@@ -76,6 +77,7 @@
     
   }
 }
+
 
 
 
