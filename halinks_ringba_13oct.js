@@ -9,7 +9,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
    
     formData.append('zipcode', document.getElementById('zip').value);
 
-    const url = 'https://corsproxy.io/?https://rtb.ringba.com/v1/production/0000000000.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
+    const url = 'https://corsproxy.io/?https://rtb.ringba.com/v1/production/95866087b88e4ab4a530dd3b76b1a02b.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
 
     fetch(url, {
         method: 'GET'
@@ -63,3 +63,4 @@ function api_tester(randomString) {
         console.error('API Tester Error:', error);
     }
 }
+
