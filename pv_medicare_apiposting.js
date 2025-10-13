@@ -33,10 +33,10 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         },
         meta: {
             jornaya_lead_id: form.jornaya_lead_id.value,
-            landing_page: 'https://proinsurancequotes.com/medicare/',
-            tcpa_consent_text: 'By Selecting Get My Quotes!, below you agree by that you are 18+ years of age and agree to the Privacy Policy Terms . By selecting the above check box you agree by your electronic signature that you give express written consent to receive marketing communications regarding insurance products and services by automatic dialing system and pre-recorded calls and artificial voice messages from proinsurancequotes.com and one or more of its Marketing partners at the phone number and e-mail address provided by you, including wireless numbers, if applicable, even if you have previously registered the provided number on any state, federal or corporate Do Not Call Registry. SMS/MMS and data messaging rates may apply. Your consent is not required to get a quote or purchase. To receive quotes without providing consent, please call at (321) 421-0783. Carrier data rates may apply. TCPA LeadID's are used with the information for compliance. Consent can be revoked.',
+            landing_page: "https://proinsurancequotes.com/medicare/",
+            tcpa_consent_text: "By Selecting Get My Quotes!, below you agree by that you are 18+ years of age and agree to the Privacy Policy Terms . By selecting the above check box you agree by your electronic signature that you give express written consent to receive marketing communications regarding insurance products and services by automatic dialing system and pre-recorded calls and artificial voice messages from proinsurancequotes.com and one or more of its Marketing partners at the phone number and e-mail address provided by you, including wireless numbers, if applicable, even if you have previously registered the provided number on any state, federal or corporate Do Not Call Registry. SMS/MMS and data messaging rates may apply. Your consent is not required to get a quote or purchase. To receive quotes without providing consent, please call at (321) 421-0783. Carrier data rates may apply. TCPA LeadID's are used with the information for compliance. Consent can be revoked.",
             source_id: form.source_id.value,
-            user_agent:'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.6668.72 Mobile Safari/537.36'
+            user_agent:"Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.6668.72 Mobile Safari/537.36"
         },
         contact: {
             first_name: form.first_name.value,
@@ -82,10 +82,10 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
 
         meta: {
             jornaya_lead_id: form.jornaya_lead_id.value,
-            landing_page: 'https://proinsurancequotes.com/medicare/',
-            tcpa_consent_text: 'By Selecting Get My Quotes!, below you agree by that you are 18+ years of age and agree to the Privacy Policy Terms . By selecting the above check box you agree by your electronic signature that you give express written consent to receive marketing communications regarding insurance products and services by automatic dialing system and pre-recorded calls and artificial voice messages from proinsurancequotes.com and one or more of its Marketing partners at the phone number and e-mail address provided by you, including wireless numbers, if applicable, even if you have previously registered the provided number on any state, federal or corporate Do Not Call Registry. SMS/MMS and data messaging rates may apply. Your consent is not required to get a quote or purchase. To receive quotes without providing consent, please call at (321) 421-0783. Carrier data rates may apply. TCPA LeadID's are used with the information for compliance. Consent can be revoked.',
+            landing_page: "https://proinsurancequotes.com/medicare/",
+            tcpa_consent_text: "By Selecting Get My Quotes!, below you agree by that you are 18+ years of age and agree to the Privacy Policy Terms . By selecting the above check box you agree by your electronic signature that you give express written consent to receive marketing communications regarding insurance products and services by automatic dialing system and pre-recorded calls and artificial voice messages from proinsurancequotes.com and one or more of its Marketing partners at the phone number and e-mail address provided by you, including wireless numbers, if applicable, even if you have previously registered the provided number on any state, federal or corporate Do Not Call Registry. SMS/MMS and data messaging rates may apply. Your consent is not required to get a quote or purchase. To receive quotes without providing consent, please call at (321) 421-0783. Carrier data rates may apply. TCPA LeadID's are used with the information for compliance. Consent can be revoked.",
             source_id: form.source_id.value,
-            user_agent:'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.6668.72 Mobile Safari/537.36'
+            user_agent:"Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.6668.72 Mobile Safari/537.36"
             
         },
         
@@ -193,4 +193,5 @@ document.addEventListener("contextmenu", function (e) {
     e.preventDefault(); // Prevent the context menu from appearing
 
 });
+
 
