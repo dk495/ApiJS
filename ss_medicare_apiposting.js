@@ -19,7 +19,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             household_income: parseInt(form.household_income.value),
             occupation: form.occupation.value,
             ongoing_medical_treatment: form.ongoing_medical_treatment.value === 'true',
-            requested_coverage_types: form.requested_coverage_types,
+            requested_coverage_types: form.requested_coverage_types.value,
             optional_coverage: form.optional_coverage.value,
             preexisting_medical_conditions: form.preexisting_medical_conditions.value === 'true',
             prescriptions: form.prescriptions.value,
@@ -65,7 +65,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             occupation: form.occupation.value,
             ongoing_medical_treatment: form.ongoing_medical_treatment.value === 'true',
             optional_coverage: form.optional_coverage.value,
-            requested_coverage_types: form.requested_coverage_types,
+            requested_coverage_types: form.requested_coverage_types.value,
             preexisting_medical_conditions: form.preexisting_medical_conditions.value === 'true',
             prescriptions: form.prescriptions.value,
             previously_denied: form.previously_denied.value === 'true',
@@ -186,6 +186,7 @@ document.addEventListener("contextmenu", function (e) {
     e.preventDefault(); // Prevent the context menu from appearing
 
 });
+
 
 
 
