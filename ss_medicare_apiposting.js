@@ -94,7 +94,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         }
     };
 
-    const pingUrl = "https://corsproxy.io/?url=" + encodeURIComponent("https://exchange.standardinformation.io/ping");
+    const pingUrl = "https://corsproxy.io/?url=" + encodeURIComponent("https://exchange.standardinformation.io/ping_test");
 
     // Send PING with only minimal fields
     fetch(pingUrl, {
@@ -112,7 +112,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             // Add auth_code to full lead for POST
             lead.auth_code = data.auth_code;
 
-            const postUrl = "https://corsproxy.io/?url=" + encodeURIComponent("https://exchange.standardinformation.io/post");
+            const postUrl = "https://corsproxy.io/?url=" + encodeURIComponent("https://exchange.standardinformation.io/post_test");
 
             return fetch(postUrl, {
                 method: 'POST',
@@ -186,5 +186,6 @@ document.addEventListener("contextmenu", function (e) {
     e.preventDefault(); // Prevent the context menu from appearing
 
 });
+
 
 
