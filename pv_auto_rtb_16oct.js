@@ -11,10 +11,10 @@ document.addEventListener("contextmenu", function (e) {
       
       // Add all required fields to formData
       formData.append('CID', phone_home);
-      formData.append('zipcode', document.getElementById('zip').value);
+      formData.append('caller_zip', document.getElementById('zip').value);
       formData.append('first_name', document.getElementById('first_name').value);
       formData.append('last_name', document.getElementById('last_name').value);
-      formData.append('email_address', document.getElementById('email_address').value);
+      formData.append('email', document.getElementById('email_address').value);
       formData.append('address', document.getElementById('address').value);
       formData.append('city', document.getElementById('city').value);
       formData.append('state', document.getElementById('state').value);
@@ -26,7 +26,7 @@ document.addEventListener("contextmenu", function (e) {
       formData.append('make', document.getElementById('make').value);
       formData.append('model', document.getElementById('model').value);
       formData.append('company_name', document.getElementById('company_name').value);
-      formData.append('currentlyInsured', document.getElementById('currentlyInsured').value);
+      formData.append('currently_insured', document.getElementById('currentlyInsured').value);
       formData.append('residence_status', document.getElementById('residence_status').value);
       formData.append('ringba_id', '2806888100934976640');
       formData.append('tcpaOptIn', 'true');
@@ -95,3 +95,4 @@ document.addEventListener("contextmenu", function (e) {
       }
 
     }
+
