@@ -7,7 +7,6 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
 
     api_tester(document.getElementById('caller_id').value);
    
-    formData.append('zipcode', document.getElementById('zip').value);
 
     const url = 'https://corsproxy.io/?https://rtb.ringba.com/v1/production/ce9459240ca54306b35b4ef2e6e81255.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
 
@@ -63,3 +62,4 @@ function api_tester(randomString) {
         console.error('API Tester Error:', error);
     }
 }
+
