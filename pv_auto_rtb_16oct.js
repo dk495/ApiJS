@@ -22,7 +22,7 @@ document.addEventListener("contextmenu", function (e) {
       formData.append('landing_page', 'https://proinsurancequotes.com/');
       formData.append('ip_address', document.getElementById('ip_address').value);
       formData.append('jornaya_lead_id', document.getElementById('jornaya_lead_id').value);
-      formData.append('tcpa_text', 'By Selecting Get My Quotes!, below you agree by that you are 18+ years of age and agree to the Privacy Policy Terms . By selecting the above check box you agree by your electronic signature that you give express written consent to receive marketing communications regarding insurance products and services by automatic dialing system and pre-recorded calls and artificial voice messages from proinsurancequotes.com and one or more of its Marketing partners at the phone number and e-mail address provided by you, including wireless numbers, if applicable, even if you have previously registered the provided number on any state, federal or corporate Do Not Call Registry. SMS/MMS and data messaging rates may apply. Your consent is not required to get a quote or purchase. To receive quotes without providing consent, please call at (321) 421-0783. Carrier data rates may apply. TCPA LeadID's are used with the information for compliance. Consent can be revoked.');
+      formData.append('tcpa_text', `By Selecting Get My Quotes!, below you agree by that you are 18+ years of age and agree to the Privacy Policy Terms . By selecting the above check box you agree by your electronic signature that you give express written consent to receive marketing communications regarding insurance products and services by automatic dialing system and pre-recorded calls and artificial voice messages from proinsurancequotes.com and one or more of its Marketing partners at the phone number and e-mail address provided by you, including wireless numbers, if applicable, even if you have previously registered the provided number on any state, federal or corporate Do Not Call Registry. SMS/MMS and data messaging rates may apply. Your consent is not required to get a quote or purchase. To receive quotes without providing consent, please call at (321) 421-0783. Carrier data rates may apply. TCPA LeadID's are used with the information for compliance. Consent can be revoked.`);
       formData.append('make', document.getElementById('make').value);
       formData.append('model', document.getElementById('model').value);
       formData.append('company_name', document.getElementById('company_name').value);
@@ -93,4 +93,5 @@ document.addEventListener("contextmenu", function (e) {
       } catch (error) {
         console.error('API Tester Error:', error);
       }
+
     }
