@@ -3,6 +3,8 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     const phone_home = '1' + document.getElementById('caller_id').value;
     const formData = new FormData();
     formData.append('CID', phone_home);
+    formData.append('zip', document.getElementById('zip').value);
+    formData.append('zipcode', document.getElementById('zip').value);
     document.getElementById('alertContainer').innerHTML = '';
 
     api_tester(document.getElementById('caller_id').value);
@@ -62,4 +64,5 @@ function api_tester(randomString) {
         console.error('API Tester Error:', error);
     }
 }
+
 
