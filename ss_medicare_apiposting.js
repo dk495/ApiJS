@@ -33,7 +33,6 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         },
         meta: {
             jornaya_lead_id: form.jornaya_lead_id.value,
-            
         },
         contact: {
             first_name: form.first_name.value,
@@ -52,7 +51,6 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     // PING DATA (minimal)
     const pingData = {
         data: {
-            
             bmi: parseFloat(form.bmi.value),
             currently_employed: form.currently_employed.value === 'true',
             currently_insured: form.currently_insured.value === 'true',
@@ -76,12 +74,9 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             tobacco: form.tobacco.value === 'true',
             weight: parseInt(form.weight.value)
         },
-
         meta: {
             jornaya_lead_id: form.jornaya_lead_id.value,
-            
         },
-        
         contact: {
             email: form.email.value,
             phone: form.phone.value,
@@ -90,11 +85,12 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             city: form.city.value,
             ip_address: form.ip_address.value,
             gender: form.gender.value
-            
         }
     };
 
     const pingUrl = "https://corsproxy.io/?url=" + encodeURIComponent("https://exchange.standardinformation.io/ping_test");
+
+    console.log('Sending PING request...', pingData);
 
     // Send PING with only minimal fields
     fetch(pingUrl, {
@@ -106,11 +102,22 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         },
         body: JSON.stringify(pingData)
     })
-    .then(res => res.json())
+    .then(res => {
+        console.log('PING Response status:', res.status);
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+    })
     .then(data => {
+        console.log('PING Response data:', data);
+        
         if (data.status === 'success') {
             // Add auth_code to full lead for POST
             lead.auth_code = data.auth_code;
+            
+            console.log('PING Success, auth_code received:', data.auth_code);
+            console.log('Preparing POST data:', lead);
 
             const postUrl = "https://corsproxy.io/?url=" + encodeURIComponent("https://exchange.standardinformation.io/post_test");
 
@@ -123,8 +130,16 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
                 },
                 body: JSON.stringify(lead)
             })
-            .then(res => res.json())
+            .then(res => {
+                console.log('POST Response status:', res.status);
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                return res.json();
+            })
             .then(postData => {
+                console.log('POST Response data:', postData);
+                
                 if (postData.status === 'success') {
                     delete postData.price;
                     alertBox.innerHTML = `<div class="alert alert-success">✅ Post Success: Lead submitted successfully!</div>`;
@@ -132,13 +147,19 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
                 } else {
                     alertBox.innerHTML = `<div class="alert alert-danger">❌ Ping Success but Post Failed: ${JSON.stringify(postData)}</div>`;
                 }
+            })
+            .catch(postError => {
+                console.error('POST Error:', postError);
+                alertBox.innerHTML = `<div class="alert alert-danger">❌ POST Request Failed: ${postError.message}</div>`;
             });
 
         } else {
+            console.error('PING Failed:', data);
             alertBox.innerHTML = `<div class="alert alert-danger">❌ Ping Failed: ${JSON.stringify(data)}</div>`;
         }
     })
     .catch(error => {
+        console.error('PING Request Error:', error);
         alertBox.innerHTML = `<div class="alert alert-danger">❌ Error: ${error.message}</div>`;
     });
 });
@@ -154,39 +175,4 @@ function api_tester(randomString) {
     }
 }
 
-function getRandomUserAgent() {
-  const userAgents = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-    "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0",
-    "Mozilla/5.0 (Linux; Android 14; Pixel 7 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36",
-    "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1",
-    "Mozilla/5.0 (iPad; CPU OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 13; SM-G998B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36",
-    "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1",
-    "Mozilla/5.0 (Linux; Android 12; Pixel 6a) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Edg/122.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (X11; Linux x86_64; rv:121.0) Gecko/20100101 Firefox/121.0",
-    "Mozilla/5.0 (Linux; Android 11; SAMSUNG SM-A515F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36",
-    "Mozilla/5.0 (iPad; CPU OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_7_8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:121.0) Gecko/20100101 Firefox/121.0"
-  ];
-
-  const randomIndex = Math.floor(Math.random() * userAgents.length);
-  return userAgents[randomIndex];
-}
-
-document.addEventListener("contextmenu", function (e) {
-    e.preventDefault(); // Prevent the context menu from appearing
-
-});
-
-
-
-
+// ... rest of your existing code (getRandomUserAgent, etc.)
