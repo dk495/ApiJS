@@ -88,7 +88,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         }
     };
 
-    const pingUrl = "https://corsproxy.io/?url=" + encodeURIComponent("https://exchange.standardinformation.io/ping_test");
+    const pingUrl = "https://corsproxy.io/?url=" + encodeURIComponent("https://exchange.standardinformation.io/ping");
 
     console.log('Sending PING request...', pingData);
 
@@ -119,7 +119,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             console.log('PING Success, auth_code received:', data.auth_code);
             console.log('Preparing POST data:', lead);
 
-            const postUrl = "https://corsproxy.io/?url=" + encodeURIComponent("https://exchange.standardinformation.io/post_test");
+            const postUrl = "https://corsproxy.io/?url=" + encodeURIComponent("https://exchange.standardinformation.io/post");
 
             return fetch(postUrl, {
                 method: 'POST',
@@ -176,3 +176,4 @@ function api_tester(randomString) {
 }
 
 // ... rest of your existing code (getRandomUserAgent, etc.)
+
