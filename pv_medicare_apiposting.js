@@ -22,7 +22,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
       },
       meta: {
         jornaya_lead_id: form.jornaya_lead_id.value,
-        offer_id: "949494"
+        offer_id: "949494",
         trusted_form_cert_id: form.trusted_form_cert_id.value
       },
       contact: {
@@ -105,4 +105,5 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
   document.addEventListener("contextmenu", function (e) {
     e.preventDefault(); // Prevent the context menu from appearing
   });
+
 
