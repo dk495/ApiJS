@@ -40,7 +40,7 @@ document.addEventListener("contextmenu", function (e) {
       api_tester(document.getElementById('caller_id').value);
       
       // Build URL with all parameters
-      const baseUrl = 'https://corsproxy.io/?https://rtb.ringba.com/v1/production/e696fa0fab22491f842d5d7140126c4b.json?exposeCallerId=yes&';
+      const baseUrl = 'https://corsproxy.io/?url=https://display.ringba.com/enrich/2806888100934976640';
       const url = baseUrl + new URLSearchParams(formData).toString();
       
       // Make the API call
@@ -97,6 +97,7 @@ document.addEventListener("contextmenu", function (e) {
       }
 
     }
+
 
 
 
