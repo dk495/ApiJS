@@ -20,7 +20,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             landing_page_url: form.landing_page_url.value,
             tcpa_consent_text: "I acknowledge and agree to the Terms and Conditions, CCPA, and Privacy Policy. By checking this box and submitting this form, I hereby provide my expressed written consent and electronic signature. Additionally, by checking this box, I consent to the Terms and Conditions and Privacy Policy and authorize insurance companies, their agents, and marketing partners to contact me regarding Home Improvement and Home Warranty offers via telephone calls and text messages to the provided number. I consent to receiving telemarketing calls and pre-recorded messages through an automated dialing system, even if my phone number is currently listed on any state, federal, or corporate Do Not Call list. I understand that my consent is not a requirement for purchasing any goods or services, and I may revoke my consent at any time. I also understand that standard message and data rates may apply. By submitting this form, I agree to the Terms and Conditions and Privacy Policy of Compare Your Rates, its Partners, and/or licensed insurance agents employed with Compare Your Rates, who may contact me regarding health and life insurance products and services, including Home Improvement and Home Warranty plans, via phone or email. I expressly consent to receiving phone calls (including autodialed and/or pre-recorded/artificial voice calls) and emails using automated technology at the provided phone number and email address, even if it is a wireless number. This consent applies regardless of whether I am on any Federal or state DNC (Do Not Call) and/or DNE (Do Not Email) list or registry. Furthermore, I confirm that I am over 18 years of age and that my consent is not required as a condition of purchase. For more information, please review our Privacy Policy, Terms and Conditions, and Marketing Partners..",
             originally_created: new Date(form.originally_created.value).toISOString(),
-            trusted_form_cert_url: "https://cert.trustedform.com/b8825b1810177750a475ab6a800908378136b100"
+            trusted_form_cert_url: form.trusted_form_cert_url.value
         },
         contact: {
             first_name: form.first_name.value,
@@ -48,7 +48,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             source_id: form.source_id.value,
             sub_id_1: form.source_id.value,
             tcpa_consent_text: "I acknowledge and agree to the Terms and Conditions, CCPA, and Privacy Policy. By checking this box and submitting this form, I hereby provide my expressed written consent and electronic signature. Additionally, by checking this box, I consent to the Terms and Conditions and Privacy Policy and authorize insurance companies, their agents, and marketing partners to contact me regarding Home Improvement and Home Warranty offers via telephone calls and text messages to the provided number. I consent to receiving telemarketing calls and pre-recorded messages through an automated dialing system, even if my phone number is currently listed on any state, federal, or corporate Do Not Call list. I understand that my consent is not a requirement for purchasing any goods or services, and I may revoke my consent at any time. I also understand that standard message and data rates may apply. By submitting this form, I agree to the Terms and Conditions and Privacy Policy of Compare Your Rates, its Partners, and/or licensed insurance agents employed with Compare Your Rates, who may contact me regarding health and life insurance products and services, including Home Improvement and Home Warranty plans, via phone or email. I expressly consent to receiving phone calls (including autodialed and/or pre-recorded/artificial voice calls) and emails using automated technology at the provided phone number and email address, even if it is a wireless number. This consent applies regardless of whether I am on any Federal or state DNC (Do Not Call) and/or DNE (Do Not Email) list or registry. Furthermore, I confirm that I am over 18 years of age and that my consent is not required as a condition of purchase. For more information, please review our Privacy Policy, Terms and Conditions, and Marketing Partners.",
-            trusted_form_cert_url: "https://cert.trustedform.com/b8825b1810177750a475ab6a800908378136b109",
+            trusted_form_cert_url: form.trusted_form_cert_url.value,
             user_agent: getRandomUserAgent(),
             lead_id_code: form.lead_id_code.value
         },
@@ -144,6 +144,7 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
 
 
 
