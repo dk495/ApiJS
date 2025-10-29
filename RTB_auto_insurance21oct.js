@@ -26,6 +26,7 @@ formData.append('driver1_sr22_required', document.getElementById('sr22').value);
 formData.append('driver1_credit_rating', document.getElementById('driver1_credit_rating').value);
 formData.append('insurance_company', document.getElementById('insurance_company').value);
 formData.append('policy_start_date', document.getElementById('policy_start_date').value);
+formData.append('incident_type', document.getElementById('incident_type').value);
 formData.append('original_lead_submit_date', document.getElementById('original_lead_submit_date').value);
 formData.append('ip_address', document.getElementById('ip_address').value);
 formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
@@ -69,7 +70,7 @@ function postPingId(pingId) {
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId,
 
-        first_name: document.getElementById('first_name').value,
+  first_name: document.getElementById('first_name').value,
   last_name: document.getElementById('last_name').value,
   email: document.getElementById('email').value,
   address: document.getElementById('address1').value,
@@ -87,6 +88,7 @@ function postPingId(pingId) {
   vehicle1_model: document.getElementById('car_model').value,
   startdate: document.getElementById('policy_start_date').value,			 
   insurance_company: document.getElementById('insurance_company').value,
+  incident_type: document.getElementById('incident_type').value,
   policy_start_date: document.getElementById('policy_start_date').value,
   original_lead_submit_date: document.getElementById('original_lead_submit_date').value,
   ip_address: document.getElementById('ip_address').value,
@@ -144,4 +146,5 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         console.error('Error in api_tester:', error);
     }
 }
+
 
