@@ -34,7 +34,7 @@ formData.append('jornaya_lead_id_agent', document.getElementById('jornaya_leadid
 
     
 const originalUrl = 'https://the-lead-cell.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_available_agents_on_auto?' + new URLSearchParams(formData).toString();
-    const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
+    const apiUrl = 'https://corsproxy.io/?url=' + encodeURIComponent(originalUrl);
 
     // Fetch data from the API
    fetch(apiUrl)
@@ -95,7 +95,7 @@ function postPingId(pingId) {
   };
 
     const originalUrl = 'https://the-lead-cell.trackdrive.com/api/v1/inbound_webhooks/post/check_for_available_agents_on_auto?' + new URLSearchParams(postData).toString();
-const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
+const url = 'https://corsproxy.io/?url=' + encodeURIComponent(originalUrl);
     fetch(url)
     .then(response => {
         // Handle response based on status
@@ -144,3 +144,4 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         console.error('Error in api_tester:', error);
     }
 }
+
