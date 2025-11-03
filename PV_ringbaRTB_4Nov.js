@@ -83,6 +83,7 @@
             </div>`;
           document.getElementById('alertContainer').innerHTML = errorAlert;
           console.error('Error:', error);
-        }
-    }
+         });
+    });
+
   
