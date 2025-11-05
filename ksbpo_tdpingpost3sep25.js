@@ -13,7 +13,7 @@ function pingAPI() {
 
     
 const originalUrl = 'https://evolvetech-innovations.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_available_agent_on_medicare?' + new URLSearchParams(formData).toString();
-    const apiUrl = 'https://corsproxy.io/?url=' + encodeURIComponent(originalUrl);
+    const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
 
     // Fetch data from the API
@@ -55,7 +55,7 @@ function postPingId(pingId) {
     };
 
     const originalUrl = 'https://evolvetech-innovations.trackdrive.com/api/v1/inbound_webhooks/post/check_for_available_agent_on_medicare?' + new URLSearchParams(postData).toString();;
-const url = 'https://corsproxy.io/?url=' + encodeURIComponent(originalUrl);
+const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
     fetch(url)
     .then(response => {
         // Handle response based on status
@@ -105,5 +105,6 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     }
 
 }
+
 
 
