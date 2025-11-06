@@ -61,7 +61,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         }
     };
 
-    const pingUrl = "https://corsproxy.io/?url=" + encodeURIComponent("https://exchange.standardinformation.io/ping?legacy=J");
+    const pingUrl = "https://corsproxy.io/?url=" + encodeURIComponent("https://exchange.standardinformation.io/ping_test?legacy=J");
 
     // Send minimal data in ping
     fetch(pingUrl, {
@@ -78,7 +78,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         if (data.status === 'success') {
             lead.auth_code = data.auth_code;
 
-            const postUrl = "https://corsproxy.io/?url=" + encodeURIComponent("https://exchange.standardinformation.io/post?legacy=J");
+            const postUrl = "https://corsproxy.io/?url=" + encodeURIComponent("https://exchange.standardinformation.io/post_test?legacy=J");
 
             // Send full data in post
             return fetch(postUrl, {
@@ -147,6 +147,7 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
 
 
 
