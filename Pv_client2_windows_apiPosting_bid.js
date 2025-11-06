@@ -67,7 +67,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
   fetch(pingUrl, {
     method: 'POST',
     headers: {
-      'Token 48a59882-8814-4e86-958e-11035aa77ce8',
+      'Authorization': 'Token 48a59882-8814-4e86-958e-11035aa77ce8',
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     },
@@ -147,6 +147,7 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
 
 
 
