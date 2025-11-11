@@ -12,7 +12,7 @@
         zipcode: document.getElementById('zipcode').value
       };
 
-      const endpoint = 'https://rtb.ringba.com/v1/production/c3afebf1948d4a9f855c701eb9359bd9.json?';
+      const endpoint = 'https://rtb.ringba.com/v1/production/c3afebf1948d4a9f855c701eb9359bd9.json';
 
       if (!endpoint) {
         document.getElementById('alertContainer').innerHTML = `
@@ -72,3 +72,4 @@
     });
 
   
+
