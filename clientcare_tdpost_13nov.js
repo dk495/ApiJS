@@ -7,10 +7,14 @@
            
             formData.append('caller_id', phone_home);          
             api_tester(document.getElementById('caller_id').value);
-            
+    const firstName = document.getElementById('first_name').value;
+    const lastName = document.getElementById('last_name').value;
+		
 	formData.append('first_name', document.getElementById('first_name').value);
 	formData.append('last_name', document.getElementById('last_name').value);
-	formData.append('email_address', document.getElementById('email').value);
+	formData.append('full_name', `${firstName} ${lastName}`);
+	formData.append('email', document.getElementById('email').value);
+    formData.append('phone_number', document.getElementById('phone_home').value);
         formData.append('state', document.getElementById('state').value);        
         formData.append('debt_amount', document.getElementById('debt_amount').value);        
 	formData.append('ip_address', document.getElementById('ip_address').value);
@@ -81,3 +85,4 @@
     
   }
 }
+
