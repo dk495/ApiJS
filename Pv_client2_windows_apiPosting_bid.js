@@ -4,6 +4,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
 
   const form = document.getElementById('leadForm');
   const alertBox = document.getElementById('alertContainer');
+  const usAgent = getRandomUserAgent();
 
   // Full lead for POST
   const lead = {
@@ -17,7 +18,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     },
     meta: {
       source_id: form.source_id.value,
-      user_agent: getRandomUserAgent(),
+      user_agent: usAgent,
       landing_page_url: form.landing_page_url.value,
       tcpa_consent_text: "By completing the form, I hereby affirm my acceptance of the Terms and Conditions, CCPA , and Privacy Policy . I grant permission to Remodeling Loans, their contractors, and partners (refer to our partners list) to communicate with me through email, phone, and text messages using the provided contact number. I consent to receiving offers from these entities, even if my contacts are listed on the State and Federal Do Not Call List. I acknowledge that these marketing communications may be transmitted using an automatic telephone dialing system or pre-recorded messages. I understand that my consent is not a prerequisite for making a purchase and that I retain the right to revoke it at any time. This declaration includes compliance with the California Notice.",
       originally_created: new Date(form.originally_created.value).toISOString(),
@@ -48,11 +49,12 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     },
     meta: {
       landing_page_url: form.landing_page_url.value,
+      user_agent: usAgent,
       originally_created: new Date(form.originally_created.value).toISOString(),
       source_id: form.source_id.value,
       tcpa_consent_text: "By completing the form, I hereby affirm my acceptance of the Terms and Conditions, CCPA , and Privacy Policy . I grant permission to Remodeling Loans, their contractors, and partners (refer to our partners list) to communicate with me through email, phone, and text messages using the provided contact number. I consent to receiving offers from these entities, even if my contacts are listed on the State and Federal Do Not Call List. I acknowledge that these marketing communications may be transmitted using an automatic telephone dialing system or pre-recorded messages. I understand that my consent is not a prerequisite for making a purchase and that I retain the right to revoke it at any time. This declaration includes compliance with the California Notice.",
       trusted_form_cert_url: form.trusted_form_cert_url.value,
-      user_agent: getRandomUserAgent()
+      
       
     },
     contact: {
@@ -147,6 +149,7 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
 
 
 
