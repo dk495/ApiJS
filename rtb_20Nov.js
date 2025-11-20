@@ -9,8 +9,8 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
    
     formData.append('zipcode', document.getElementById('zip').value);
 
-    const url = 'https://rtb.ringba.com/v1/production/2b7d33dcfe284c3296727c4994379add.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
-    const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(url);
+   const url = 'https://corsproxy.io/?https://rtb.ringba.com/v1/production/2b7d33dcfe284c3296727c4994379add.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
+
     fetch(url, {
         method: 'GET'
     })
@@ -63,3 +63,4 @@ function api_tester(randomString) {
         console.error('API Tester Error:', error);
     }
 }
+
