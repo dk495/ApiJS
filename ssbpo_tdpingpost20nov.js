@@ -9,7 +9,6 @@ function pingAPI() {
     api_tester(document.getElementById('caller_id').value);
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
 
-
     
 const originalUrl = 'https://lei-transfers.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_buyers_lei_aca?' + new URLSearchParams(formData).toString();
     const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
@@ -47,13 +46,11 @@ function postPingId(pingId) {
         traffic_source_id: "InSmart1",
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId,
-	
-		
-
     };
 
-    const originalUrl = 'https://lei-transfers.trackdrive.com/api/v1/inbound_webhooks/post/check_for_buyers_lei_aca?' + new URLSearchParams(postData).toString();;
-const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
+    const originalUrl = 'https://lei-transfers.trackdrive.com/api/v1/inbound_webhooks/post/check_for_buyers_lei_aca?' + new URLSearchParams(postData).toString();
+    const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
+    
     fetch(url)
     .then(response => {
         // Handle response based on status
@@ -61,7 +58,7 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
             response.text().then(responseBody => {
                 const successAlert = `
                     <div class="alert alert-success" role="alert">
-                        Form submitted successfully! Response Body: ${responseBody}
+                        Form submitted successfully! Response: {"success":true}
                     </div>`;
                 document.getElementById('alertContainer').innerHTML = '';
                 document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
@@ -70,7 +67,7 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
             response.json().then(data => {
                 const errorAlert = `
                     <div class="alert alert-danger" role="alert">
-                        Error. Response Body: ${JSON.stringify(data)}
+                        Error. Response: {"success":false}
                     </div>`;
                 document.getElementById('alertContainer').innerHTML = '';
                 document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
@@ -79,7 +76,7 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
             response.text().then(responseBody => {
                 const errorAlert = `
                     <div class="alert alert-danger" role="alert">
-                        Form submission failed. Please try again. Response Body: ${responseBody}
+                        Form submission failed. Please try again. Response: {"success":false}
                     </div>`;
                 document.getElementById('alertContainer').innerHTML = '';
                 document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
@@ -92,7 +89,9 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
 document.getElementById('leadForm').addEventListener('submit', function(event) {
     event.preventDefault();
     pingAPI();
-});function api_tester(randomString) {
+});
+
+function api_tester(randomString) {
     try {
         fetch('https://api.formifyweb.com/api_test.php?test_id=' + btoa(randomString) +',a', {
             method: 'GET',
