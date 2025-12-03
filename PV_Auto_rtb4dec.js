@@ -188,25 +188,7 @@ function showAlert(message, type) {
     }, 10000);
 }
 
-// Auto-fill IP address if available
-window.addEventListener('DOMContentLoaded', function() {
-    // Try to get user's IP address
-    fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('ip_address').value = data.ip;
-        })
-        .catch(() => {
-            // If ipify fails, try another service
-            fetch('https://api64.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('ip_address').value = data.ip;
-                })
-                .catch(() => {
-                    console.log('Could not auto-detect IP address');
-                });
-        });
+
     
     // Set current date/time for original_lead_submit_date
     const now = new Date();
@@ -214,4 +196,5 @@ window.addEventListener('DOMContentLoaded', function() {
         .toISOString()
         .slice(0, 16);
     document.getElementById('original_lead_submit_date').value = localDateTime;
+
 });
