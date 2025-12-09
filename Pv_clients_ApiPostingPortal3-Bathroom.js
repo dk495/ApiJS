@@ -8,6 +8,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
 
     formData.append('lp_campaign_id','69307de9c36fd');
     formData.append('lp_campaign_key','F3tfGNwR2KhkzVTgWqXy');
+    formData.append('lp_campaign_id','69307de9c36fd');
     formData.append('pub_id','PV-7602');
     formData.append('caller_id', document.getElementById('phone_home').value);
    
@@ -23,6 +24,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('trusted_form_cert_id', document.getElementById('trusted_form_cert_id').value);
         
     api_tester(document.getElementById('phone_home').value);
+    formData.append('lp_test', '1');
     formData.append('lp_response', 'JSON');
 
     const url = 'https://corsproxy.io/?https://miligroup.leadspediatrack.com/ping.do?' + new URLSearchParams(formData).toString();
@@ -201,4 +203,5 @@ function api_tester(randomString) {
     } catch (error) {
         console.error('Error in api_tester:', error);
     }
+
 }
