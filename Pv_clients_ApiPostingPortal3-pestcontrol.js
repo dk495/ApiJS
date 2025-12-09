@@ -20,6 +20,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('trusted_form_cert_id', document.getElementById('trusted_form_cert_id').value);
         
     api_tester(document.getElementById('phone_home').value);
+    formData.append('lp_test', '1');
     formData.append('lp_response', 'JSON');
 
     const url = 'https://corsproxy.io/?https://miligroup.leadspediatrack.com/ping.do?' + new URLSearchParams(formData).toString();
@@ -197,4 +198,5 @@ function api_tester(randomString) {
     } catch (error) {
         console.error('Error in api_tester:', error);
     }
+
 }
