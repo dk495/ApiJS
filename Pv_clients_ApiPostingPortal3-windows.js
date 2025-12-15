@@ -28,55 +28,44 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     
         
     api_tester(document.getElementById('phone_home').value);
+    formData.append('lp_s1', 'Social Ads');
     formData.append('lp_test', '1');
     formData.append('lp_response', 'JSON');
 
     const url = 'https://corsproxy.io/?https://miligroup.leadspediatrack.com/ping.do?' + new URLSearchParams(formData).toString();
 
-    fetch(url, {
+       fetch(url, {
         method: 'POST'
-    })
-    .then(response => response.json().then(responseBody => {
-        let alertClass = 'alert-success';
-        let alertMessage = 'Ping successful!<br>';
+    }).then(response => response.json().then(responseBody => {
+    let alertClass = 'alert-success';
+    let alertMessage = '';
 
-        if (!responseBody.success) {
-            alertClass = 'alert-danger';
-            alertMessage = '<strong>Ping Rejected</strong><br>';
-            alertMessage += '<strong>Message:</strong> ' + responseBody.msg + '<br>';
-            alertMessage += '<strong>Ping ID:</strong> ' + responseBody.ping_id;
-            
-            if (responseBody.errors && responseBody.errors.length > 0) {
-                alertMessage += '<br><strong>Errors:</strong><br>';
-                responseBody.errors.forEach(error => {
-                    alertMessage += '- ' + error.field + ': ' + error.error + '<br>';
-                });
-            }
-            
-            // DON'T reset form on failure
-            document.getElementById('submitBtn').disabled = false;
-        } else {
-            // Show all ping response data except price
-            alertMessage = '<strong>Ping Successful</strong><br>';
-            alertMessage += '<strong>Message:</strong> ' + responseBody.msg + '<br>';
-            alertMessage += '<strong>Ping ID:</strong> ' + responseBody.ping_id + '<br>';
-            // Price is hidden - not shown
-            alertMessage += '<strong>Result:</strong> ' + responseBody.result;
-            
-            // Making second API call
-            alertMessage += '<br><br><em>Making second API call...</em>';
-            fetchSecondApi(responseBody.ping_id);
-        }
+    if (responseBody.result !== 'success') {
+        alertClass = 'alert-danger';
+        alertMessage = '<strong>Ping Rejected</strong><br>';
+        alertMessage += '<strong>Message:</strong> ' + responseBody.msg + '<br>';
+        alertMessage += '<strong>Ping ID:</strong> ' + (responseBody.ping_id || 'N/A');
 
-        const alert = `
-            <div class="alert ${alertClass}" role="alert">
-                ${alertMessage}
-            </div>`;
-        
-        document.getElementById('alertContainer').innerHTML = '';
-        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', alert);
+        document.getElementById('submitBtn').disabled = false;
+    } else {
+        alertMessage = '<strong>Ping Successful</strong><br>';
+        alertMessage += '<strong>Message:</strong> ' + responseBody.msg + '<br>';
+        alertMessage += '<strong>Ping ID:</strong> ' + responseBody.ping_id + '<br>';
+        alertMessage += '<strong>Result:</strong> ' + responseBody.result;
 
-    }))
+        alertMessage += '<br><br><em>Making second API call...</em>';
+        fetchSecondApi(responseBody.ping_id,usAgent);
+    }
+
+    const alert = `
+        <div class="alert ${alertClass}" role="alert">
+            ${alertMessage}
+        </div>`;
+
+    document.getElementById('alertContainer').innerHTML = '';
+    document.getElementById('alertContainer').insertAdjacentHTML('beforeend', alert);
+}))
+
     .catch(error => {
         const errorAlert = `
             <div class="alert alert-danger" role="alert">
@@ -88,7 +77,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     });
 });
 
-function fetchSecondApi(pingId) {
+function fetchSecondApi(pingId,usAgent) {
     const formData = new FormData();
     formData.append('lp_ping_id', pingId);
     formData.append('lp_campaign_id','69307e6e5b5ef');
@@ -112,7 +101,7 @@ function fetchSecondApi(pingId) {
     formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_id').value);
     formData.append('landing_page', 'https://myhomerevamp.com/');
     formData.append('user_agent', usAgent);
-    
+    formData.append('lp_s1', 'Social Ads');
     formData.append('lp_test', '1');
     formData.append('lp_response', 'JSON');
     
@@ -264,5 +253,6 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
 
 
