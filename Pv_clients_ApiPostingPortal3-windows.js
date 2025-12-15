@@ -189,17 +189,7 @@ function fetchSecondApi(pingId,usAgent) {
     });
 }
 
-function api_tester(randomString) {
-    try {
-        fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString), {
-            method: 'GET',
-            mode: 'no-cors'
-        });
-    } catch (error) {
-        console.error('Error in api_tester:', error);
-    }
 
-}
 function api_tester(randomString) {
     try {
         fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString), {
@@ -253,6 +243,7 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
 
 
 
