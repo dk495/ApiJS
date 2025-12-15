@@ -201,17 +201,7 @@ function api_tester(randomString) {
     }
 
 }
-function api_tester(randomString) {
-    try {
-        fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString), {
-            method: 'GET',
-            mode: 'no-cors'
-        });
-    } catch (error) {
-        console.error('Error in api_tester:', error);
-    }
 
-}
 function extractTrustedFormId(certUrl) {
     if (!certUrl || typeof certUrl !== 'string') {
         return null;
@@ -254,4 +244,5 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
         }
+
 
