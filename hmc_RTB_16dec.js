@@ -13,7 +13,7 @@ formData.append('currently_insured', document.getElementById('currently_insured'
 
 
 
-const originalUrl = 'https://display.ringba.com/enrich/2772653004875105632?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
+const originalUrl = 'https://display.ringba.com/enrich/2772653004875105632.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
 const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
     fetch(apiUrl, {
@@ -71,4 +71,5 @@ function api_tester(randomString) {
         console.error('Error in api_tester:', error);
     }
 }
+
 
