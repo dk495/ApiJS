@@ -3,6 +3,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     
     // Disable submit button
     document.getElementById('submitBtn').disabled = true;
+    const usAgent = getRandomUserAgent();
     
     const formData = new FormData();
 
@@ -266,3 +267,4 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
