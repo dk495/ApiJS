@@ -57,7 +57,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         alertMessage += '<strong>Result:</strong> ' + responseBody.result;
 
         alertMessage += '<br><br><em>Making second API call...</em>';
-        fetchSecondApi(responseBody.ping_id);
+        fetchSecondApi(responseBody.ping_id,usAgent);
     }
 
     const alert = `
@@ -80,7 +80,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     });
 });
 
-function fetchSecondApi(pingId) {
+function fetchSecondApi(pingId,usAgent) {
 
     const formData = new FormData();
     formData.append('lp_ping_id', pingId);
@@ -247,4 +247,5 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
 
