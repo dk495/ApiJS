@@ -7,7 +7,7 @@ document.getElementById('submitBtn').disabled = true;
     api_tester(document.getElementById('caller_id').value);
     formData.append('CID', '+1' + document.getElementById('caller_id').value);
 formData.append('State', document.getElementById('state').value);
-formData.append('Zipcode', document.getElementById('zip').value);
+formData.append('zip_code', document.getElementById('zip').value);
 formData.append('homeowner', document.getElementById('homeowner').value);
 formData.append('currently_insured', document.getElementById('currently_insured').value);
 
@@ -71,3 +71,4 @@ function api_tester(randomString) {
         console.error('Error in api_tester:', error);
     }
 }
+
