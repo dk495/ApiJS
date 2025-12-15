@@ -32,6 +32,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('TCPA', 'YES');
         
     api_tester(document.getElementById('phone_home').value);
+    formData.append('lp_s1', 'Social Ads');
     formData.append('lp_test', '1');
     formData.append('lp_response', 'JSON');
 
@@ -106,7 +107,7 @@ function fetchSecondApi(pingId,usAgent) {
     formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_id').value);
     formData.append('landing_page', 'https://myhomerevamp.com/');
     formData.append('user_agent', usAgent);
-    
+    formData.append('lp_s1', 'Social Ads');
     formData.append('lp_test', '1');
     formData.append('lp_response', 'JSON');
     
@@ -247,5 +248,6 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
 
 
