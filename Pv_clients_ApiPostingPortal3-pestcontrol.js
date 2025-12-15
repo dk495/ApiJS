@@ -198,6 +198,7 @@ function api_tester(randomString) {
     } catch (error) {
         console.error('Error in api_tester:', error);
     }
+}
     
 function extractTrustedFormId(certUrl) {
     if (!certUrl || typeof certUrl !== 'string') {
@@ -243,6 +244,7 @@ function getRandomUserAgent() {
 }
 
 }
+
 
 
 
