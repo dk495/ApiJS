@@ -115,81 +115,101 @@ function fetchSecondApi(pingId,usAgent) {
     const urln = 'https://corsproxy.io/?https://miligroup.leadspediatrack.com/post.do?' + new URLSearchParams(formData).toString();
     
     fetch(urln, {
-        method: 'POST'
-    })
-    .then(response => response.json())
-    .then(responseBody => {
-        let alertClass = 'alert-success';
-        let alertMessage = '';
+    method: 'POST'
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+})
+.then(responseBody => {
+    console.log('Post Response:', responseBody); // Debug log
+    
+    let alertClass = 'alert-success';
+    let alertMessage = '';
 
-        if (!responseBody.success) {
-            alertClass = 'alert-danger';
-            alertMessage = '<strong>Lead Post Failed</strong><br>';
-            alertMessage += '<strong>Message:</strong> ' + responseBody.msg + '<br>';
-            alertMessage += '<strong>Lead ID:</strong> ' + responseBody.lead_id + '<br>';
-            alertMessage += '<strong>Result:</strong> ' + responseBody.result;
-            
-            if (responseBody.errors && responseBody.errors.length > 0) {
-                alertMessage += '<br><strong>Errors:</strong><br>';
-                responseBody.errors.forEach(error => {
-                    alertMessage += '- ' + error.field + ': ' + error.error + '<br>';
-                });
-            }
-            
-            // DON'T reset form on failure
-            document.getElementById('submitBtn').disabled = false;
-        } else {
-            // SUCCESS - show all response data except price
-            alertMessage = '<strong>Lead Posted Successfully!</strong><br>';
-            alertMessage += '<strong>Message:</strong> ' + responseBody.msg + '<br>';
-            alertMessage += '<strong>Lead ID:</strong> ' + responseBody.lead_id + '<br>';
-            alertMessage += '<strong>Result:</strong> ' + responseBody.result;
-            
-            // Price is hidden - not shown in the message
-            
-            if (responseBody.redirect_url) {
-                alertMessage += '<br><strong>Redirect URL:</strong> ' + responseBody.redirect_url;
-            }
-            
-            // Show full response data (for debugging/info)
-            alertMessage += '<br><br><strong>Full Response:</strong><br>';
-            alertMessage += '<div style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 12px; max-height: 200px; overflow-y: auto;">';
-            
-            // Create a copy of responseBody without the price field
-            const responseWithoutPrice = { ...responseBody };
-            delete responseWithoutPrice.price; // Remove price from display
-            
-            alertMessage += JSON.stringify(responseWithoutPrice, null, 2);
-            alertMessage += '</div>';
-            
-            // RESET FORM only on success
-            document.getElementById('leadForm').reset();
-        }
-
-        const alert = `
-            <div class="alert ${alertClass}" role="alert">
-                ${alertMessage}
-            </div>`;
+    // Check if result is 'failed' (case insensitive)
+    if (responseBody.result && responseBody.result.toLowerCase() === 'failed') {
+        alertClass = 'alert-warning';
+        alertMessage = '<strong>Lead Posted with Warning</strong><br>';
+        alertMessage += '<strong>Message:</strong> ' + (responseBody.msg || 'Lead Rejected') + '<br>';
+        alertMessage += '<strong>Lead ID:</strong> ' + (responseBody.lead_id || 'N/A') + '<br>';
+        alertMessage += '<strong>Result:</strong> ' + responseBody.result;
         
-        // Clear previous alerts and show new one
-        document.getElementById('alertContainer').innerHTML = '';
-        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', alert);
-        
-        // Re-enable button (already done in error case above)
-        if (responseBody.success) {
-            document.getElementById('submitBtn').disabled = false;
+        if (responseBody.errors && responseBody.errors.length > 0) {
+            alertMessage += '<br><strong>Errors:</strong><br>';
+            responseBody.errors.forEach(error => {
+                alertMessage += '- ' + error.field + ': ' + error.error + '<br>';
+            });
         }
-    })
-    .catch(error => {
-        const errorAlert = `
-            <div class="alert alert-danger" role="alert">
-                <strong>Error in second request:</strong> ${error.message}
-            </div>`;
-        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+        
+        // DON'T reset form on failure
         document.getElementById('submitBtn').disabled = false;
-    });
-}
+    } 
+    // Check if result is 'success' or success flag is true
+    else if (responseBody.success || (responseBody.result && responseBody.result.toLowerCase() === 'success')) {
+        // SUCCESS - show all response data except price
+        alertMessage = '<strong>Lead Posted Successfully!</strong><br>';
+        alertMessage += '<strong>Message:</strong> ' + responseBody.msg + '<br>';
+        alertMessage += '<strong>Lead ID:</strong> ' + responseBody.lead_id + '<br>';
+        alertMessage += '<strong>Result:</strong> ' + responseBody.result;
+        
+        // Price is hidden - not shown in the message
+        
+        if (responseBody.redirect_url) {
+            alertMessage += '<br><strong>Redirect URL:</strong> ' + responseBody.redirect_url;
+        }
+        
+        // Show full response data (for debugging/info)
+        alertMessage += '<br><br><strong>Full Response:</strong><br>';
+        alertMessage += '<div style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 12px; max-height: 200px; overflow-y: auto;">';
+        
+        // Create a copy of responseBody without the price field
+        const responseWithoutPrice = { ...responseBody };
+        delete responseWithoutPrice.price; // Remove price from display
+        
+        alertMessage += JSON.stringify(responseWithoutPrice, null, 2);
+        alertMessage += '</div>';
+        
+        // RESET FORM only on success
+        document.getElementById('leadForm').reset();
+        document.getElementById('submitBtn').disabled = false;
+    } 
+    // Handle unexpected response format
+    else {
+        alertClass = 'alert-info';
+        alertMessage = '<strong>Lead Processing Completed</strong><br>';
+        alertMessage += '<strong>Message:</strong> ' + (responseBody.msg || 'No message') + '<br>';
+        alertMessage += '<strong>Lead ID:</strong> ' + (responseBody.lead_id || 'N/A') + '<br>';
+        alertMessage += '<strong>Result:</strong> ' + (responseBody.result || 'unknown') + '<br><br>';
+        alertMessage += '<strong>Full Response:</strong><br>';
+        alertMessage += '<div style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 12px; max-height: 200px; overflow-y: auto;">';
+        alertMessage += JSON.stringify(responseBody, null, 2);
+        alertMessage += '</div>';
+        
+        document.getElementById('submitBtn').disabled = false;
+    }
 
+    const alert = `
+        <div class="alert ${alertClass}" role="alert">
+            ${alertMessage}
+        </div>`;
+    
+    // Clear previous alerts and show new one
+    document.getElementById('alertContainer').innerHTML = '';
+    document.getElementById('alertContainer').insertAdjacentHTML('beforeend', alert);
+})
+.catch(error => {
+    const errorAlert = `
+        <div class="alert alert-danger" role="alert">
+            <strong>Error in second request:</strong> ${error.message}
+        </div>`;
+    document.getElementById('alertContainer').innerHTML = '';
+    document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+    document.getElementById('submitBtn').disabled = false;
+});
+}
 
 function api_tester(randomString) {
     try {
@@ -244,6 +264,7 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
 
 
 
