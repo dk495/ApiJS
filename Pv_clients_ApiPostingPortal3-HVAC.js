@@ -209,6 +209,7 @@ function fetchSecondApi(pingId,usAgent) {
     document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
     document.getElementById('submitBtn').disabled = false;
 });
+}
 function api_tester(randomString) {
     try {
         fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString), {
@@ -263,4 +264,5 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
 
