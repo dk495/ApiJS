@@ -93,7 +93,7 @@ function fetchSecondApi(pingId,usAgent) {
     formData.append('address', document.getElementById('address').value);
     formData.append('email_address', document.getElementById('email_address').value);
     formData.append('ip_address', document.getElementById('ip_address').value);
-    formData.append('TYPE', document.getElementById('type').value);
+    formData.append('type', document.getElementById('type').value);
     formData.append('home_owner', document.getElementById('home_owner').value);
     formData.append('Project', document.getElementById('project').value);
     formData.append('jornaya_lead_id', document.getElementById('jornaya_lead_id').value);
@@ -244,6 +244,7 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
         }
+
 
 
 
