@@ -262,9 +262,5 @@ function getRandomUserAgent() {
 
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
-        }
-
-
-
-
+}
 
