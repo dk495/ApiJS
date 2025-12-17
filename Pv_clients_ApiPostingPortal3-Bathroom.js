@@ -23,6 +23,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('home_owner', document.getElementById('home_owner').value);
     formData.append('Project', document.getElementById('project').value);
     formData.append('jornaya_lead_id', document.getElementById('jornaya_lead_id').value);
+    formData.append('universal_leadid', document.getElementById('jornaya_lead_id').value);
     formData.append('trusted_form_cert_id', extractTrustedFormId(document.getElementById('trusted_form_cert_id').value) || '');
     formData.append('trusted_form', document.getElementById('trusted_form_cert_id').value);
     formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_id').value);
@@ -102,6 +103,7 @@ function fetchSecondApi(pingId,usAgent) {
     formData.append('home_owner', document.getElementById('home_owner').value);
     formData.append('Project', document.getElementById('project').value);
     formData.append('jornaya_lead_id', document.getElementById('jornaya_lead_id').value);
+    formData.append('universal_leadid', document.getElementById('jornaya_lead_id').value);
     formData.append('trusted_form_cert_id', extractTrustedFormId(document.getElementById('trusted_form_cert_id').value) || '');
     formData.append('trusted_form', document.getElementById('trusted_form_cert_id').value);
     formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_id').value);
@@ -268,6 +270,7 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
 
 
 
