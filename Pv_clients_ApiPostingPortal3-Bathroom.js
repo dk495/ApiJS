@@ -10,7 +10,6 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
 
     formData.append('lp_campaign_id','69307de9c36fd');
     formData.append('lp_campaign_key','F3tfGNwR2KhkzVTgWqXy');
-    formData.append('lp_campaign_id','69307de9c36fd');
     formData.append('pub_id','PV-7602');
     formData.append('caller_id', document.getElementById('phone_home').value);
    
@@ -278,6 +277,7 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
 
 
 
