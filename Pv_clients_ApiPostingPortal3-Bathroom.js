@@ -45,8 +45,12 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     const url = 'https://corsproxy.io/?https://miligroup.leadspediatrack.com/ping.do?' + new URLSearchParams(formData).toString();
 
     fetch(url, {
-        method: 'POST'
-    }).then(response => response.json().then(responseBody => {
+    method: 'POST'
+})
+.then(response => {
+    return response.json();
+})
+.then(responseBody => {
     let alertClass = 'alert-success';
     let alertMessage = '';
 
@@ -64,7 +68,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         alertMessage += '<strong>Result:</strong> ' + responseBody.result;
 
         alertMessage += '<br><br><em>Making second API call...</em>';
-        fetchSecondApi(responseBody.ping_id,usAgent);
+        fetchSecondApi(responseBody.ping_id, usAgent);
     }
 
     const alert = `
@@ -74,17 +78,16 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
 
     document.getElementById('alertContainer').innerHTML = '';
     document.getElementById('alertContainer').insertAdjacentHTML('beforeend', alert);
-}))
-
-    .catch(error => {
-        const errorAlert = `
-            <div class="alert alert-danger" role="alert">
-                <strong>Error:</strong> ${error.message}
-            </div>`;
-        document.getElementById('alertContainer').innerHTML = '';
-        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
-        document.getElementById('submitBtn').disabled = false;
-    });
+})
+.catch(error => {
+    const errorAlert = `
+        <div class="alert alert-danger" role="alert">
+            <strong>Error:</strong> ${error.message}
+        </div>`;
+    document.getElementById('alertContainer').innerHTML = '';
+    document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+    document.getElementById('submitBtn').disabled = false;
+});
 });
 
 function fetchSecondApi(pingId,usAgent) {
@@ -275,6 +278,7 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
 
 
 
