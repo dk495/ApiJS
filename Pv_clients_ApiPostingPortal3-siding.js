@@ -5,12 +5,17 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     document.getElementById('submitBtn').disabled = true;
     const usAgent = getRandomUserAgent();
     
+    // Get values BEFORE creating formData
+    const trustedFormUrl = document.getElementById('trusted_form_cert_id').value;
+    const extractedCertId = extractTrustedFormId(trustedFormUrl);
+    const phoneHome = document.getElementById('phone_home').value;
+    
     const formData = new FormData();
 
     formData.append('lp_campaign_id','69307e5b6dbf3');
     formData.append('lp_campaign_key','8H4NbypMPQL32z9XBqWk');
     formData.append('pub_id','PV-7602');
-    formData.append('caller_id', document.getElementById('phone_home').value);
+    formData.append('caller_id', phoneHome);
     formData.append('city', document.getElementById('city').value);
     formData.append('state', document.getElementById('state').value);
     formData.append('zip_code', document.getElementById('zip_code').value);
@@ -20,54 +25,73 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('home_owner', document.getElementById('home_owner').value);
     formData.append('jornaya_lead_id', document.getElementById('jornaya_lead_id').value);
     formData.append('universal_leadid', document.getElementById('jornaya_lead_id').value);
-    formData.append('trusted_form_cert_id', extractTrustedFormId(document.getElementById('trusted_form_cert_id').value) || '');
-    formData.append('trusted_form', document.getElementById('trusted_form_cert_id').value);
-    formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_id').value);
+    
+    // Debug: Check what values we have
+    console.log('TrustedForm URL:', trustedFormUrl);
+    console.log('Extracted Cert ID:', extractedCertId);
+    
+    formData.append('trusted_form_cert_id', extractedCertId || '');
+    formData.append('trusted_form', trustedFormUrl || '');
+    formData.append('trusted_form_cert_url', trustedFormUrl || '');
+    
     formData.append('landing_page', 'https://myhomerevamp.com/');
     formData.append('user_agent', usAgent);
     formData.append('tcpa_language', 'I acknowledge and agree to the Terms and Conditions, CCPA, and Privacy Policy. By checking this box and submitting this form, I hereby provide my expressed written consent and electronic signature. Additionally, by checking this box, I consent to the Terms and Conditions and Privacy Policy and authorize insurance companies, their agents, and marketing partners to contact me regarding Home Improvement and Home Warranty offers via telephone calls and text messages to the provided number. I consent to receiving telemarketing calls and pre-recorded messages through an automated dialing system, even if my phone number is currently listed on any state, federal, or corporate Do Not Call list. I understand that my consent is not a requirement for purchasing any goods or services, and I may revoke my consent at any time. I also understand that standard message and data rates may apply. By submitting this form, I agree to the Terms and Conditions and Privacy Policy of Compare Your Rates, its Partners, and/or licensed insurance agents employed with Compare Your Rates, who may contact me regarding health and life insurance products and services, including Home Improvement and Home Warranty plans, via phone or email. I expressly consent to receiving phone calls (including autodialed and/or pre-recorded/artificial voice calls) and emails using automated technology at the provided phone number and email address, even if it is a wireless number. This consent applies regardless of whether I am on any Federal or state DNC ("Do Not Call") and/or DNE ("Do Not Email") list or registry. Furthermore, I confirm that I am over 18 years of age and that my consent is not required as a condition of purchase. For more information, please review our Privacy Policy, Terms and Conditions, and Marketing Partners.');
     formData.append('TCPA', 'YES');
     
         
-    api_tester(document.getElementById('phone_home').value);
+    api_tester(phoneHome);
     formData.append('lp_s1', 'Social Ads');
     formData.append('lp_test', '1');
     formData.append('lp_response', 'JSON');
 
     const url = 'https://corsproxy.io/?https://miligroup.leadspediatrack.com/ping.do?' + new URLSearchParams(formData).toString();
 
-       fetch(url, {
+    console.log('Ping URL (first part):', url.substring(0, 200) + '...');
+
+    fetch(url, {
         method: 'POST'
-    }).then(response => response.json().then(responseBody => {
-    let alertClass = 'alert-success';
-    let alertMessage = '';
+    })
+    .then(response => {
+        return response.json();
+    })
+    .then(responseBody => {
+        let alertClass = 'alert-success';
+        let alertMessage = '';
 
-    if (responseBody.result !== 'success') {
-        alertClass = 'alert-danger';
-        alertMessage = '<strong>Ping Rejected</strong><br>';
-        alertMessage += '<strong>Message:</strong> ' + responseBody.msg + '<br>';
-        alertMessage += '<strong>Ping ID:</strong> ' + (responseBody.ping_id || 'N/A');
+        if (responseBody.result !== 'success') {
+            alertClass = 'alert-danger';
+            alertMessage = '<strong>Ping Rejected</strong><br>';
+            alertMessage += '<strong>Message:</strong> ' + responseBody.msg + '<br>';
+            alertMessage += '<strong>Ping ID:</strong> ' + (responseBody.ping_id || 'N/A');
+            
+            if (responseBody.errors && responseBody.errors.length > 0) {
+                alertMessage += '<br><strong>Errors:</strong><br>';
+                responseBody.errors.forEach(error => {
+                    alertMessage += '- ' + error.field + ': ' + error.error + '<br>';
+                });
+            }
 
-        document.getElementById('submitBtn').disabled = false;
-    } else {
-        alertMessage = '<strong>Ping Successful</strong><br>';
-        alertMessage += '<strong>Message:</strong> ' + responseBody.msg + '<br>';
-        alertMessage += '<strong>Ping ID:</strong> ' + responseBody.ping_id + '<br>';
-        alertMessage += '<strong>Result:</strong> ' + responseBody.result;
+            document.getElementById('submitBtn').disabled = false;
+        } else {
+            alertMessage = '<strong>Ping Successful</strong><br>';
+            alertMessage += '<strong>Message:</strong> ' + responseBody.msg + '<br>';
+            alertMessage += '<strong>Ping ID:</strong> ' + responseBody.ping_id + '<br>';
+            alertMessage += '<strong>Result:</strong> ' + responseBody.result;
 
-        alertMessage += '<br><br><em>Making second API call...</em>';
-        fetchSecondApi(responseBody.ping_id,usAgent);
-    }
+            alertMessage += '<br><br><em>Making second API call...</em>';
+            // Pass the extracted values to the second function
+            fetchSecondApi(responseBody.ping_id, usAgent, extractedCertId, trustedFormUrl);
+        }
 
-    const alert = `
-        <div class="alert ${alertClass}" role="alert">
-            ${alertMessage}
-        </div>`;
+        const alert = `
+            <div class="alert ${alertClass}" role="alert">
+                ${alertMessage}
+            </div>`;
 
-    document.getElementById('alertContainer').innerHTML = '';
-    document.getElementById('alertContainer').insertAdjacentHTML('beforeend', alert);
-}))
-
+        document.getElementById('alertContainer').innerHTML = '';
+        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', alert);
+    })
     .catch(error => {
         const errorAlert = `
             <div class="alert alert-danger" role="alert">
@@ -79,7 +103,8 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     });
 });
 
-function fetchSecondApi(pingId,usAgent) {
+function fetchSecondApi(pingId, usAgent, extractedCertId, trustedFormUrl) {
+    // Get fresh values for form fields
     const formData = new FormData();
     formData.append('lp_ping_id', pingId);
     formData.append('lp_campaign_id','69307e5b6dbf3');
@@ -100,9 +125,12 @@ function fetchSecondApi(pingId,usAgent) {
     formData.append('Project', document.getElementById('project').value);
     formData.append('jornaya_lead_id', document.getElementById('jornaya_lead_id').value);
     formData.append('universal_leadid', document.getElementById('jornaya_lead_id').value);
-    formData.append('trusted_form_cert_id', extractTrustedFormId(document.getElementById('trusted_form_cert_id').value) || '');
-    formData.append('trusted_form', document.getElementById('trusted_form_cert_id').value);
-    formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_id').value);
+    
+    // Use the passed values
+    formData.append('trusted_form_cert_id', extractedCertId || '');
+    formData.append('trusted_form', trustedFormUrl || '');
+    formData.append('trusted_form_cert_url', trustedFormUrl || '');
+    
     formData.append('landing_page', 'https://myhomerevamp.com/');
     formData.append('user_agent', usAgent);
     formData.append('lp_s1', 'Social Ads');
@@ -113,106 +141,107 @@ function fetchSecondApi(pingId,usAgent) {
     formData.append('tcpa_language', 'I acknowledge and agree to the Terms and Conditions, CCPA, and Privacy Policy. By checking this box and submitting this form, I hereby provide my expressed written consent and electronic signature. Additionally, by checking this box, I consent to the Terms and Conditions and Privacy Policy and authorize insurance companies, their agents, and marketing partners to contact me regarding Home Improvement and Home Warranty offers via telephone calls and text messages to the provided number. I consent to receiving telemarketing calls and pre-recorded messages through an automated dialing system, even if my phone number is currently listed on any state, federal, or corporate Do Not Call list. I understand that my consent is not a requirement for purchasing any goods or services, and I may revoke my consent at any time. I also understand that standard message and data rates may apply. By submitting this form, I agree to the Terms and Conditions and Privacy Policy of Compare Your Rates, its Partners, and/or licensed insurance agents employed with Compare Your Rates, who may contact me regarding health and life insurance products and services, including Home Improvement and Home Warranty plans, via phone or email. I expressly consent to receiving phone calls (including autodialed and/or pre-recorded/artificial voice calls) and emails using automated technology at the provided phone number and email address, even if it is a wireless number. This consent applies regardless of whether I am on any Federal or state DNC ("Do Not Call") and/or DNE ("Do Not Email") list or registry. Furthermore, I confirm that I am over 18 years of age and that my consent is not required as a condition of purchase. For more information, please review our Privacy Policy, Terms and Conditions, and Marketing Partners.');
     formData.append('TCPA', 'YES');
     
-    
-    
     const urln = 'https://corsproxy.io/?https://miligroup.leadspediatrack.com/post.do?' + new URLSearchParams(formData).toString();
     
+    console.log('Post URL (first part):', urln.substring(0, 200) + '...');
+    
     fetch(urln, {
-    method: 'POST'
-})
-.then(response => {
-    if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return response.json();
-})
-.then(responseBody => {
-    console.log('Post Response:', responseBody); // Debug log
-    
-    let alertClass = 'alert-success';
-    let alertMessage = '';
-
-    // Check if result is 'failed' (case insensitive)
-    if (responseBody.result && responseBody.result.toLowerCase() === 'failed') {
-        alertClass = 'alert-warning';
-        alertMessage = '<strong>Lead Posted with Warning</strong><br>';
-        alertMessage += '<strong>Message:</strong> ' + (responseBody.msg || 'Lead Rejected') + '<br>';
-        alertMessage += '<strong>Lead ID:</strong> ' + (responseBody.lead_id || 'N/A') + '<br>';
-        alertMessage += '<strong>Result:</strong> ' + responseBody.result;
-        
-        if (responseBody.errors && responseBody.errors.length > 0) {
-            alertMessage += '<br><strong>Errors:</strong><br>';
-            responseBody.errors.forEach(error => {
-                alertMessage += '- ' + error.field + ': ' + error.error + '<br>';
-            });
+        method: 'POST'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
+        return response.json();
+    })
+    .then(responseBody => {
+        console.log('Post Response:', responseBody); // Debug log
         
-        // DON'T reset form on failure
-        document.getElementById('submitBtn').disabled = false;
-    } 
-    // Check if result is 'success' or success flag is true
-    else if (responseBody.success || (responseBody.result && responseBody.result.toLowerCase() === 'success')) {
-        // SUCCESS - show all response data except price
-        alertMessage = '<strong>Lead Posted Successfully!</strong><br>';
-        alertMessage += '<strong>Message:</strong> ' + responseBody.msg + '<br>';
-        alertMessage += '<strong>Lead ID:</strong> ' + responseBody.lead_id + '<br>';
-        alertMessage += '<strong>Result:</strong> ' + responseBody.result;
-        
-        // Price is hidden - not shown in the message
-        
-        if (responseBody.redirect_url) {
-            alertMessage += '<br><strong>Redirect URL:</strong> ' + responseBody.redirect_url;
-        }
-        
-        // Show full response data (for debugging/info)
-        alertMessage += '<br><br><strong>Full Response:</strong><br>';
-        alertMessage += '<div style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 12px; max-height: 200px; overflow-y: auto;">';
-        
-        // Create a copy of responseBody without the price field
-        const responseWithoutPrice = { ...responseBody };
-        delete responseWithoutPrice.price; // Remove price from display
-        
-        alertMessage += JSON.stringify(responseWithoutPrice, null, 2);
-        alertMessage += '</div>';
-        
-        // RESET FORM only on success
-        document.getElementById('leadForm').reset();
-        document.getElementById('submitBtn').disabled = false;
-    } 
-    // Handle unexpected response format
-    else {
-        alertClass = 'alert-info';
-        alertMessage = '<strong>Lead Processing Completed</strong><br>';
-        alertMessage += '<strong>Message:</strong> ' + (responseBody.msg || 'No message') + '<br>';
-        alertMessage += '<strong>Lead ID:</strong> ' + (responseBody.lead_id || 'N/A') + '<br>';
-        alertMessage += '<strong>Result:</strong> ' + (responseBody.result || 'unknown') + '<br><br>';
-        alertMessage += '<strong>Full Response:</strong><br>';
-        alertMessage += '<div style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 12px; max-height: 200px; overflow-y: auto;">';
-        alertMessage += JSON.stringify(responseBody, null, 2);
-        alertMessage += '</div>';
-        
-        document.getElementById('submitBtn').disabled = false;
-    }
+        let alertClass = 'alert-success';
+        let alertMessage = '';
 
-    const alert = `
-        <div class="alert ${alertClass}" role="alert">
-            ${alertMessage}
-        </div>`;
-    
-    // Clear previous alerts and show new one
-    document.getElementById('alertContainer').innerHTML = '';
-    document.getElementById('alertContainer').insertAdjacentHTML('beforeend', alert);
-})
-.catch(error => {
-    const errorAlert = `
-        <div class="alert alert-danger" role="alert">
-            <strong>Error in second request:</strong> ${error.message}
-        </div>`;
-    document.getElementById('alertContainer').innerHTML = '';
-    document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
-    document.getElementById('submitBtn').disabled = false;
-});
+        // Check if result is 'failed' (case insensitive)
+        if (responseBody.result && responseBody.result.toLowerCase() === 'failed') {
+            alertClass = 'alert-warning';
+            alertMessage = '<strong>Lead Posted with Warning</strong><br>';
+            alertMessage += '<strong>Message:</strong> ' + (responseBody.msg || 'Lead Rejected') + '<br>';
+            alertMessage += '<strong>Lead ID:</strong> ' + (responseBody.lead_id || 'N/A') + '<br>';
+            alertMessage += '<strong>Result:</strong> ' + responseBody.result;
+            
+            if (responseBody.errors && responseBody.errors.length > 0) {
+                alertMessage += '<br><strong>Errors:</strong><br>';
+                responseBody.errors.forEach(error => {
+                    alertMessage += '- ' + error.field + ': ' + error.error + '<br>';
+                });
+            }
+            
+            // DON'T reset form on failure
+            document.getElementById('submitBtn').disabled = false;
+        } 
+        // Check if result is 'success' or success flag is true
+        else if (responseBody.success || (responseBody.result && responseBody.result.toLowerCase() === 'success')) {
+            // SUCCESS - show all response data except price
+            alertMessage = '<strong>Lead Posted Successfully!</strong><br>';
+            alertMessage += '<strong>Message:</strong> ' + responseBody.msg + '<br>';
+            alertMessage += '<strong>Lead ID:</strong> ' + responseBody.lead_id + '<br>';
+            alertMessage += '<strong>Result:</strong> ' + responseBody.result;
+            
+            // Price is hidden - not shown in the message
+            
+            if (responseBody.redirect_url) {
+                alertMessage += '<br><strong>Redirect URL:</strong> ' + responseBody.redirect_url;
+            }
+            
+            // Show full response data (for debugging/info)
+            alertMessage += '<br><br><strong>Full Response:</strong><br>';
+            alertMessage += '<div style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 12px; max-height: 200px; overflow-y: auto;">';
+            
+            // Create a copy of responseBody without the price field
+            const responseWithoutPrice = { ...responseBody };
+            delete responseWithoutPrice.price; // Remove price from display
+            
+            alertMessage += JSON.stringify(responseWithoutPrice, null, 2);
+            alertMessage += '</div>';
+            
+            // RESET FORM only on success
+            document.getElementById('leadForm').reset();
+            document.getElementById('submitBtn').disabled = false;
+        } 
+        // Handle unexpected response format
+        else {
+            alertClass = 'alert-info';
+            alertMessage = '<strong>Lead Processing Completed</strong><br>';
+            alertMessage += '<strong>Message:</strong> ' + (responseBody.msg || 'No message') + '<br>';
+            alertMessage += '<strong>Lead ID:</strong> ' + (responseBody.lead_id || 'N/A') + '<br>';
+            alertMessage += '<strong>Result:</strong> ' + (responseBody.result || 'unknown') + '<br><br>';
+            alertMessage += '<strong>Full Response:</strong><br>';
+            alertMessage += '<div style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 12px; max-height: 200px; overflow-y: auto;">';
+            alertMessage += JSON.stringify(responseBody, null, 2);
+            alertMessage += '</div>';
+            
+            document.getElementById('submitBtn').disabled = false;
+        }
+
+        const alert = `
+            <div class="alert ${alertClass}" role="alert">
+                ${alertMessage}
+            </div>`;
+        
+        // Clear previous alerts and show new one
+        document.getElementById('alertContainer').innerHTML = '';
+        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', alert);
+    })
+    .catch(error => {
+        const errorAlert = `
+            <div class="alert alert-danger" role="alert">
+                <strong>Error in second request:</strong> ${error.message}
+            </div>`;
+        document.getElementById('alertContainer').innerHTML = '';
+        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+        document.getElementById('submitBtn').disabled = false;
+    });
 }
+
 function api_tester(randomString) {
     try {
         fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString), {
@@ -222,23 +251,36 @@ function api_tester(randomString) {
     } catch (error) {
         console.error('Error in api_tester:', error);
     }
-
 }
+
 function extractTrustedFormId(certUrl) {
     if (!certUrl || typeof certUrl !== 'string') {
+        console.log('No cert URL provided');
         return null;
     }
 
     // Trim spaces
     certUrl = certUrl.trim();
+    console.log('Processing TrustedForm URL:', certUrl);
 
-    // Match TrustedForm Cert ID (UUID-like string)
-    const match = certUrl.match(
-        /trustedform\.com\/cert\/([a-f0-9\-]+)/i
-    );
+    // Match TrustedForm Cert ID - try multiple patterns
+    let match = certUrl.match(/trustedform\.com\/cert\/([a-f0-9\-]+)/i);
+    
+    if (!match) {
+        // Try alternative pattern without dashes
+        match = certUrl.match(/trustedform\.com\/cert\/([a-f0-9]+)/i);
+    }
+    
+    if (!match) {
+        // Try to extract just the ID part if it's at the end
+        match = certUrl.match(/([a-f0-9]{40})/i);
+    }
 
-    return match ? match[1] : null;
+    const result = match ? match[1] : null;
+    console.log('Extracted TrustedForm ID:', result);
+    return result;
 }
+
 function getRandomUserAgent() {
   const userAgents = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
@@ -265,11 +307,4 @@ function getRandomUserAgent() {
 
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
-        }
-
-
-
-
-
-
-
+}
