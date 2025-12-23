@@ -44,7 +44,6 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         
     api_tester(phoneHome);
     formData.append('lp_s1', 'Social Ads');
-    formData.append('lp_test', '1');
     formData.append('lp_response', 'JSON');
 
     const url = 'https://corsproxy.io/?https://miligroup.leadspediatrack.com/ping.do?' + new URLSearchParams(formData).toString();
@@ -136,7 +135,6 @@ function fetchSecondApi(pingId, usAgent, extractedCertId, trustedFormUrl) {
     formData.append('landing_page', 'https://myhomerevamp.com/');
     formData.append('user_agent', usAgent);
     formData.append('lp_s1', 'Social Ads');
-    formData.append('lp_test', '1');
     formData.append('lp_response', 'JSON');
     
     // TCPA fields for post (static values)
@@ -310,3 +308,4 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
