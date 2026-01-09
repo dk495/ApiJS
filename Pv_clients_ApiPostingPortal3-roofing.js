@@ -106,8 +106,8 @@ function fetchSecondApi(pingId, usAgent, extractedCertId, trustedFormUrl) {
     // Get fresh values for form fields
     const formData = new FormData();
     formData.append('lp_ping_id', pingId);
-    formData.append('lp_campaign_id','c9zjyk8QhvqZJV6fGp23');
-    formData.append('lp_campaign_key','N2pFq7XP3fkMD4mQLZgJ');
+    formData.append('lp_campaign_id','69307e46c646c');
+    formData.append('lp_campaign_key','c9zjyk8QhvqZJV6fGp23');
     formData.append('pub_id','PV-7602');
     formData.append('first_name', document.getElementById('first_name').value);
     formData.append('last_name', document.getElementById('last_name').value);
@@ -306,6 +306,7 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
 
 
 
