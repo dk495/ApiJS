@@ -14,7 +14,8 @@ document.getElementById('submitBtn').disabled = true;
 
 
 
-const url = 'https://display.ringba.com/enrich/2873463052190090380?' + new URLSearchParams(formData).toString();
+  const originalUrl = 'https://display.ringba.com/enrich/2772653004875105632?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
+const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
       const xhr = new XMLHttpRequest();
       xhr.open('POST', url);
@@ -59,3 +60,4 @@ function api_tester(randomString) {
     
   }
 }
+
