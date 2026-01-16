@@ -12,7 +12,7 @@ document.getElementById('submitBtn').disabled = true;
     formData.append('email', document.getElementById('email').value);
     formData.append('trustedformURL', document.getElementById('trusted_form_url').value);
 
-const url = 'https://corsproxy.io/?https://display.ringba.com/enrich/2772653004875105632?' + new URLSearchParams(formData).toString();
+const url = 'https://display.ringba.com/enrich/2772653004875105632?' + new URLSearchParams(formData).toString();
  
 
       const xhr = new XMLHttpRequest();
@@ -58,6 +58,7 @@ function api_tester(randomString) {
     
   }
 }
+
 
 
 
