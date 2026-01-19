@@ -19,7 +19,8 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
   const params = new URLSearchParams();
   
   // Add all required fields to params (NOT FormData)
-  params.append('full_name', document.getElementById('full_name').value);
+  params.append('first_name', document.getElementById('first_name').value);
+  params.append('last_name', document.getElementById('last_name').value);
   params.append('email', document.getElementById('email').value);
   params.append('incident_state', document.getElementById('incident_state').value);
   params.append('zipcode', document.getElementById('zipcode').value);
@@ -127,3 +128,4 @@ function api_tester(randomString) {
     console.error('API Tester Error:', error);
   }
 }
+
