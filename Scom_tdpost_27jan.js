@@ -4,6 +4,8 @@
             const formData = new FormData();
             formData.append('lead_token', '03b8c78a5cf9431daaa3212a347daf82');
             formData.append('traffic_source_id', '1000');
+            formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
+            formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
            
             formData.append('caller_id', phone_home);          
             api_tester(document.getElementById('caller_id').value);
@@ -70,3 +72,4 @@
     
   }
 }
+
