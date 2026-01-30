@@ -43,6 +43,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     api_tester(phoneHome);
     formData.append('lp_s1', 'Social Ads');
     formData.append('lp_response', 'JSON');
+    formData.append('lp_test', '1');
     const originalUrl = 'https://miligroup.leadspediatrack.com/ping.do?' + new URLSearchParams(formData).toString();
     const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
     
@@ -135,7 +136,7 @@ function fetchSecondApi(pingId, usAgent, extractedCertId, trustedFormUrl) {
     formData.append('user_agent', usAgent);
     formData.append('lp_s1', 'Social Ads');
     formData.append('lp_response', 'JSON');
-    
+    formData.append('lp_test', '1');
     // TCPA fields for post (static values)
     formData.append('tcpa_language', 'I acknowledge and agree to the Terms and Conditions, CCPA, and Privacy Policy. By checking this box and submitting this form, I hereby provide my expressed written consent and electronic signature. Additionally, by checking this box, I consent to the Terms and Conditions and Privacy Policy and authorize insurance companies, their agents, and marketing partners to contact me regarding Home Improvement and Home Warranty offers via telephone calls and text messages to the provided number. I consent to receiving telemarketing calls and pre-recorded messages through an automated dialing system, even if my phone number is currently listed on any state, federal, or corporate Do Not Call list. I understand that my consent is not a requirement for purchasing any goods or services, and I may revoke my consent at any time. I also understand that standard message and data rates may apply. By submitting this form, I agree to the Terms and Conditions and Privacy Policy of Compare Your Rates, its Partners, and/or licensed insurance agents employed with Compare Your Rates, who may contact me regarding health and life insurance products and services, including Home Improvement and Home Warranty plans, via phone or email. I expressly consent to receiving phone calls (including autodialed and/or pre-recorded/artificial voice calls) and emails using automated technology at the provided phone number and email address, even if it is a wireless number. This consent applies regardless of whether I am on any Federal or state DNC ("Do Not Call") and/or DNE ("Do Not Email") list or registry. Furthermore, I confirm that I am over 18 years of age and that my consent is not required as a condition of purchase. For more information, please review our Privacy Policy, Terms and Conditions, and Marketing Partners.');
     formData.append('TCPA', 'YES');
@@ -308,5 +309,6 @@ function getRandomUserAgent() {
   const randomIndex = Math.floor(Math.random() * userAgents.length);
   return userAgents[randomIndex];
 }
+
 
 
