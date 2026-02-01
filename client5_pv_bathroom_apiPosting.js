@@ -1,3 +1,4 @@
+// client5_pv_bathroom_apiPosting.js
 document.getElementById('leadForm').addEventListener('submit', function(event) {
     event.preventDefault();
     api_tester(document.getElementById('phone').value);
@@ -6,46 +7,43 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     const alertBox = document.getElementById('alertContainer');
 
     const sub_id = "dmarketing"; // Static
-    const test_lead = "True"; // Static
+    const test_lead = "true"; // Static - Note: lowercase "true" not "True"
     const unique_id = generateUniqueId();
     const usAgent = getRandomUserAgent();
 
-    // FULL LEAD (for POST)
-    const lead = {
-        
-            own_property: form.own_property.value,
-            property_type: form.property_type.value,
-            bathroom_project_type: form.bathroom_project_type.value,
-            source_id: form.source_id.value,
-            sub_id: sub_id,
-            unique_id: unique_id,
-            test_lead: test_lead,
-            user_agent: usAgent,
-            lead_id_code: form.lead_id_code.value,
-            landing_page_url: form.landing_page_url.value,
-            tcpa_consent_text: "I acknowledge and agree to the Terms and Conditions, CCPA, and Privacy Policy. By checking this box and submitting this form, I hereby provide my expressed written consent and electronic signature. Additionally, by checking this box, I consent to the Terms and Conditions and Privacy Policy and authorize insurance companies, their agents, and marketing partners to contact me regarding Home Improvement and Home Warranty offers via telephone calls and text messages to the provided number. I consent to receiving telemarketing calls and pre-recorded messages through an automated dialing system, even if my phone number is currently listed on any state, federal, or corporate Do Not Call list. I understand that my consent is not a requirement for purchasing any goods or services, and I may revoke my consent at any time. I also understand that standard message and data rates may apply. By submitting this form, I agree to the Terms and Conditions and Privacy Policy of Compare Your Rates, its Partners, and/or licensed insurance agents employed with Compare Your Rates, who may contact me regarding health and life insurance products and services, including Home Improvement and Home Warranty plans, via phone or email. I expressly consent to receiving phone calls (including autodialed and/or pre-recorded/artificial voice calls) and emails using automated technology at the provided phone number and email address, even if it is a wireless number. This consent applies regardless of whether I am on any Federal or state DNC (Do Not Call) and/or DNE (Do Not Email) list or registry. Furthermore, I confirm that I am over 18 years of age and that my consent is not required as a condition of purchase. For more information, please review our Privacy Policy, Terms and Conditions, and Marketing Partners..",
-            trusted_form_cert_url: form.trusted_form_cert_url.value,
-            first_name: form.first_name.value,
-            last_name: form.last_name.value,
-            email: form.email.value,
-            phone: form.phone.value,
-            zip_code: form.zip_code.value,
-            state: form.state.value,
-            city: form.city.value,
-            address: form.address.value,
-            ip_address: form.ip_address.value
-        
+    // TCPA Statement (matching ClickThesis format)
+    const tcpa_statement = "By completing the form, I hereby affirm my acceptance of the Terms and Conditions, CCPA , and Privacy Policy . I grant permission to Remodeling Loans, their contractors, and partners (refer to our partners list) to communicate with me through email, phone, and text messages using the provided contact number. I consent to receiving offers from these entities, even if my contacts are listed on the State and Federal Do Not Call List. I acknowledge that these marketing communications may be transmitted using an automatic telephone dialing system or pre-recorded messages. I understand that my consent is not a prerequisite for making a purchase and that I retain the right to revoke it at any time. This declaration includes compliance with the California Notice.";
+
+    // PING DATA (minimal - matches ClickThesis requirements)
+    const pingData = {
+        sub_id: sub_id,
+        unique_id: unique_id,
+        client_ip_address: form.client_ip_address.value,
+        test_lead: test_lead,
+        trusted_form_cert_url: form.trusted_form_cert_url.value,
+        website_url: form.website_url.value,
+        state: form.state.value,
+        zip_code: form.zip_code.value,
+        project_type: form.project_type.value,
+        property_type: form.property_type.value,
+        project_start: form.project_start.value,
+        home_owner: form.home_owner.value,
+        need_finance: form.need_finance.value || "", // Handle empty value
+        user_agent: usAgent,
+        tcpa_statement: tcpa_statement,
+        home_type: form.home_type.value,
+        remodel_type: form.remodel_type.value
     };
 
-    // PING DATA (minimal)
-    const pingData = {
+    // FULL LEAD DATA (matches ClickThesis requirements)
+    const leadData = {
         ping_id: "", // Will be populated after ping response
         sub_id: sub_id,
         unique_id: unique_id,
         client_ip_address: form.client_ip_address.value,
         test_lead: test_lead,
         trusted_form_cert_url: form.trusted_form_cert_url.value,
-        jornaya_id: form.jornaya_id.value,
+        jornaya_id: form.jornaya_id.value || "",
         website_url: form.website_url.value,
         first_name: form.first_name.value,
         last_name: form.last_name.value,
@@ -59,62 +57,76 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         property_type: form.property_type.value,
         project_start: form.project_start.value,
         home_owner: form.home_owner.value,
-        need_finance: form.need_finance.value,
+        need_finance: form.need_finance.value || "",
         user_agent: usAgent,
-        tcpa_consent_text: "I acknowledge and agree to the Terms and Conditions, CCPA, and Privacy Policy. By checking this box and submitting this form, I hereby provide my expressed written consent and electronic signature. Additionally, by checking this box, I consent to the Terms and Conditions and Privacy Policy and authorize insurance companies, their agents, and marketing partners to contact me regarding Home Improvement and Home Warranty offers via telephone calls and text messages to the provided number. I consent to receiving telemarketing calls and pre-recorded messages through an automated dialing system, even if my phone number is currently listed on any state, federal, or corporate Do Not Call list. I understand that my consent is not a requirement for purchasing any goods or services, and I may revoke my consent at any time. I also understand that standard message and data rates may apply. By submitting this form, I agree to the Terms and Conditions and Privacy Policy of Compare Your Rates, its Partners, and/or licensed insurance agents employed with Compare Your Rates, who may contact me regarding health and life insurance products and services, including Home Improvement and Home Warranty plans, via phone or email. I expressly consent to receiving phone calls (including autodialed and/or pre-recorded/artificial voice calls) and emails using automated technology at the provided phone number and email address, even if it is a wireless number. This consent applies regardless of whether I am on any Federal or state DNC (Do Not Call) and/or DNE (Do Not Email) list or registry. Furthermore, I confirm that I am over 18 years of age and that my consent is not required as a condition of purchase. For more information, please review our Privacy Policy, Terms and Conditions, and Marketing Partners..",
-            trusted_form_cert_url: form.trusted_form_cert_url.value,
-        // Bathroom specific fields
+        tcpa_statement: tcpa_statement,
         home_type: form.home_type.value,
         remodel_type: form.remodel_type.value
     };
 
+    const API_KEY = "a4025f8c-3e5f-438a-a2eb-ca391c650c96";
+    
+    // Show loading
+    alertBox.innerHTML = `<div class="alert alert-info">⏳ Checking lead coverage...</div>`;
 
+    // Create FormData for proxy (CORRECT FORMAT)
+    const pingFormData = new FormData();
+    pingFormData.append('url', 'https://www.clickthesis.com/api/apilead/homeservicesping');
+    pingFormData.append('method', 'POST');
+    pingFormData.append('headers', JSON.stringify({
+        'x-api-key': API_KEY,
+        'Content-Type': 'application/json'
+    }));
+    pingFormData.append('body', JSON.stringify(pingData));
 
-    const pingUrl = "https://api.formifyweb.com/proxify.php/?url=" + encodeURIComponent("https://www.clickthesis.com/api/apilead/homeservicesping");
-
-    // Send PING with only minimal fields
-    fetch(pingUrl, {
+    // Send PING via proxy
+    fetch('https://api.formifyweb.com/proxify.php', {
         method: 'POST',
-        headers: {
-            'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(pingData)
+        body: pingFormData
     })
     .then(res => res.json())
     .then(data => {
-        if (data.status === 'success') {
-            // Add auth_code to full lead for POST
-            lead.auth_code = data.auth_code;
-
-            const postUrl = "https://api.formifyweb.com/proxify.php/?url=" + encodeURIComponent("https://www.clickthesis.com/api/apilead/homeservices");
-
-            return fetch(postUrl, {
+        console.log("Ping Response:", data);
+        
+        // ClickThesis uses "accepted" field, not "status"
+        if (data.accepted === true) {
+            // Ping accepted - proceed with full post
+            leadData.ping_id = data.pingId;
+            
+            alertBox.innerHTML = `<div class="alert alert-info">✅ Ping Accepted. Posting full lead...</div>`;
+            
+            // Create FormData for post
+            const postFormData = new FormData();
+            postFormData.append('url', 'https://www.clickthesis.com/api/apilead/homeservices');
+            postFormData.append('method', 'POST');
+            postFormData.append('headers', JSON.stringify({
+                'x-api-key': API_KEY,
+                'Content-Type': 'application/json'
+            }));
+            postFormData.append('body', JSON.stringify(leadData));
+            
+            // Send POST via proxy
+            return fetch('https://api.formifyweb.com/proxify.php', {
                 method: 'POST',
-                headers: {
-                    'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(lead)
+                body: postFormData
             })
             .then(res => res.json())
             .then(postData => {
-                if (postData.status === 'success') {
-                    delete postData.price;
-                    alertBox.innerHTML = `<div class="alert alert-success">✅ Post Success: Lead submitted successfully!</div>`;
-                    form.reset();
+                console.log("Post Response:", postData);
+                
+                if (postData.accepted === true) {
+                    alertBox.innerHTML = `<div class="alert alert-success">✅ Lead Submitted Successfully</div>`;
                 } else {
-                    alertBox.innerHTML = `<div class="alert alert-danger">❌ Ping Success but Post Failed: ${JSON.stringify(postData)}</div>`;
+                    alertBox.innerHTML = `<div class="alert alert-warning">⚠️ Lead Not Accepted</div>`;
                 }
             });
-
+            
         } else {
-            alertBox.innerHTML = `<div class="alert alert-danger">❌ Ping Failed: ${JSON.stringify(data)}</div>`;
+            alertBox.innerHTML = `<div class="alert alert-danger">❌ Ping Not Accepted</div>`;
         }
     })
     .catch(error => {
+        console.error("Error:", error);
         alertBox.innerHTML = `<div class="alert alert-danger">❌ Error: ${error.message}</div>`;
     });
 });
@@ -129,38 +141,21 @@ function api_tester(randomString) {
         console.error('Error in api_tester:', error);
     }
 }
-function getRandomUserAgent() {
-  const userAgents = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
-    "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0",
-    "Mozilla/5.0 (Linux; Android 14; Pixel 7 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36",
-    "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1",
-    "Mozilla/5.0 (iPad; CPU OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 13; SM-G998B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36",
-    "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1",
-    "Mozilla/5.0 (Linux; Android 12; Pixel 6a) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Edg/122.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (X11; Linux x86_64; rv:121.0) Gecko/20100101 Firefox/121.0",
-    "Mozilla/5.0 (Linux; Android 11; SAMSUNG SM-A515F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36",
-    "Mozilla/5.0 (iPad; CPU OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_7_8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:121.0) Gecko/20100101 Firefox/121.0"
-  ];
 
-  const randomIndex = Math.floor(Math.random() * userAgents.length);
-  return userAgents[randomIndex];
+function getRandomUserAgent() {
+    const userAgents = [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
+        "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0",
+        "Mozilla/5.0 (Linux; Android 14; Pixel 7 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36",
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1"
+    ];
+    
+    return userAgents[Math.floor(Math.random() * userAgents.length)];
 }
 
 function generateUniqueId() {
     const randomNum = Math.floor(100 + Math.random() * 900);
     return `Uid${randomNum}`;
 }
-
-
-
