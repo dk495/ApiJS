@@ -2,6 +2,11 @@
 document.getElementById('leadForm').addEventListener('submit', async function(event) {
     event.preventDefault();
     
+    // Disable submit button to prevent double submission
+    const submitBtn = event.target.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Processing...';
+    
     // Generate unique ID for this submission
     const uniqueId = generateUniqueId();
     
@@ -44,29 +49,42 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
             remodel_type: form.remodel_type.value
         };
 
-        console.log("Ping Data:", pingData);
+        console.log("Ping Data to send:", pingData);
+        
+        // IMPORTANT: For testing, use ZIP 99999 as per documentation
+        if (pingData.zip_code === "99999") {
+            console.log("Using test ZIP code for acceptance");
+        }
         
         // Step 1: Ping API using proxy
-        const pingUrl = "https://api.formifyweb.com/proxify.php?url=https://www.clickthesis.com/api/apilead/homeservicesping";
+        // Use FormData approach for proxy to avoid CORS issues
+        const pingProxyUrl = "https://api.formifyweb.com/proxify.php";
         
-        alertBox.innerHTML = `<div class="alert alert-info">⏳ Pinging server: ${pingUrl}...</div>`;
+        console.log("Sending ping to proxy:", pingProxyUrl);
         
-        const pingResponse = await fetch(pingUrl, {
+        // Create FormData for proxy
+        const pingFormData = new FormData();
+        pingFormData.append('url', 'https://www.clickthesis.com/api/apilead/homeservicesping');
+        pingFormData.append('method', 'POST');
+        pingFormData.append('headers', JSON.stringify({
+            'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
+            'Content-Type': 'application/json'
+        }));
+        pingFormData.append('data', JSON.stringify(pingData));
+        
+        const pingResponse = await fetch(pingProxyUrl, {
             method: 'POST',
-            headers: {
-                'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(pingData)
+            body: pingFormData
         });
 
+        console.log("Ping response status:", pingResponse.status);
+        
         if (!pingResponse.ok) {
             throw new Error(`Ping failed with status: ${pingResponse.status}`);
         }
 
         const pingResult = await pingResponse.json();
-        console.log("Ping Result:", pingResult);
+        console.log("Ping Result received:", pingResult);
         
         if (pingResult.accepted === true) {
             // Ping accepted - prepare full lead data
@@ -98,29 +116,36 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
                 remodel_type: form.remodel_type.value
             };
 
-            console.log("Lead Data:", leadData);
+            console.log("Full Lead Data to send:", leadData);
             
             alertBox.innerHTML = `<div class="alert alert-info">✅ Coverage Available! Estimated: $${pingResult.bidPrice}. Submitting full lead...</div>`;
             
             // Step 2: Post full lead using proxy
-            const postUrl = "https://api.formifyweb.com/proxify.php?url=https://www.clickthesis.com/api/apilead/homeservices";
+            // Create FormData for post proxy
+            const postFormData = new FormData();
+            postFormData.append('url', 'https://www.clickthesis.com/api/apilead/homeservices');
+            postFormData.append('method', 'POST');
+            postFormData.append('headers', JSON.stringify({
+                'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
+                'Content-Type': 'application/json'
+            }));
+            postFormData.append('data', JSON.stringify(leadData));
             
-            const postResponse = await fetch(postUrl, {
+            console.log("Sending post to proxy...");
+            
+            const postResponse = await fetch(pingProxyUrl, {
                 method: 'POST',
-                headers: {
-                    'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(leadData)
+                body: postFormData
             });
 
+            console.log("Post response status:", postResponse.status);
+            
             if (!postResponse.ok) {
                 throw new Error(`Post failed with status: ${postResponse.status}`);
             }
 
             const leadResult = await postResponse.json();
-            console.log("Lead Result:", leadResult);
+            console.log("Lead Result received:", leadResult);
             
             if (leadResult.accepted === true) {
                 // Lead sold successfully
@@ -175,6 +200,10 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
             <p>${error.message}</p>
             <p class="mb-0"><small>Check browser console (F12) for more details</small></p>
         </div>`;
+    } finally {
+        // Re-enable submit button
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Submit Lead';
     }
 });
 
