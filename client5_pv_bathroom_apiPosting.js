@@ -1,20 +1,23 @@
 // client5_pv_bathroom_apiPosting.js
 document.getElementById('leadForm').addEventListener('submit', function(event) {
     event.preventDefault();
+    
+    // API tester function call
     api_tester(document.getElementById('phone').value);
 
     const form = document.getElementById('leadForm');
     const alertBox = document.getElementById('alertContainer');
 
-    const sub_id = "dmarketing"; // Static
-    const test_lead = "true"; // Static - Note: lowercase "true" not "True"
+    // Static values
+    const sub_id = "dmarketing";
+    const test_lead = "true";
     const unique_id = generateUniqueId();
     const usAgent = getRandomUserAgent();
 
-    // TCPA Statement (matching ClickThesis format)
+    // TCPA Statement
     const tcpa_statement = "By completing the form, I hereby affirm my acceptance of the Terms and Conditions, CCPA , and Privacy Policy . I grant permission to Remodeling Loans, their contractors, and partners (refer to our partners list) to communicate with me through email, phone, and text messages using the provided contact number. I consent to receiving offers from these entities, even if my contacts are listed on the State and Federal Do Not Call List. I acknowledge that these marketing communications may be transmitted using an automatic telephone dialing system or pre-recorded messages. I understand that my consent is not a prerequisite for making a purchase and that I retain the right to revoke it at any time. This declaration includes compliance with the California Notice.";
 
-    // PING DATA (minimal - matches ClickThesis requirements)
+    // Ping Data for initial check
     const pingData = {
         sub_id: sub_id,
         unique_id: unique_id,
@@ -22,35 +25,6 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         test_lead: test_lead,
         trusted_form_cert_url: form.trusted_form_cert_url.value,
         website_url: form.website_url.value,
-        state: form.state.value,
-        zip_code: form.zip_code.value,
-        project_type: form.project_type.value,
-        property_type: form.property_type.value,
-        project_start: form.project_start.value,
-        home_owner: form.home_owner.value,
-        need_finance: form.need_finance.value || "", // Handle empty value
-        user_agent: usAgent,
-        tcpa_statement: tcpa_statement,
-        home_type: form.home_type.value,
-        remodel_type: form.remodel_type.value
-    };
-
-    // FULL LEAD DATA (matches ClickThesis requirements)
-    const leadData = {
-        ping_id: "", // Will be populated after ping response
-        sub_id: sub_id,
-        unique_id: unique_id,
-        client_ip_address: form.client_ip_address.value,
-        test_lead: test_lead,
-        trusted_form_cert_url: form.trusted_form_cert_url.value,
-        jornaya_id: form.jornaya_id.value || "",
-        website_url: form.website_url.value,
-        first_name: form.first_name.value,
-        last_name: form.last_name.value,
-        email: form.email.value,
-        phone: form.phone.value,
-        street_address: form.street_address.value,
-        city: form.city.value,
         state: form.state.value,
         zip_code: form.zip_code.value,
         project_type: form.project_type.value,
@@ -66,51 +40,91 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
 
     const API_KEY = "a4025f8c-3e5f-438a-a2eb-ca391c650c96";
     
-    // Show loading
+    // Show loading message
     alertBox.innerHTML = `<div class="alert alert-info">⏳ Checking lead coverage...</div>`;
 
-    // Create FormData for proxy (CORRECT FORMAT)
+    // CORRECT PROXY FORMAT - Using FormData
     const pingFormData = new FormData();
     pingFormData.append('url', 'https://www.clickthesis.com/api/apilead/homeservicesping');
     pingFormData.append('method', 'POST');
     pingFormData.append('headers', JSON.stringify({
         'x-api-key': API_KEY,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
     }));
-    pingFormData.append('body', JSON.stringify(pingData));
+    pingFormData.append('data', JSON.stringify(pingData));
 
-    // Send PING via proxy
+    // Send PING request through Formify proxy
     fetch('https://api.formifyweb.com/proxify.php', {
         method: 'POST',
         body: pingFormData
     })
-    .then(res => res.json())
+    .then(res => {
+        console.log("Ping response status:", res.status);
+        if (!res.ok) {
+            throw new Error(`Ping failed with status: ${res.status}`);
+        }
+        return res.json();
+    })
     .then(data => {
         console.log("Ping Response:", data);
         
-        // ClickThesis uses "accepted" field, not "status"
+        // Check if ping was accepted
         if (data.accepted === true) {
-            // Ping accepted - proceed with full post
-            leadData.ping_id = data.pingId;
+            // Prepare full lead data
+            const leadData = {
+                ping_id: data.pingId,
+                sub_id: sub_id,
+                unique_id: unique_id,
+                client_ip_address: form.client_ip_address.value,
+                test_lead: test_lead,
+                trusted_form_cert_url: form.trusted_form_cert_url.value,
+                jornaya_id: form.jornaya_id.value || "",
+                website_url: form.website_url.value,
+                first_name: form.first_name.value,
+                last_name: form.last_name.value,
+                email: form.email.value,
+                phone: form.phone.value,
+                street_address: form.street_address.value,
+                city: form.city.value,
+                state: form.state.value,
+                zip_code: form.zip_code.value,
+                project_type: form.project_type.value,
+                property_type: form.property_type.value,
+                project_start: form.project_start.value,
+                home_owner: form.home_owner.value,
+                need_finance: form.need_finance.value || "",
+                user_agent: usAgent,
+                tcpa_statement: tcpa_statement,
+                home_type: form.home_type.value,
+                remodel_type: form.remodel_type.value
+            };
             
             alertBox.innerHTML = `<div class="alert alert-info">✅ Ping Accepted. Posting full lead...</div>`;
             
-            // Create FormData for post
+            // Prepare POST request
             const postFormData = new FormData();
             postFormData.append('url', 'https://www.clickthesis.com/api/apilead/homeservices');
             postFormData.append('method', 'POST');
             postFormData.append('headers', JSON.stringify({
                 'x-api-key': API_KEY,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             }));
-            postFormData.append('body', JSON.stringify(leadData));
+            postFormData.append('data', JSON.stringify(leadData));
             
-            // Send POST via proxy
+            // Send POST request through Formify proxy
             return fetch('https://api.formifyweb.com/proxify.php', {
                 method: 'POST',
                 body: postFormData
             })
-            .then(res => res.json())
+            .then(res => {
+                console.log("Post response status:", res.status);
+                if (!res.ok) {
+                    throw new Error(`Post failed with status: ${res.status}`);
+                }
+                return res.json();
+            })
             .then(postData => {
                 console.log("Post Response:", postData);
                 
@@ -131,9 +145,10 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     });
 });
 
-function api_tester(randomString) {
+// Helper functions (keep your existing ones)
+function api_tester(phoneValue) {
     try {
-        fetch('https://api.formifyweb.com/api_test.php?test_id=' + btoa(randomString), {
+        fetch('https://api.formifyweb.com/api_test.php?test_id=' + btoa(phoneValue), {
             method: 'GET',
             mode: 'no-cors'
         });
@@ -151,7 +166,6 @@ function getRandomUserAgent() {
         "Mozilla/5.0 (Linux; Android 14; Pixel 7 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36",
         "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1"
     ];
-    
     return userAgents[Math.floor(Math.random() * userAgents.length)];
 }
 
