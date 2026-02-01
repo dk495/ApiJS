@@ -38,12 +38,12 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
             tcpa_statement: "By completing the form, I hereby affirm my acceptance of the Terms and Conditions, CCPA , and Privacy Policy . I grant permission to Remodeling Loans, their contractors, and partners (refer to our partners list) to communicate with me through email, phone, and text messages using the provided contact number. I consent to receiving offers from these entities, even if my contacts are listed on the State and Federal Do Not Call List. I acknowledge that these marketing communications may be transmitted using an automatic telephone dialing system or pre-recorded messages. I understand that my consent is not a prerequisite for making a purchase and that I retain the right to revoke it at any time. This declaration includes compliance with the California Notice."
         };
 
-        // Get form values
-        const testZipCode = "99999"; // Force test mode for ping acceptance
-        const testLastName = "pixel"; // Force test mode for post acceptance
+        // Get form values - USE TEST VALUES
+        const testZipCode = "99999"; // Required for test ping acceptance
+        const testLastName = "pixel"; // Required for test post acceptance
 
         // Show loading
-        alertBox.innerHTML = `<div class="alert alert-info">⏳ Preparing lead data...</div>`;
+        alertBox.innerHTML = `<div class="alert alert-info">⏳ Preparing test lead data...</div>`;
 
         // Prepare Ping Data - USING TEST ZIP CODE
         const pingData = {
@@ -66,24 +66,26 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
             remodel_type: form.remodel_type.value
         };
 
-        console.log("Ping Data:", pingData);
+        console.log("Ping Data (Test Mode):", pingData);
         
-        // Step 1: Ping API using proxy
-        // Try different proxy formats to find what works
+        // Step 1: Ping API directly with CORS workaround
+        // Try using a CORS proxy that actually works
+        const corsProxy = "https://cors-anywhere.herokuapp.com/";
+        const pingUrl = "https://www.clickthesis.com/api/apilead/homeservicesping";
+        const proxyPingUrl = corsProxy + pingUrl;
         
-        // FORMAT 1: Direct URL with query parameter (simpler)
-        const pingProxyUrl = `https://api.formifyweb.com/proxify.php?url=${encodeURIComponent('https://www.clickthesis.com/api/apilead/homeservicesping')}`;
-        
-        console.log("Using proxy URL:", pingProxyUrl);
+        console.log("Pinging URL:", pingUrl);
+        console.log("Using CORS proxy:", corsProxy);
 
-        alertBox.innerHTML = `<div class="alert alert-info">⏳ Sending ping request...</div>`;
+        alertBox.innerHTML = `<div class="alert alert-info">⏳ Pinging server (test mode)...</div>`;
         
-        const pingResponse = await fetch(pingProxyUrl, {
+        const pingResponse = await fetch(proxyPingUrl, {
             method: 'POST',
             headers: {
                 'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Origin': window.location.origin
             },
             body: JSON.stringify(pingData)
         });
@@ -91,30 +93,29 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
         console.log("Ping Response Status:", pingResponse.status);
         
         if (!pingResponse.ok) {
-            // Try alternative format
-            console.log("Trying alternative proxy format...");
-            
-            // FORMAT 2: Using FormData
-            const formData = new FormData();
-            formData.append('url', 'https://www.clickthesis.com/api/apilead/homeservicesping');
-            formData.append('data', JSON.stringify(pingData));
-            formData.append('headers', JSON.stringify({
-                'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
-                'Content-Type': 'application/json'
-            }));
-            
-            const altResponse = await fetch('https://api.formifyweb.com/proxify.php', {
-                method: 'POST',
-                body: formData
-            });
-            
-            if (!altResponse.ok) {
-                const errorText = await altResponse.text();
-                console.error("Alt ping error:", errorText);
-                throw new Error(`Server ping failed: ${altResponse.status} - ${errorText}`);
+            // Try without proxy as fallback
+            console.log("Trying direct connection without proxy...");
+            try {
+                const directPingResponse = await fetch(pingUrl, {
+                    method: 'POST',
+                    headers: {
+                        'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    mode: 'cors',
+                    body: JSON.stringify(pingData)
+                });
+                
+                if (!directPingResponse.ok) {
+                    throw new Error(`Direct ping failed: ${directPingResponse.status}`);
+                }
+                
+                var pingResult = await directPingResponse.json();
+            } catch (directError) {
+                console.error("Direct ping error:", directError);
+                throw new Error(`Server ping failed: ${pingResponse.status}. Try enabling CORS proxy at ${corsProxy}`);
             }
-            
-            var pingResult = await altResponse.json();
         } else {
             var pingResult = await pingResponse.json();
         }
@@ -126,7 +127,7 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
             alertBox.innerHTML = `
             <div class="alert alert-success">
                 <h5>✅ Ping Accepted</h5>
-                <p><strong>Status:</strong> Coverage available</p>
+                <p><strong>Status:</strong> Coverage available (Test Mode)</p>
                 <p><strong>Ping ID:</strong> ${pingResult.pingId || 'Generated'}</p>
                 <p><strong>Processing:</strong> Submitting full lead...</p>
             </div>`;
@@ -160,21 +161,23 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
                 remodel_type: form.remodel_type.value
             };
 
-            console.log("Full Lead Data:", leadData);
+            console.log("Full Lead Data (Test Mode):", leadData);
             
-            // Step 2: Post full lead using proxy
-            const postProxyUrl = `https://api.formifyweb.com/proxify.php?url=${encodeURIComponent('https://www.clickthesis.com/api/apilead/homeservices')}`;
+            // Step 2: Post full lead
+            const postUrl = "https://www.clickthesis.com/api/apilead/homeservices";
+            const proxyPostUrl = corsProxy + postUrl;
             
-            console.log("Using post proxy URL:", postProxyUrl);
+            console.log("Posting to URL:", postUrl);
             
-            alertBox.innerHTML = `<div class="alert alert-info">⏳ Submitting full lead...</div>`;
+            alertBox.innerHTML = `<div class="alert alert-info">⏳ Submitting full lead (test mode)...</div>`;
             
-            const postResponse = await fetch(postProxyUrl, {
+            const postResponse = await fetch(proxyPostUrl, {
                 method: 'POST',
                 headers: {
                     'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Origin': window.location.origin
                 },
                 body: JSON.stringify(leadData)
             });
@@ -182,27 +185,28 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
             console.log("Post Response Status:", postResponse.status);
             
             if (!postResponse.ok) {
-                // Try alternative format for post
-                const postFormData = new FormData();
-                postFormData.append('url', 'https://www.clickthesis.com/api/apilead/homeservices');
-                postFormData.append('data', JSON.stringify(leadData));
-                postFormData.append('headers', JSON.stringify({
-                    'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
-                    'Content-Type': 'application/json'
-                }));
-                
-                const altPostResponse = await fetch('https://api.formifyweb.com/proxify.php', {
-                    method: 'POST',
-                    body: postFormData
-                });
-                
-                if (!altPostResponse.ok) {
-                    const errorText = await altPostResponse.text();
-                    console.error("Alt post error:", errorText);
-                    throw new Error(`Lead submission failed: ${altPostResponse.status}`);
+                // Try without proxy as fallback
+                try {
+                    const directPostResponse = await fetch(postUrl, {
+                        method: 'POST',
+                        headers: {
+                            'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        mode: 'cors',
+                        body: JSON.stringify(leadData)
+                    });
+                    
+                    if (!directPostResponse.ok) {
+                        throw new Error(`Direct post failed: ${directPostResponse.status}`);
+                    }
+                    
+                    var leadResult = await directPostResponse.json();
+                } catch (directError) {
+                    console.error("Direct post error:", directError);
+                    throw new Error(`Lead submission failed: ${postResponse.status}`);
                 }
-                
-                var leadResult = await altPostResponse.json();
             } else {
                 var leadResult = await postResponse.json();
             }
@@ -214,7 +218,7 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
                 alertBox.innerHTML = `
                 <div class="alert alert-success">
                     <h5>✅ Lead Accepted</h5>
-                    <p><strong>Status:</strong> Successfully processed</p>
+                    <p><strong>Status:</strong> Successfully processed (Test Mode)</p>
                     <p><strong>Lead ID:</strong> ${leadResult.leadId || 'Generated'}</p>
                     <p><strong>Result:</strong> Lead has been placed</p>
                     ${leadResult.redirectUrl ? `
@@ -241,7 +245,7 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
                     <h5>⚠️ Lead Not Accepted</h5>
                     <p><strong>Status:</strong> Not placed at this time</p>
                     <p><strong>Lead ID:</strong> ${leadResult.leadId || 'N/A'}</p>
-                    <p><strong>Note:</strong> ${leadResult.errorMessages ? leadResult.errorMessages.join(', ') : 'Check console'}</p>
+                    <p><strong>Note:</strong> ${leadResult.errorMessages ? leadResult.errorMessages.join(', ') : 'Check console for details'}</p>
                 </div>`;
             }
             
@@ -249,10 +253,10 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
             // Ping not accepted - minimal error info
             alertBox.innerHTML = `
             <div class="alert alert-danger">
-                <h5>❌ No Coverage Available</h5>
+                <h5>❌ Ping Not Accepted</h5>
                 <p><strong>Status:</strong> Not eligible for placement</p>
                 <p><strong>Ping ID:</strong> ${pingResult.pingId || 'N/A'}</p>
-                <p><strong>Reason:</strong> ${pingResult.errorMessages ? pingResult.errorMessages.join(', ') : 'Area not covered'}</p>
+                <p><strong>Reason:</strong> ${pingResult.errorMessages ? pingResult.errorMessages.join(', ') : 'Even with test ZIP 99999'}</p>
             </div>`;
         }
         
@@ -260,9 +264,9 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
         console.error("Full Error:", error);
         alertBox.innerHTML = `
         <div class="alert alert-danger">
-            <h5>❌ Network Error</h5>
+            <h5>❌ Connection Error</h5>
             <p>${error.message}</p>
-            <p class="mb-0"><small>Check console for details</small></p>
+            <p class="mb-0"><small>If using CORS proxy, you may need to request temporary access at <a href="https://cors-anywhere.herokuapp.com/corsdemo" target="_blank">cors-anywhere demo page</a></small></p>
         </div>`;
     } finally {
         // Re-enable submit button
@@ -311,7 +315,7 @@ function generateUniqueId() {
     return `Uid${randomNum}`;
 }
 
-// Add auto-fill for testing (remove in production)
+// Add auto-fill for testing
 function fillTestData() {
     if (window.location.href.includes('formifyweb.com')) {
         document.getElementById('first_name').value = 'John';
@@ -334,7 +338,8 @@ function fillTestData() {
         document.getElementById('project_start').value = '30';
         document.getElementById('jornaya_id').value = '59265254-ACF0-3CE3-B443-20E56A123F00';
         
-        console.log("Test data filled. Note: Last name will be auto-changed to 'pixel' for submission.");
+        console.log("Test data filled with ZIP 99999 for test mode.");
+        console.log("Note: Last name will be auto-changed to 'pixel' during submission.");
     }
 }
 
@@ -342,4 +347,4 @@ function fillTestData() {
 document.addEventListener('DOMContentLoaded', fillTestData);
 
 // Debug: Log when script loads
-console.log("PV Bathroom Lead Form JavaScript loaded successfully");
+console.log("PV Bathroom Lead Form JavaScript loaded successfully - Using CORS proxy");
