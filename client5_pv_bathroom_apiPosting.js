@@ -10,7 +10,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
 
     // Static values
     const sub_id = "dmarketing";
-    const test_lead = "true";
+    const test_lead = "True";
     const unique_id = generateUniqueId();
     const usAgent = getRandomUserAgent();
 
@@ -173,3 +173,4 @@ function generateUniqueId() {
     const randomNum = Math.floor(100 + Math.random() * 900);
     return `Uid${randomNum}`;
 }
+
