@@ -4,27 +4,40 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
     
     // Disable submit button to prevent double submission
     const submitBtn = event.target.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
     submitBtn.disabled = true;
-    submitBtn.innerHTML = 'Processing...';
-    
-    // Generate unique ID for this submission
-    const uniqueId = generateUniqueId();
-    
-    // Call API tester
-    api_tester(document.getElementById('phone').value);
+    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing...';
 
     const form = document.getElementById('leadForm');
     const alertBox = document.getElementById('alertContainer');
-    const usAgent = getRandomUserAgent();
     
-    // Static values as per requirements
-    const STATIC_VALUES = {
-        sub_id: "dmarketing",
-        test_lead: "true",
-        tcpa_statement: "By completing the form, I hereby affirm my acceptance of the Terms and Conditions, CCPA , and Privacy Policy . I grant permission to Remodeling Loans, their contractors, and partners (refer to our partners list) to communicate with me through email, phone, and text messages using the provided contact number. I consent to receiving offers from these entities, even if my contacts are listed on the State and Federal Do Not Call List. I acknowledge that these marketing communications may be transmitted using an automatic telephone dialing system or pre-recorded messages. I understand that my consent is not a prerequisite for making a purchase and that I retain the right to revoke it at any time. This declaration includes compliance with the California Notice."
-    };
+    // Validate required fields
+    const requiredFields = ['first_name', 'last_name', 'email', 'phone', 'city', 'state', 'zip_code', 
+                           'street_address', 'client_ip_address', 'project_type', 'home_type', 
+                           'remodel_type', 'property_type', 'project_start', 'website_url', 'trusted_form_cert_url'];
+    
+    for (const fieldId of requiredFields) {
+        const field = document.getElementById(fieldId);
+        if (!field.value.trim()) {
+            alertBox.innerHTML = `<div class="alert alert-danger">❌ Please fill in all required fields. Missing: ${fieldId.replace('_', ' ')}</div>`;
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+            return;
+        }
+    }
 
     try {
+        // Generate unique ID for this submission
+        const uniqueId = generateUniqueId();
+        const usAgent = getRandomUserAgent();
+        
+        // Static values as per requirements
+        const STATIC_VALUES = {
+            sub_id: "dmarketing",
+            test_lead: "true",
+            tcpa_statement: "By completing the form, I hereby affirm my acceptance of the Terms and Conditions, CCPA , and Privacy Policy . I grant permission to Remodeling Loans, their contractors, and partners (refer to our partners list) to communicate with me through email, phone, and text messages using the provided contact number. I consent to receiving offers from these entities, even if my contacts are listed on the State and Federal Do Not Call List. I acknowledge that these marketing communications may be transmitted using an automatic telephone dialing system or pre-recorded messages. I understand that my consent is not a prerequisite for making a purchase and that I retain the right to revoke it at any time. This declaration includes compliance with the California Notice."
+        };
+
         // Show loading
         alertBox.innerHTML = `<div class="alert alert-info">⏳ Checking lead coverage...</div>`;
 
@@ -49,45 +62,51 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
             remodel_type: form.remodel_type.value
         };
 
-        console.log("Ping Data to send:", pingData);
-        
-        // IMPORTANT: For testing, use ZIP 99999 as per documentation
-        if (pingData.zip_code === "99999") {
-            console.log("Using test ZIP code for acceptance");
-        }
+        console.log("Ping Data prepared");
         
         // Step 1: Ping API using proxy
-        // Use FormData approach for proxy to avoid CORS issues
         const pingProxyUrl = "https://api.formifyweb.com/proxify.php";
         
-        console.log("Sending ping to proxy:", pingProxyUrl);
-        
-        // Create FormData for proxy
-        const pingFormData = new FormData();
-        pingFormData.append('url', 'https://www.clickthesis.com/api/apilead/homeservicesping');
-        pingFormData.append('method', 'POST');
-        pingFormData.append('headers', JSON.stringify({
-            'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
-            'Content-Type': 'application/json'
-        }));
-        pingFormData.append('data', JSON.stringify(pingData));
+        // Create URL parameters for proxy
+        const pingParams = new URLSearchParams({
+            url: 'https://www.clickthesis.com/api/apilead/homeservicesping',
+            method: 'POST',
+            headers: JSON.stringify({
+                'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }),
+            data: JSON.stringify(pingData)
+        });
+
+        alertBox.innerHTML = `<div class="alert alert-info">⏳ Verifying lead eligibility...</div>`;
         
         const pingResponse = await fetch(pingProxyUrl, {
             method: 'POST',
-            body: pingFormData
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: pingParams.toString()
         });
-
-        console.log("Ping response status:", pingResponse.status);
         
         if (!pingResponse.ok) {
-            throw new Error(`Ping failed with status: ${pingResponse.status}`);
+            throw new Error(`Server ping failed with status: ${pingResponse.status}`);
         }
 
         const pingResult = await pingResponse.json();
-        console.log("Ping Result received:", pingResult);
+        console.log("Ping Response received");
         
         if (pingResult.accepted === true) {
-            // Ping accepted - prepare full lead data
+            // Ping accepted - show minimal info
+            alertBox.innerHTML = `
+            <div class="alert alert-success">
+                <h5>✅ Ping Accepted</h5>
+                <p><strong>Status:</strong> Coverage available</p>
+                <p><strong>Ping ID:</strong> ${pingResult.pingId || 'Generated'}</p>
+                <p><strong>Processing:</strong> Submitting full lead...</p>
+            </div>`;
+            
+            // Prepare full lead data
             const leadData = {
                 ping_id: pingResult.pingId,
                 sub_id: STATIC_VALUES.sub_id,
@@ -116,94 +135,94 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
                 remodel_type: form.remodel_type.value
             };
 
-            console.log("Full Lead Data to send:", leadData);
-            
-            alertBox.innerHTML = `<div class="alert alert-info">✅ Coverage Available! Estimated: $${pingResult.bidPrice}. Submitting full lead...</div>`;
+            console.log("Full Lead Data prepared");
             
             // Step 2: Post full lead using proxy
-            // Create FormData for post proxy
-            const postFormData = new FormData();
-            postFormData.append('url', 'https://www.clickthesis.com/api/apilead/homeservices');
-            postFormData.append('method', 'POST');
-            postFormData.append('headers', JSON.stringify({
-                'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
-                'Content-Type': 'application/json'
-            }));
-            postFormData.append('data', JSON.stringify(leadData));
-            
-            console.log("Sending post to proxy...");
+            const postParams = new URLSearchParams({
+                url: 'https://www.clickthesis.com/api/apilead/homeservices',
+                method: 'POST',
+                headers: JSON.stringify({
+                    'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }),
+                data: JSON.stringify(leadData)
+            });
             
             const postResponse = await fetch(pingProxyUrl, {
                 method: 'POST',
-                body: postFormData
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: postParams.toString()
             });
-
-            console.log("Post response status:", postResponse.status);
             
             if (!postResponse.ok) {
-                throw new Error(`Post failed with status: ${postResponse.status}`);
+                throw new Error(`Lead submission failed with status: ${postResponse.status}`);
             }
 
             const leadResult = await postResponse.json();
-            console.log("Lead Result received:", leadResult);
+            console.log("Lead Response received");
             
             if (leadResult.accepted === true) {
-                // Lead sold successfully
+                // Lead sold successfully - show minimal info
                 alertBox.innerHTML = `
                 <div class="alert alert-success">
-                    <h5>✅ Lead Sold Successfully!</h5>
-                    <p><strong>Commission:</strong> $${leadResult.commissionAmount}</p>
-                    <p><strong>Lead ID:</strong> ${leadResult.leadId}</p>
-                    <p><strong>Processing Time:</strong> ${leadResult.processingTime} seconds</p>
+                    <h5>✅ Lead Accepted</h5>
+                    <p><strong>Status:</strong> Successfully processed</p>
+                    <p><strong>Lead ID:</strong> ${leadResult.leadId || 'Generated'}</p>
+                    <p><strong>Result:</strong> Lead has been placed</p>
                     ${leadResult.redirectUrl ? `
-                    <a href="${leadResult.redirectUrl}" target="_blank" class="btn btn-success btn-sm mt-2">
-                        Redirect Consumer Now
-                    </a>
-                    <p class="mt-2 mb-0"><small>Auto-redirecting in 5 seconds...</small></p>
+                    <div class="mt-3">
+                        <p><strong>Next Step:</strong> Consumer will be redirected</p>
+                        <a href="${leadResult.redirectUrl}" target="_blank" class="btn btn-success btn-sm mt-1">
+                            View Redirect URL
+                        </a>
+                    </div>
                     ` : ''}
                 </div>`;
                 
-                // Auto-redirect after 5 seconds if redirect URL exists
+                // Auto-redirect after 3 seconds if redirect URL exists
                 if (leadResult.redirectUrl) {
                     setTimeout(() => {
                         window.location.href = leadResult.redirectUrl;
-                    }, 5000);
+                    }, 3000);
                 }
                 
             } else {
-                // Lead not sold
+                // Lead not sold - minimal error info
                 alertBox.innerHTML = `
                 <div class="alert alert-warning">
-                    <h5>⚠️ Lead Not Sold</h5>
+                    <h5>⚠️ Lead Not Accepted</h5>
+                    <p><strong>Status:</strong> Not placed at this time</p>
                     <p><strong>Lead ID:</strong> ${leadResult.leadId || 'N/A'}</p>
-                    <p><strong>Errors:</strong> ${leadResult.errorMessages ? leadResult.errorMessages.join(', ') : 'No specific errors'}</p>
-                    <p><strong>Processing Time:</strong> ${leadResult.processingTime || 'N/A'} seconds</p>
+                    <p><strong>Note:</strong> Lead may be duplicate or outside coverage area</p>
                 </div>`;
             }
             
         } else {
-            // Ping not accepted
+            // Ping not accepted - minimal error info
             alertBox.innerHTML = `
             <div class="alert alert-danger">
                 <h5>❌ No Coverage Available</h5>
+                <p><strong>Status:</strong> Not eligible for placement</p>
                 <p><strong>Ping ID:</strong> ${pingResult.pingId || 'N/A'}</p>
-                <p><strong>Reason:</strong> ${pingResult.errorMessages ? pingResult.errorMessages.join(', ') : 'No specific reason provided'}</p>
-                <p><strong>Processing Time:</strong> ${pingResult.processingTime || 'N/A'} seconds</p>
+                <p><strong>Reason:</strong> Area or lead type not covered</p>
             </div>`;
         }
         
     } catch (error) {
-        console.error("Full Error:", error);
+        console.error("Submission Error:", error);
         alertBox.innerHTML = `
         <div class="alert alert-danger">
-            <h5>❌ Network Error</h5>
-            <p>${error.message}</p>
-            <p class="mb-0"><small>Check browser console (F12) for more details</small></p>
+            <h5>❌ Submission Error</h5>
+            <p>There was an issue processing your request.</p>
+            <p class="mb-0"><small>Please try again or contact support if the issue persists.</small></p>
         </div>`;
     } finally {
         // Re-enable submit button
         submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Submit Lead';
+        submitBtn.innerHTML = originalBtnText;
     }
 });
 
@@ -246,6 +265,36 @@ function generateUniqueId() {
     const randomNum = Math.floor(100 + Math.random() * 900); // 100-999
     return `Uid${randomNum}`;
 }
+
+// Add auto-fill for testing (remove in production)
+function fillTestData() {
+    if (window.location.href.includes('formifyweb.com')) {
+        document.getElementById('first_name').value = 'John';
+        document.getElementById('last_name').value = 'pixel'; // Use 'pixel' for test acceptance
+        document.getElementById('email').value = 'test@example.com';
+        document.getElementById('phone').value = '4638090973';
+        document.getElementById('city').value = 'Test City';
+        document.getElementById('state').value = 'FL';
+        document.getElementById('zip_code').value = '99999'; // Test ZIP for acceptance
+        document.getElementById('street_address').value = '123 Test St';
+        document.getElementById('client_ip_address').value = '8.8.8.8';
+        document.getElementById('website_url').value = 'https://test.com';
+        document.getElementById('trusted_form_cert_url').value = 'https://cert.trustedform.com/test123';
+        document.getElementById('home_owner').value = 'true';
+        document.getElementById('need_finance').value = 'true';
+        document.getElementById('project_type').value = 'bathroom';
+        document.getElementById('home_type').value = 'single_family';
+        document.getElementById('remodel_type').value = 'bath_to_shower';
+        document.getElementById('property_type').value = 'Residential';
+        document.getElementById('project_start').value = '30';
+        document.getElementById('jornaya_id').value = '59265254-ACF0-3CE3-B443-20E56A123F00';
+        
+        console.log("Test data filled for acceptance testing");
+    }
+}
+
+// Call test data fill on page load
+document.addEventListener('DOMContentLoaded', fillTestData);
 
 // Debug: Log when script loads
 console.log("PV Bathroom Lead Form JavaScript loaded successfully");
