@@ -9,14 +9,13 @@ function pingAPI() {
     api_tester(document.getElementById('caller_id').value);
 
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
-
-
-
-
-
-
-    
-
+    formData.append('first_name', document.getElementById('first_name').value);
+    formData.append('last_name',  document.getElementById('last_name').value);
+    formData.append('email', document.getElementById('email').value);
+    formData.append('address', document.getElementById('address1').value);
+    formData.append('city', document.getElementById('city').value);
+    formData.append('state', document.getElementById('state').value);
+    formData.append('zip', document.getElementById('zip').value);
     
 const originalUrl = 'https://voyant-digital-media-group-inc.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_available_buyers_on_window_wt?' + new URLSearchParams(formData).toString();
     const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
@@ -54,10 +53,13 @@ function postPingId(pingId) {
         traffic_source_id: "1021",
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId,
-	
-      
-  
-		
+	    first_name: document.getElementById('first_name').value,
+        last_name:  document.getElementById('last_name').value,
+        email: document.getElementById('email').value,
+        address: document.getElementById('address1').value,
+        city: document.getElementById('city').value,
+        state: document.getElementById('state').value,
+        zip: document.getElementById('zip').value,
 
     };
 
@@ -111,3 +113,4 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         console.error('Error in api_tester:', error);
     }
 }
+
