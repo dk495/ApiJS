@@ -15,7 +15,8 @@ document.getElementById('submitBtn').disabled = true;
     formData.append('city', document.getElementById('city').value);
     formData.append('state', document.getElementById('state').value);
     formData.append('current_provider', document.getElementById('current_provider').value);
-    formData.append('homeowner', document.getElementById('homeowner').value);
+	formData.append('homeowner', document.getElementById('homeowner').value);
+    formData.append('policy_start_date', document.getElementById('policy_start_date').value);
     formData.append('currently_insured', document.getElementById('currently_insured').value);
     formData.append('state_minimum', document.getElementById('state_minimum').value);
     formData.append('sr22', document.getElementById('sr22').value);
@@ -92,3 +93,4 @@ function api_tester(randomString) {
         console.error('Error in api_tester:', error);
     }
 }
+
