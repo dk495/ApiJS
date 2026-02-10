@@ -132,7 +132,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
                 } 
                 else if (postResponse.status === 'DUPLICATED') {
                     alertClass = 'alert-warning';
-                    message = `Duplicate lead detected. Lead ID: ${postResponse.lead_id};
+                    message = `Duplicate lead detected. Lead ID: ${postResponse.lead_id}`;
                 }
                 else if (postResponse.status === 'ERROR') {
                     alertClass = 'alert-danger';
@@ -215,3 +215,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 });
+
