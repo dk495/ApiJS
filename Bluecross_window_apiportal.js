@@ -81,7 +81,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             formData.append('lp_supplier_id', '103160');
             formData.append('lp_key', 'd6e2tdw6xcjyr2');
             formData.append('lp_ping_id', ping_id);
-            pingData.append('affid', '11219');
+            formData.append('affid', '11219');
             formData.append('first_name', document.getElementById('first_name').value);
             formData.append('last_name', document.getElementById('last_name').value);
             formData.append('phone', document.getElementById('phone').value);
@@ -185,4 +185,5 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         document.getElementById('submitBtn').disabled = false;
     });
 });
+
 
