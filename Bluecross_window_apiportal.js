@@ -120,7 +120,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
                 
                 if (postResponse.status === 'ACCEPTED') {
                     alertClass = 'alert-success';
-                    message = `Lead submitted successfully! Lead ID: ${postResponse.lead_id};
+                    message = `Lead submitted successfully! Lead ID: ${postResponse.lead_id}`;
                     document.getElementById('leadForm').reset();
                 } 
                 else if (postResponse.status === 'DUPLICATED') {
@@ -185,6 +185,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         document.getElementById('submitBtn').disabled = false;
     });
 });
+
 
 
 
