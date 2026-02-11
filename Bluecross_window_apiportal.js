@@ -120,11 +120,11 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
                 
                 let alertClass, message;
                 
-                if (postResponse.status === 'ACCEPTED') {
+                      if (postResponse.status === 'ACCEPTED') {
                     alertClass = 'alert-success';
-                    message = `Lead submitted successfully! Lead ID: ${postResponse.lead_id}`;
+                    message = `Lead submitted successfully! Lead ID: ${postResponse.lead_id}, Payout: $${postResponse.payout}`;
                     document.getElementById('leadForm').reset();
-                } 
+}
                 else if (postResponse.status === 'DUPLICATED') {
                     alertClass = 'alert-warning';
                     message = `Duplicate lead detected. Lead ID: ${postResponse.lead_id}, Message: ${postResponse.message}`;
@@ -187,6 +187,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         document.getElementById('submitBtn').disabled = false;
     });
 });
+
 
 
 
