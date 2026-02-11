@@ -55,6 +55,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     pingData.append('credit_rating', document.getElementById('credit_rating').value);
     pingData.append('work_type', document.getElementById('work_type').value);
     pingData.append('num_windows', document.getElementById('num_windows').value);
+    pingData.append('window_material', document.getElementById('window_material').value);
     pingData.append('time_frame', document.getElementById('time_frame').value);
     
    
@@ -99,6 +100,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             formData.append('credit_rating', document.getElementById('credit_rating').value);
             formData.append('work_type', document.getElementById('work_type').value);
             formData.append('num_windows', document.getElementById('num_windows').value);
+            formData.append('window_material', document.getElementById('window_material').value);
             formData.append('time_frame', document.getElementById('time_frame').value);
             formData.append('property_type', document.getElementById('property_type').value);
             
@@ -185,6 +187,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         document.getElementById('submitBtn').disabled = false;
     });
 });
+
 
 
 
