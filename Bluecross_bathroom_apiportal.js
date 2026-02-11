@@ -93,7 +93,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             
             // Address Information
             formData.append('address', document.getElementById('address').value);
-            formData.append('address2', document.getElementById('address2').value);
+            
             formData.append('city', document.getElementById('city').value);
             formData.append('state', document.getElementById('state').value);
             formData.append('zip_code', document.getElementById('zip_code').value);
@@ -216,4 +216,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 });
+
 
