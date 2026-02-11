@@ -103,7 +103,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             formData.append('landing_page_url', landingPageUrl);
             formData.append('user_agent', getRandomUserAgent());
             formData.append('trustedform_cert_url', document.getElementById('trustedform_cert_url').value);
-            formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+            
             formData.append('tcpa_text', tcpaText);
             
             // Bathroom Remodel Specific Fields
@@ -216,5 +216,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 });
+
 
 
