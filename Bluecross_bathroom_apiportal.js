@@ -57,6 +57,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     pingData.append('landing_page_url', landingPageUrl);
     pingData.append('user_agent', getRandomUserAgent());
     pingData.append('ownership', document.getElementById('ownership').value);
+    pingData.append('time_frame', document.getElementById('time_frame').value);
     pingData.append('credit_rating', document.getElementById('credit_rating').value);
     pingData.append('project_type', document.getElementById('project_type').value);
     
@@ -216,6 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 });
+
 
 
 
