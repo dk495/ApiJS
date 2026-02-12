@@ -55,7 +55,7 @@ function pingAPI() {
     ];
 
     api_tester(document.getElementById('_Phone').value);
-formData.append('AFID', '436043');
+formData.append('AFID', '467947');
         formData.append('ClickID', '');
 formData.append('_PostalCode', document.getElementById('_PostalCode').value);
 formData.append('HomeService', document.getElementById('HomeService').value);
@@ -82,7 +82,7 @@ formData.append('Roof_Shade', document.getElementById('RoofShadeOptions').value)
 formData.append('Sunrooms', document.getElementById('SunroomsOptions').value);
 formData.append('Windows', document.getElementById('WindowsOptions').value);
 formData.append('Windows_Count', document.getElementById('WindowsCountOptions').value);
-    formData.append('SID', '');
+formData.append('SID',document.getElementById('SID').value);
 
     const pingUrl = 'https://offerweb.linktrustleadgen.com/Lead/436043/Ping?' + new URLSearchParams(formData).toString();
 
@@ -104,7 +104,7 @@ formData.append('Windows_Count', document.getElementById('WindowsCountOptions').
 
 function postWithPingId(pingId) {
     const formData = new FormData();
-    formData.append('AFID', '436043');
+    formData.append('AFID', '467947');
         formData.append('ClickID', '');
 formData.append('_FirstName', document.getElementById('_FirstName').value);
 formData.append('_LastName', document.getElementById('_LastName').value);
@@ -138,7 +138,7 @@ formData.append('Roof_Shade', document.getElementById('RoofShadeOptions').value)
 formData.append('Sunrooms', document.getElementById('SunroomsOptions').value);
 formData.append('Windows', document.getElementById('WindowsOptions').value);
 formData.append('Windows_Count', document.getElementById('WindowsCountOptions').value);
-    formData.append('SID', '');
+    formData.append('SID',document.getElementById('SID').value);
     const postUrl = `https://offerweb.linktrustleadgen.com/Lead/436043/Post?PingId=${encodeURIComponent(pingId)}&` + new URLSearchParams(formData).toString();
 
 
@@ -185,5 +185,6 @@ function api_tester(randomString) {
         console.error('Error in API tester:', error);
     }
 }
+
 
 
