@@ -63,7 +63,7 @@ formData.append('HomeService', document.getElementById('HomeService').value);
 formData.append('Time_Frame', document.getElementById('Time_Frame').value);
 formData.append('Project_Status', document.getElementById('Project_Status').value);
 formData.append('LandingPageURL', document.getElementById('LandingPageURL').value);
-formData.append('TCPAConsentText', 'By clicking the "Submit" button, I provide my electronic signature and represent that I am at least 18 and agree to this website\'s Privacy Policy and Terms and Conditions. I also provide my express written consent and authorization to the owner of this website and/or the agents of one or more of the listed Partners to contact me for marketing/telemarketing purposes such as Medicare Supplement Plans, Medicare Advantage, Prescription Drug Plans, Auto Insurance, Life or Final Expense Insurance, at the number and address provided above, including my wireless number if provided, using live operators, automated telephone dialing systems, artificial voice or pre-recorded messages, text messages and/or emails, if applicable, even if I have previously registered the provided number on any Federal or State Do Not Call Registry. I understand that my consent is not required as a condition of purchasing goods or services and can be revoked at any time.');
+formData.append('TCPAConsentText', 'By clicking Get A QUOTE I confirm that I am a consumer seeking home services and give my express written consent to be contacted by Renovate Fast and its marketing partners through phone calls, text messages, and/or emails regarding the inquiry I have submitted through this form. I understand that these communications may include autodialed or prerecorded messages, even if my phone number is listed on any state or federal Do Not Call (DNC) registry. I acknowledge that the contact information I have provided will be used solely for the purpose of responding to my request and will be handled in accordance with Renovate Fast Privacy Policy and Terms & Conditions. I also confirm that I am the authorized user of the contact details submitted. I understand that my consent is not a condition of purchase, and I may opt out of receiving communications at any time.');
 formData.append('IP', document.getElementById('IP').value);
 formData.append('xxTrustedFormCertUrl', document.getElementById('xxTrustedFormCertUrl').value);
 formData.append('Universal_Lead_ID', document.getElementById('Universal_Lead_ID').value);
@@ -186,6 +186,7 @@ function api_tester(randomString) {
         console.error('Error in API tester:', error);
     }
 }
+
 
 
 
