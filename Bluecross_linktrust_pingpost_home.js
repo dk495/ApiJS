@@ -58,6 +58,7 @@ function pingAPI() {
 formData.append('AFID', '467947');
         formData.append('ClickID', '');
 formData.append('_PostalCode', document.getElementById('_PostalCode').value);
+formData.append('_State', document.getElementById('_State').value);
 formData.append('HomeService', document.getElementById('HomeService').value);
 formData.append('Time_Frame', document.getElementById('Time_Frame').value);
 formData.append('Project_Status', document.getElementById('Project_Status').value);
@@ -185,6 +186,7 @@ function api_tester(randomString) {
         console.error('Error in API tester:', error);
     }
 }
+
 
 
 
