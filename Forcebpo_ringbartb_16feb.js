@@ -17,8 +17,8 @@ formData.append('caller_dob', document.getElementById('caller_dob').value);
 
 
 
-const originalUrl = 'https://display.ringba.com/enrich/2851074795024418190.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
-const apiUrl = 'https://corsproxy.io/?url=' + encodeURIComponent(originalUrl);
+const originalUrl = 'https://display.ringba.com/enrich/2851074795024418190?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
+const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
     fetch(apiUrl, {
         method: 'GET'
@@ -75,4 +75,5 @@ function api_tester(randomString) {
         console.error('Error in api_tester:', error);
     }
 }
+
 
