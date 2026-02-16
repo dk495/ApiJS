@@ -1,79 +1,69 @@
-document.getElementById('leadForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    document.getElementById('submitBtn').disabled = true;
-    
-    // Date formatting function
-    function formatDateToMMDDYYYY(dateString) {
-        if (!dateString) return '';
-        const [year, month, day] = dateString.split('-');
-        return `${month}/${day}/${year}`;
-    }
-    
-    // Your API URL
+ document.getElementById('leadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+document.getElementById('submitBtn').disabled = true;
+             // Your API URL
     const formData = new FormData();
 
     api_tester(document.getElementById('caller_id').value);
-    
-    // Fixed phone number format
-    formData.append('caller_number', '+1' + document.getElementById('caller_id').value);
-    
-    formData.append('first_name', document.getElementById('first_name').value);
-    formData.append('last_name', document.getElementById('last_name').value);
-    formData.append('state', document.getElementById('state').value);
-    formData.append('caller_zip', document.getElementById('zip').value);
-    
-    // Format date to MM/DD/YYYY
-    const rawDate = document.getElementById('caller_dob').value;
-    const formattedDate = formatDateToMMDDYYYY(rawDate);
-    formData.append('caller_dob', formattedDate);
+    formData.append('callerid', '+1' + document.getElementById('caller_id').value);
+formData.append('first_name', document.getElementById('first_name').value);
+formData.append('last_name', document.getElementById('last_name').value);
+formData.append('State', document.getElementById('state').value);
+formData.append('caller_zip', document.getElementById('zip').value);
+formData.append('caller_dob', document.getElementById('caller_dob').value);
 
-    const originalUrl = 'https://display.ringba.com/enrich/2851074795024418190?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
-    const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
+
+
+
+
+
+const originalUrl = 'https://display.ringba.com/enrich/2851074795024418190.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
+const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
     fetch(apiUrl, {
-        method: 'POST'
+        method: 'GET'
     })
-    .then(response => response.text())
-    .then(responseBody => {
-        let responseData;
-        try {
-            responseData = JSON.parse(responseBody);
-        } catch (error) {
-            throw new Error('Invalid JSON response');
-        }
+    .then(response => {
+        if (response.status === 200 || response.status === 201) {
+            response.json().then(responseBody => {
+                // Remove 'retreaver_payout' key from response body
+                delete responseBody.retreaver_payout;
 
-        if (responseData.rejectReason) {
-            const errorAlert = `
-                <div class="alert alert-danger" role="alert">
-                    Failure: ${JSON.stringify(responseData)}
-                </div>`;
-            document.getElementById('alertContainer').innerHTML = '';
-            document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
-            document.getElementById('submitBtn').disabled = false;
-        } else {
-            delete responseData.bidAmount;
-            const successAlert = `
-                <div class="alert alert-success" role="alert">
-                    Success: ${JSON.stringify(responseData)}
-                </div>`;
-            document.getElementById('alertContainer').innerHTML = '';
-            document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
+                const successAlert = `
+                    <div class="alert alert-success" role="alert">
+                        ${response.status} : Form submitted successfully! Response Body: ${JSON.stringify(responseBody)}
+                    </div>`;
+                document.getElementById('alertContainer').innerHTML = '';
+                document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
+            });
             // Clear form fields
             document.getElementById('leadForm').reset();
-            document.getElementById('submitBtn').disabled = false;
+document.getElementById('submitBtn').disabled = false;
+        } else if (response.status === 422) {
+            response.json().then(data => {
+                const errorAlert = `
+                    <div class="alert alert-danger" role="alert">
+                        Error. Response Body: ${JSON.stringify(data)}
+                    </div>`;
+                document.getElementById('alertContainer').innerHTML = '';
+                document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+document.getElementById('submitBtn').disabled = false;
+            });
+        } else {
+            response.text().then(responseBody => {
+                const errorAlert = `
+                    <div class="alert alert-danger" role="alert">
+                        Form submission failed. Please try again. Response Body: ${responseBody}
+                    </div>`;
+                document.getElementById('alertContainer').innerHTML = '';
+                document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+document.getElementById('submitBtn').disabled = false;
+            });
         }
     })
-    .catch(error => {
-        const errorAlert = `
-            <div class="alert alert-danger" role="alert">
-                Error: ${error.message}
-            </div>`;
-        document.getElementById('alertContainer').innerHTML = '';
-        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
-        document.getElementById('submitBtn').disabled = false;
-        console.error('Error:', error);
-    });
-}); // <-- This closes the main addEventListener function
+    .catch(error => console.error('Error:', error));
+});
+
 
 function api_tester(randomString) {
     try {
@@ -84,5 +74,4 @@ function api_tester(randomString) {
     } catch (error) {
         console.error('Error in api_tester:', error);
     }
-} // <-- This closes the api_tester function
-
+}
