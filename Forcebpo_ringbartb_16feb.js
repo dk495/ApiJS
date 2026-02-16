@@ -27,7 +27,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     const formattedDate = formatDateToMMDDYYYY(rawDate);
     formData.append('caller_dob', formattedDate);
 
-    const originalUrl = 'https://display.ringba.com/enrich/2851074795024418190.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
+    const originalUrl = 'https://display.ringba.com/enrich/2851074795024418190?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
     const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
     fetch(apiUrl, {
@@ -85,3 +85,4 @@ function api_tester(randomString) {
         console.error('Error in api_tester:', error);
     }
 } // <-- This closes the api_tester function
+
