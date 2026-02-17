@@ -1,13 +1,10 @@
 document.getElementById('leadForm').addEventListener('submit', function(event) {
     event.preventDefault();
-
-
-    const phone_home = '1' + document.getElementById('caller_id').value;
     const formData = new FormData();
 
 formData.append('key', '44cb02d2-3aed-4c4e-b393-4860f46761a1');
 formData.append('publisher_id', '456');
-formData.append('caller_number', phone_home);
+formData.append('caller_number', document.getElementById('caller_id').value);
 formData.append('first_name', document.getElementById('first_name').value);
 formData.append('last_name', document.getElementById('last_name').value);
 formData.append('state', document.getElementById('state').value);
@@ -71,3 +68,4 @@ const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponen
         console.error('Error in api_tester:', error);
     }
 }
+
