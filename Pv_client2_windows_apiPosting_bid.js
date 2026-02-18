@@ -69,7 +69,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
   fetch(pingUrl, {
     method: 'POST',
     headers: {
-      'Authorization': 'Token 48a59882-8814-4e86-958e-11035aa77ce8',
+      'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     },
@@ -86,7 +86,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
       return fetch(postUrl, {
         method: 'POST',
         headers: {
-          'Authorization': 'Token 48a59882-8814-4e86-958e-11035aa77ce8',
+          'x-api-key': 'a4025f8c-3e5f-438a-a2eb-ca391c650c96',
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
