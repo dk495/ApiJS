@@ -4,7 +4,7 @@
     const formData = new FormData();
 
 formData.append('CallerId', document.getElementById('caller_id').value);
-formData.append('InbloundStateCode', document.getElementById('state').value);
+formData.append('InboundStateCode', document.getElementById('state').value);
 formData.append('InboundZipCode', document.getElementById('zip').value);
 
 
@@ -54,6 +54,7 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
     })
     .catch(error => console.error('Error:', error));
 });
+
 
 
 
