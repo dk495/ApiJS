@@ -1,4 +1,4 @@
- ddocument.getElementById('leadForm').addEventListener('submit', function(event) {
+ document.getElementById('leadForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
     const formData = new FormData();
@@ -54,5 +54,6 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
     })
     .catch(error => console.error('Error:', error));
 });
+
 
 
