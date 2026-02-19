@@ -10,7 +10,7 @@ formData.append('InboundZipCode', document.getElementById('zip').value);
 
 
 
-const originalUrl = 'https://bid.callgrid.com/api/bid/cmk2uqzxf01du06k08ah98qtx?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
+const originalUrl = 'https://bid.callgrid.com/api/bid/cmk2uqzxf01du06k08ah98qtx?' + new URLSearchParams(formData).toString();
 const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
     fetch(url, {
@@ -54,6 +54,7 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
     })
     .catch(error => console.error('Error:', error));
 });
+
 
 
 
