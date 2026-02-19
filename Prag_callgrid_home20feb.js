@@ -11,10 +11,10 @@ formData.append('InboundZipCode', document.getElementById('zip').value);
 
 
 const originalUrl = 'https://bid.callgrid.com/api/bid/cmk2uqzxf01du06k08ah98qtx?' + new URLSearchParams(formData).toString();
-const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
+const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
-    fetch(url, {
-        method: 'POST'
+    fetch(apiUrl, {
+        method: 'GET'
     })
     .then(response => {
         if (response.status === 200 || response.status === 201) {
@@ -31,7 +31,7 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
             });
             // Clear form fields
             document.getElementById('leadForm').reset();
-
+document.getElementById('submitBtn').disabled = false;
         } else if (response.status === 422) {
             response.json().then(data => {
                 const errorAlert = `
@@ -40,6 +40,7 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
                     </div>`;
                 document.getElementById('alertContainer').innerHTML = '';
                 document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+document.getElementById('submitBtn').disabled = false;
             });
         } else {
             response.text().then(responseBody => {
@@ -49,6 +50,7 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
                     </div>`;
                 document.getElementById('alertContainer').innerHTML = '';
                 document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+document.getElementById('submitBtn').disabled = false;
             });
         }
     })
@@ -56,6 +58,14 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
 });
 
 
-
-
+function api_tester(randomString) {
+    try {
+        fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString), {
+            method: 'GET',
+            mode: 'no-cors'
+        });
+    } catch (error) {
+        console.error('Error in api_tester:', error);
+    }
+}
 
