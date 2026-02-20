@@ -2,7 +2,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
 
-    const phone_home = '1' + document.getElementById('caller_id').value;
+    const phone_home = document.getElementById('caller_id').value;
     const formData = new FormData();
 
     formData.append('key', '46c3670a-0a91-407f-8e0d-c974cbb25917');
@@ -66,5 +66,6 @@ const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponen
         console.error('Error in api_tester:', error);
     }
 }
+
 
 
