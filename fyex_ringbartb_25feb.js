@@ -13,7 +13,7 @@ formData.append('zipcode', document.getElementById('zip').value);
 
 
 
-const originalUrl = 'https://rtb.ringba.com/v1/production/fa1de8e091a1424ebd129e4b0adeef5d.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
+const originalUrl = 'https://rtb.ringba.com/v1/production/ff4795d75407490dbbf38fe90405f2ef.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
 const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
     fetch(apiUrl, {
@@ -71,3 +71,4 @@ function api_tester(randomString) {
         console.error('Error in api_tester:', error);
     }
 }
+
