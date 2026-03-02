@@ -12,6 +12,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('FirstName', document.getElementById('first_name').value); 
     formData.append('LastName', document.getElementById('last_name').value);
     formData.append('Email', document.getElementById('email').value); 
+    formData.append('caller_zip', document.getElementById('zip').value);
     formData.append('trustedformurl', document.getElementById('trusted_form').value);
     
    
@@ -69,5 +70,6 @@ const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponen
         console.error('Error in api_tester:', error);
     }
 }
+
 
 
