@@ -9,15 +9,9 @@ function pingAPI() {
     api_tester(document.getElementById('caller_id').value);
 
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
+    formData.append('zip', document.getElementById('zip').value);
 
 
-
-
-
-
-    
-
-    
 const originalUrl = 'https://voyant-digital-media-group-inc.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_available_buyers_on_window_wt?' + new URLSearchParams(formData).toString();
     const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
@@ -54,7 +48,7 @@ function postPingId(pingId) {
         traffic_source_id: "1021",
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId,
-	
+	     zip: document.getElementById('zip').value,
       
   
 		
@@ -111,3 +105,4 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         console.error('Error in api_tester:', error);
     }
 }
+
