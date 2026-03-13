@@ -43,8 +43,9 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             postData.append('email', document.getElementById('email').value);
             postData.append('phone', document.getElementById('caller_id').value.replace(/\D/g, ''));
             postData.append('dob', document.getElementById('dob').value);
+            postData.append('gender', document.getElementById('gender').value);
             postData.append('state', document.getElementById('state').value);
-
+            
             // POST URL
             const postUrl = 'https://msb.tldcrm.com/post?vendor_id=33445&post_key=f34308c88e73b545f2424b4db0d6e660';
             const proxyPostUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(postUrl);
