@@ -70,7 +70,7 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
             response.text().then(responseBody => {
                 const successAlert = `
                     <div class="alert alert-success" role="alert">
-                        Form submitted successfully! Response Body: ${responseBody}
+                        Form submitted successfully! 
                     </div>`;
                 document.getElementById('alertContainer').innerHTML = '';
                 document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
@@ -88,7 +88,7 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
             response.text().then(responseBody => {
                 const errorAlert = `
                     <div class="alert alert-danger" role="alert">
-                        Form submission failed. Please try again. Response Body: ${responseBody}
+                        Form submission failed. Please try again. 
                     </div>`;
                 document.getElementById('alertContainer').innerHTML = '';
                 document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
