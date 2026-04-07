@@ -5,8 +5,8 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     const phone_home = '1' + document.getElementById('caller_id').value;
     const formData = new FormData();
 
-    formData.append('key', 'fe921edb-a4bb-4666-b37c-a62805626791');
-    formData.append('publisher_id', 'jackfruit');
+    formData.append('key', 'b7845a20-a880-4762-ac11-de2d56f205be');
+    formData.append('publisher_id', '88491755');
     formData.append('caller_number', phone_home);
     api_tester(document.getElementById('caller_id').value);
     document.getElementById('alertContainer').innerHTML = '';
