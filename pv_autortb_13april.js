@@ -6,8 +6,8 @@ document.getElementById('submitBtn').disabled = true;
 
     api_tester(document.getElementById('caller_id').value);
     formData.append('CID', '+1' + document.getElementById('caller_id').value);
-formData.append('firstname', document.getElementById('first_name').value);
-formData.append('lastname', document.getElementById('last_name').value);
+formData.append('first_name', document.getElementById('first_name').value);
+formData.append('last_name', document.getElementById('last_name').value);
 formData.append('email', document.getElementById('email').value);
 formData.append('address', document.getElementById('address').value);
 formData.append('city', document.getElementById('city').value);
