@@ -4,7 +4,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     // Get values and validate
     let phoneNumber = document.getElementById('caller_id').value;
     const zipCode = document.getElementById('zip').value;
-    
+    const category = document.getElementById('category').value;
     // Remove any non-digit characters from phone
     phoneNumber = phoneNumber.replace(/\D/g, '');
     
@@ -34,7 +34,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     
     // Build correct Soleo URL (NOT .json extension, no exposeCallerId)
     // According to Soleo spec: https://api.soleo.com/expresscall?Parameter=Value
-    const soleoUrl = `https://trialapi.soleo.com/expresscall?APIKey=${apiKey}&PostalCode=${zipCode}&ANI=${ani}`;
+    const soleoUrl = `https://trialapi.soleo.com/expresscall?category=${category}&PostalCode=${zipCode}&ANI=${ani}&APIKey=${apiKey}`;
     
     console.log('Soleo Request URL:', soleoUrl);
     
