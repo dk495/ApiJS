@@ -34,7 +34,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     
     // Build correct Soleo URL (NOT .json extension, no exposeCallerId)
     // According to Soleo spec: https://api.soleo.com/expresscall?Parameter=Value
-    const soleoUrl = `https://api.soleo.com/expresscall?APIKey=${apiKey}&PostalCode=${zipCode}&ANI=${ani}`;
+    const soleoUrl = `https://trialapi.soleo.com/expresscall?APIKey=${apiKey}&PostalCode=${zipCode}&ANI=${ani}`;
     
     console.log('Soleo Request URL:', soleoUrl);
     
@@ -116,17 +116,13 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         api_tester(phoneNumber);
     })
     .catch(error => {
-        console.error('Error:', error);
         const errorAlert = `
             <div class="alert alert-danger" role="alert">
-                <strong>Error:</strong> ${error.message}<br><br>
-                <small>Possible issues:<br>
-                - Check your API key is valid<br>
-                - Ensure the proxy server is working<br>
-                - Verify the zip code has sponsored listings<br>
-                - Try using trialapi.soleo.com for testing</small>
+                Error: ${error.message}
             </div>`;
-        document.getElementById('alertContainer').innerHTML = errorAlert;
+        document.getElementById('alertContainer').innerHTML = '';
+        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+        console.error('Error:', error);
     });
 });
 
