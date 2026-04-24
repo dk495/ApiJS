@@ -34,7 +34,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     
     // Build correct Soleo URL (NOT .json extension, no exposeCallerId)
     // According to Soleo spec: https://api.soleo.com/expresscall?Parameter=Value
-    const soleoUrl = `https://trialapi.soleo.com/expresscall?Category=${category}&PostalCode=${zipCode}&ANI=${ani}&APIKey=${apiKey}`;
+    const soleoUrl = `https://api.soleo.com/expresscall/?Category=${category}&PostalCode=${zipCode}&ANI=${ani}&APIKey=${apiKey}`;
     
     console.log('Soleo Request URL:', soleoUrl);
     
