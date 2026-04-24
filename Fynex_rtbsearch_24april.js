@@ -13,7 +13,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     document.getElementById('alertContainer').innerHTML = '';
  
 
-    const url = 'https://api.soleo.com/expresscall/??exposeCallerId=yes&' + new URLSearchParams(formData).toString();
+    const url = 'https://api.soleo.com/expresscall.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
 const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(url);
     fetch(apiUrl, {
         method: 'POST'
