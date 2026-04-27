@@ -30,7 +30,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     
     // Format phone with '1' prefix for ANI (per Soleo spec)
     const ani = '1' + phoneNumber;
-    const apiKey = 'sp9q7fvjns5abbhh7dy2b6d9';
+    const apiKey = 'w8anbd4dkg54qqk22d8jb9zk';
     
     // Build correct Soleo URL (NOT .json extension, no exposeCallerId)
     // According to Soleo spec: https://api.soleo.com/expresscall?Parameter=Value
