@@ -17,7 +17,7 @@
 	formData.append('jornaya_leadid', document.getElementById('Jornaya_lead_id').value);
            
     
-            const url = 'https://ggc.trackdrive.com/api/v1/leads/capture?' + new URLSearchParams(formData).toString();
+            const url = 'https://assured-health.trackdrive.com/api/v1/leads/capture?' + new URLSearchParams(formData).toString();
     
             fetch(url, {
                 method: 'POST'
