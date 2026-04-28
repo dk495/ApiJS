@@ -4,11 +4,21 @@ function pingAPI() {
 
     // Your API URL
     const formData = new FormData();
-    formData.append('trackdrive_number', '+18772443363');
+    formData.append('trackdrive_number', '+18775848172');
     formData.append('traffic_source_id', '1021');
     api_tester(document.getElementById('caller_id').value);
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
     formData.append('zip', document.getElementById('zip').value);
+	formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
+    formData.append('first_name', document.getElementById('first_name').value);
+    formData.append('last_name',  document.getElementById('last_name').value);
+    formData.append('email', document.getElementById('email').value);
+    formData.append('address', document.getElementById('address1').value);
+    formData.append('city', document.getElementById('city').value);
+    formData.append('state', document.getElementById('state').value);
+    formData.append('zip', document.getElementById('zip').value);
+	formData.append('call_type', 'blind_transfer');
+
 
     
 const originalUrl = 'https://voyant-digital-media-group-inc.trackdrive.com/api/v1/inbound_webhooks/ping/check_agents_on_roofing?' + new URLSearchParams(formData).toString();
@@ -43,11 +53,20 @@ const originalUrl = 'https://voyant-digital-media-group-inc.trackdrive.com/api/v
 
 function postPingId(pingId) {
     const postData = {
-        trackdrive_number: "+18772443363",
+        trackdrive_number: "+18775848172",
         traffic_source_id: "1021",
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId,
 	    zip: document.getElementById('zip').value,
+		first_name: document.getElementById('first_name').value,
+        last_name:  document.getElementById('last_name').value,
+        email: document.getElementById('email').value,
+        address: document.getElementById('address1').value,
+        city: document.getElementById('city').value,
+        state: document.getElementById('state').value,
+        zip: document.getElementById('zip').value,
+		call_type: "blind_transfer",
+
 		
 
     };
