@@ -7,8 +7,6 @@ function pingAPI() {
     formData.append('trackdrive_number', '+18775848172');
     formData.append('traffic_source_id', '1021');
     api_tester(document.getElementById('caller_id').value);
-    formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
-    formData.append('zip', document.getElementById('zip').value);
 	formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
     formData.append('first_name', document.getElementById('first_name').value);
     formData.append('last_name',  document.getElementById('last_name').value);
@@ -57,7 +55,6 @@ function postPingId(pingId) {
         traffic_source_id: "1021",
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId,
-	    zip: document.getElementById('zip').value,
 		first_name: document.getElementById('first_name').value,
         last_name:  document.getElementById('last_name').value,
         email: document.getElementById('email').value,
