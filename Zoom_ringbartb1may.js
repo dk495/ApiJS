@@ -9,7 +9,7 @@ document.getElementById('submitBtn').disabled = true;
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
     formData.append('zipcode', document.getElementById('zip').value);
     formData.append('state', document.getElementById('state').value);
-    formData.append('residenceStatus', document.getElementById('residenceStatus').value);
+    formData.append('residence_status', document.getElementById('residence_status').value);
     formData.append('currently_insured', document.getElementById('currently_insured').value);
 
 
