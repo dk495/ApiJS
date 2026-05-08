@@ -17,7 +17,7 @@ formData.append('caller_dob', document.getElementById('caller_dob').value);
 
 
 
-const originalUrl = 'https://display.ringba.com/enrich/2954679024187606214.json?' + new URLSearchParams(formData).toString();
+const originalUrl = 'https://display.ringba.com/enrich/2954679024187606214?' + new URLSearchParams(formData).toString();
 const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
     fetch(apiUrl, {
