@@ -6,7 +6,7 @@ document.getElementById('submitBtn').disabled = true;
 
     api_tester(document.getElementById('caller_id').value);
     formData.append('CID', '+1' + document.getElementById('caller_id').value);
-
+    formData.append('zipcode', document.getElementById('zip').value);
 
 
 
