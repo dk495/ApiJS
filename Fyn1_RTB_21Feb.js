@@ -17,7 +17,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     const url = 'https://rtb.retreaver.com/rtbs.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
 const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(url);
     fetch(apiUrl, {
-        method: 'POST'
+       
     })
     .then(response => response.text())
     .then(responseBody => {
