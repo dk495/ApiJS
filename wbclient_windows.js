@@ -16,6 +16,7 @@ function pingAPI() {
     formData.append('city', document.getElementById('city').value);
     formData.append('state', document.getElementById('state').value);
     formData.append('zip', document.getElementById('zip').value);
+	formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
 	formData.append('call_type', 'warm_transfer');
     
 const originalUrl = 'https://voyant-digital-media-group-inc.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_available_buyers_on_window_wt?' + new URLSearchParams(formData).toString();
@@ -61,6 +62,7 @@ function postPingId(pingId) {
         city: document.getElementById('city').value,
         state: document.getElementById('state').value,
         zip: document.getElementById('zip').value,
+		trusted_form_cert_url: document.getElementById('trusted_form_cert_url').value,
 		call_type: "warm_transfer",
 
     };
