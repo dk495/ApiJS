@@ -9,7 +9,27 @@ document.getElementById('submitBtn').disabled = true;
     formData.append('zipcode', document.getElementById('zip').value);
     formData.append('caller_state', document.getElementById('state').value);
     formData.append('caller_zip', document.getElementById('zip').value);
-    formData.append('dob', document.getElementById('caller_dob').value);
+
+    const dobRaw = document.getElementById('caller_dob').value;
+
+if (!dobRaw) {
+    alert("Please select DOB");
+    document.getElementById('submitBtn').disabled = false;
+    return;
+}
+
+// Convert YYYY-MM-DD → MM/DD/YYYY
+const dateObj = new Date(dobRaw);
+
+const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+const day = String(dateObj.getDate()).padStart(2, '0');
+const year = dateObj.getFullYear();
+
+const formattedDOB = `${month}/${day}/${year}`;
+
+formData.append('dob', formattedDOB);
+
+  
     formData.append('subid', 'yes');
 
 
