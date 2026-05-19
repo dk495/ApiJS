@@ -7,9 +7,10 @@ document.getElementById('submitBtn').disabled = true;
     api_tester(document.getElementById('caller_id').value);
     formData.append('CID', '+1' + document.getElementById('caller_id').value);
     formData.append('zipcode', document.getElementById('zip').value);
+    formData.append('caller_state', document.getElementById('state').value);
+    formData.append('caller_zip', document.getElementById('zip').value);
+    formData.append('dob', document.getElementById('caller_dob').value);
     formData.append('subid', 'yes');
-
-
 
 
 
