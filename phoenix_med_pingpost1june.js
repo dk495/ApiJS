@@ -11,7 +11,7 @@ function pingAPI() {
 
 
     
-const originalUrl = 'https://elite-calls-com.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_medicare_transfer_available_agents?' + new URLSearchParams(formData).toString();
+const originalUrl = 'https://advance-grow-marketing.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_med_tr_buyers?' + new URLSearchParams(formData).toString();
     const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
 
@@ -52,7 +52,7 @@ function postPingId(pingId) {
 
     };
 
-    const originalUrl = 'https://elite-calls-com.trackdrive.com/api/v1/inbound_webhooks/post/check_for_medicare_transfer_available_agents?' + new URLSearchParams(postData).toString();;
+    const originalUrl = 'https://advance-grow-marketing.trackdrive.com/api/v1/inbound_webhooks/post/check_for_med_tr_buyers?' + new URLSearchParams(postData).toString();;
 const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
     fetch(url)
     .then(response => {
