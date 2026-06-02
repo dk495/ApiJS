@@ -1,40 +1,51 @@
+function sanitizeApiResponse(data) {
+    // Create a deep copy to avoid mutating original response
+    const sanitizedData = JSON.parse(JSON.stringify(data));
+    
+    // Remove offer_conversion_payout from buyers array
+    if (sanitizedData.try_all_buyers && sanitizedData.try_all_buyers.buyers) {
+        sanitizedData.try_all_buyers.buyers = sanitizedData.try_all_buyers.buyers.map(buyer => {
+            delete buyer.offer_conversion_payout;
+            return buyer;
+        });
+    }
+    
+    return sanitizedData;
+}
+
 function pingAPI() {
     // Disable submit button
     document.getElementById('submitBtn').disabled = true;
 
-    // Your API URL
     const formData = new FormData();
     formData.append('trackdrive_number', '+18443851910');
     formData.append('traffic_source_id', '10014');
     api_tester(document.getElementById('caller_id').value);
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
 
-
-    
-const originalUrl = 'https://advance-grow-marketing.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_med_tr_buyers?' + new URLSearchParams(formData).toString();
+    const originalUrl = 'https://advance-grow-marketing.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_med_tr_buyers?' + new URLSearchParams(formData).toString();
     const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
-
-    // Fetch data from the API
-   fetch(apiUrl)
+    fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            // Check if ping was successful
             if (data.success) {
-                // Extract ping_id
                 const pingId = data.try_all_buyers.ping_id;
-
-                // Proceed with POST request using ping_id
+                
+                // Sanitize the response data (remove sensitive info)
+                const sanitizedData = sanitizeApiResponse(data);
+                
+                // Display sanitized data if needed
+                console.log('Sanitized Response:', sanitizedData);
+                
                 postPingId(pingId);
             } else {
-                // Display error message
                 document.getElementById("apiResponse").innerHTML = "Ping ok but. Error: " + data.errors.join(", ");
                 document.getElementById("apiResponse").classList.add("alert-danger");
                 document.getElementById("apiResponse").classList.remove("alert-info");
             }
         })
         .catch(error => {
-            // Display an error message in the Bootstrap alert
             document.getElementById("apiResponse").innerHTML = "Error fetching data from the API.";
             document.getElementById("apiResponse").classList.add("alert-danger");
             document.getElementById("apiResponse").classList.remove("alert-info");
