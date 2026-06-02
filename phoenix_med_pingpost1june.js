@@ -47,40 +47,31 @@ function postPingId(pingId) {
         traffic_source_id: "10014",
         caller_id: '+1' + document.getElementById('caller_id').value,
         ping_id: pingId,
-	
-		
-
     };
 
-    const originalUrl = 'https://advance-grow-marketing.trackdrive.com/api/v1/inbound_webhooks/post/check_for_med_tr_buyers?' + new URLSearchParams(postData).toString();;
-const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
+    const originalUrl = 'https://advance-grow-marketing.trackdrive.com/api/v1/inbound_webhooks/post/check_for_med_tr_buyers?' + new URLSearchParams(postData).toString();
+    const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
+    
     fetch(url)
     .then(response => {
-        // Handle response based on status
         if (response.status === 200 || response.status === 201) {
             response.text().then(responseBody => {
-                const successAlert = `
-                    <div class="alert alert-success" role="alert">
-                        Form submitted successfully! Response Body: ${responseBody}
-                    </div>`;
+                // Hide offer_conversion_payout
+                const filteredBody = responseBody.replace(/,"offer_conversion_payout":\d+(?:\.\d+)?/g, '');
+                
+                const successAlert = `<div class="alert alert-success" role="alert">Form submitted successfully! Response Body: ${filteredBody}</div>`;
                 document.getElementById('alertContainer').innerHTML = '';
                 document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
             });
         } else if (response.status === 422) {
             response.json().then(data => {
-                const errorAlert = `
-                    <div class="alert alert-danger" role="alert">
-                        Error. Response Body: ${JSON.stringify(data)}
-                    </div>`;
+                const errorAlert = `<div class="alert alert-danger" role="alert">Error. Response Body: ${JSON.stringify(data)}</div>`;
                 document.getElementById('alertContainer').innerHTML = '';
                 document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
             });
         } else {
             response.text().then(responseBody => {
-                const errorAlert = `
-                    <div class="alert alert-danger" role="alert">
-                        Form submission failed. Please try again. Response Body: ${responseBody}
-                    </div>`;
+                const errorAlert = `<div class="alert alert-danger" role="alert">Form submission failed. Please try again. Response Body: ${responseBody}</div>`;
                 document.getElementById('alertContainer').innerHTML = '';
                 document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
             });
@@ -88,7 +79,6 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
     })
     .catch(error => console.error('Error:', error));
 }
-
 document.getElementById('leadForm').addEventListener('submit', function(event) {
     event.preventDefault();
     pingAPI();
