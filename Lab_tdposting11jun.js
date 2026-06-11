@@ -8,7 +8,7 @@ document.getElementById('submitBtn').disabled = true;
     formData.append('traffic_source_id', '3209');
     api_tester(document.getElementById('caller_id').value);
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
-    formData.append('age', document.getElementById('Age').value);
+    formData.append('age', document.getElementById('age').value);
     formData.append('zip', document.getElementById('zip').value);
     formData.append('state', document.getElementById('state').value);
     
