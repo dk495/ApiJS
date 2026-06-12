@@ -8,8 +8,8 @@ document.getElementById('submitBtn').disabled = true;
     formData.append('traffic_source_id', '3209');
     api_tester(document.getElementById('caller_id').value);
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
-    formData.append('age', document.getElementById('age').value);
-    formData.append('zip', document.getElementById('zip').value);
+    formData.append('Age', document.getElementById('age').value);
+    formData.append('Zip', document.getElementById('zip').value);
     formData.append('state', document.getElementById('state').value);
     
 
@@ -18,7 +18,7 @@ document.getElementById('submitBtn').disabled = true;
 
     
 
-            const url = 'https://ggc.trackdrive.com/api/v1/leads/capture?' + new URLSearchParams(formData).toString();
+            const url = 'https://ggc.trackdrive.com/api/v1/leads/capture?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
     
             fetch(url, {
                 method: 'POST'
