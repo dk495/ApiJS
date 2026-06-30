@@ -14,7 +14,8 @@ document.getElementById('submitBtn').disabled = true;
     formData.append('dob', document.getElementById('dob').value);
     formData.append('currently_receiving_ssdi', document.getElementById('currently_receiving_ssdi').value);
     formData.append('applied', document.getElementById('applied').value);
-    formData.append('trusted_form_cert_url', document.getElementById('trusted_form_cert_url').value);
+	//formData.append('jornaya_leadid', document.getElementById('Jornaya_lead_id').value);
+	formData.append('trusted_form_cert_url', 'https://cert.trustedform.com/d1c8cb3258c65a45d8541d221d847a5956a58c8d');
     formData.append('source_url', 'https://quotes.kproinsurance.com/ssdi/');
 
 
