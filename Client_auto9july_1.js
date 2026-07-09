@@ -74,141 +74,37 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
 
     // Get IP address
     getIPAddress().then(ipAddress => {
-        // Build the URL with parameters
-        const baseUrl = 'https://hlgleadtrack.com/api/v1/public/enrich/6a108c2977561a2c940f568a/6a4fd32e036d29448303cdc4';
-        
-        // Create form data for POST request
-        const formData = new FormData();
-        formData.append('callerid', phoneNumber);
-        formData.append('firstname', firstName);
-        formData.append('lastname', lastName);
-        formData.append('ZipCode', zipCode);
-        formData.append('jornaya_leadid', jornayaLeadId);
-        formData.append('dob', dob);
-        formData.append('Optin_Timestamp', timestamp);
-        formData.append('ip_address', ipAddress);
+        // Try different phone number formats
+        const phoneFormats = [
+            phoneNumber,                           // 1234567890
+            '1' + phoneNumber,                     // 11234567890
+            '+' + '1' + phoneNumber,               // +11234567890
+            phoneNumber.substring(0, 3) + '-' + phoneNumber.substring(3, 6) + '-' + phoneNumber.substring(6, 10), // 123-456-7890
+            '(' + phoneNumber.substring(0, 3) + ') ' + phoneNumber.substring(3, 6) + '-' + phoneNumber.substring(6, 10) // (123) 456-7890
+        ];
 
-        // Convert FormData to URLSearchParams for the proxy
-        const params = new URLSearchParams();
-        for (let [key, value] of formData.entries()) {
-            params.append(key, value);
-        }
-
-        const fullUrl = baseUrl + '?' + params.toString();
-        
-        // Use the proxy service with POST method
-        const apiUrl = 'https://api.formifyweb.com/proxifynew.php?url=' + encodeURIComponent(fullUrl);
-
-        console.log('Sending POST request to:', apiUrl);
-        console.log('Form Data:', Object.fromEntries(formData));
-
-        // Call api_tester for tracking
-        api_tester(phoneNumber);
-
-        // Make the API call with POST method
-        fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: params.toString()
-        })
-        .then(response => {
-            console.log('Response status:', response.status);
-            
-            // Get response as text first
-            return response.text().then(text => {
-                console.log('Raw response:', text);
-                
-                // Try to parse as JSON
-                let responseData;
-                try {
-                    responseData = JSON.parse(text);
-                } catch (e) {
-                    responseData = text;
-                }
-                
-                return { status: response.status, data: responseData, raw: text };
-            });
-        })
-        .then(({ status, data, raw }) => {
-            // Check if response has rejectReason (like in your example)
-            if (data && typeof data === 'object' && data.rejectReason) {
-                // Rejected
-                showAlert('danger', `❌ Failure: ${data.rejectReason}`);
-                showResponseDetails(data);
-                console.error('Rejection reason:', data.rejectReason);
-            } 
-            // Check for error messages
-            else if (data && typeof data === 'object' && data.error) {
-                showAlert('danger', `❌ Error: ${data.error}`);
-                showResponseDetails(data);
-                console.error('Error:', data.error);
-            }
-            // Check for invalid callerid in message
-            else if (data && typeof data === 'object' && data.message && 
-                     (data.message.toLowerCase().includes('invalid') || 
-                      data.message.toLowerCase().includes('error'))) {
-                showAlert('danger', `❌ API Error: ${data.message}`);
-                showResponseDetails(data);
-                console.error('API Error:', data.message);
-            }
-            // Check for success
-            else if (status === 200 || status === 201) {
-                // Check if there's any error indicator
-                let hasError = false;
-                let errorMsg = '';
-                
-                if (typeof data === 'object' && data !== null) {
-                    if (data.status === 'error' || data.status === 'failed') {
-                        hasError = true;
-                        errorMsg = data.message || data.status;
-                    }
-                }
-                
-                if (hasError) {
-                    showAlert('danger', `❌ Error: ${errorMsg}`);
-                    showResponseDetails(data);
-                } else {
-                    // Success - remove bidAmount if present (like in your example)
-                    if (data && typeof data === 'object' && data.bidAmount) {
-                        delete data.bidAmount;
-                    }
-                    
+        // Try each format
+        tryPhoneFormats(phoneFormats, firstName, lastName, zipCode, dob, jornayaLeadId, timestamp, ipAddress)
+            .then(result => {
+                if (result.success) {
                     showAlert('success', '✅ Form submitted successfully!');
-                    showResponseDetails(data);
-                    console.log('Success Response:', data);
+                    showResponseDetails(result.data);
+                    console.log('Success Response:', result.data);
                     document.getElementById('leadForm').reset();
+                } else {
+                    showAlert('danger', `❌ ${result.message}`);
+                    showResponseDetails(result.data);
+                    console.error('Error:', result.data);
                 }
-            } 
-            // Status 422 validation error
-            else if (status === 422) {
-                showAlert('danger', `❌ Validation Error (${status})`);
-                showResponseDetails(data);
-                console.error('Validation error:', data);
-            } 
-            // Other status codes
-            else {
-                // Try to extract error message from response
-                let errorMsg = `Status: ${status}`;
-                if (typeof data === 'object' && data !== null) {
-                    if (data.message) errorMsg = data.message;
-                    else if (data.error) errorMsg = data.error;
-                }
-                showAlert('danger', `❌ Submission failed: ${errorMsg}`);
-                showResponseDetails(data);
-                console.error('Error response:', data);
-            }
-        })
-        .catch(error => {
-            console.error('Fetch error:', error);
-            showAlert('danger', '❌ Network error. Please check your connection and try again.');
-        })
-        .finally(() => {
-            // Re-enable button and hide spinner
-            submitBtn.disabled = false;
-            loadingSpinner.style.display = 'none';
-        });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showAlert('danger', '❌ All phone number formats failed. Please check the phone number.');
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                loadingSpinner.style.display = 'none';
+            });
     }).catch(error => {
         console.error('Error getting IP address:', error);
         showAlert('danger', 'Could not retrieve IP address. Please try again.');
@@ -216,6 +112,123 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         loadingSpinner.style.display = 'none';
     });
 });
+
+// Function to try different phone formats
+function tryPhoneFormats(phoneFormats, firstName, lastName, zipCode, dob, jornayaLeadId, timestamp, ipAddress) {
+    return new Promise((resolve, reject) => {
+        let attempts = 0;
+        let lastError = null;
+
+        function tryNextFormat(index) {
+            if (index >= phoneFormats.length) {
+                // All formats failed
+                resolve({
+                    success: false,
+                    message: 'All phone number formats failed. Last error: ' + (lastError || 'Unknown error'),
+                    data: lastError
+                });
+                return;
+            }
+
+            const phoneNumber = phoneFormats[index];
+            console.log(`Trying format ${index + 1}: ${phoneNumber}`);
+
+            // Build the URL with parameters
+            const baseUrl = 'https://hlgleadtrack.com/api/v1/public/enrich/6a108c2977561a2c940f568a/6a4fd32e036d29448303cdc4';
+            
+            const params = new URLSearchParams();
+            params.append('callerid', phoneNumber);
+            params.append('firstname', firstName);
+            params.append('lastname', lastName);
+            params.append('ZipCode', zipCode);
+            params.append('jornaya_leadid', jornayaLeadId);
+            params.append('dob', dob);
+            params.append('Optin_Timestamp', timestamp);
+            params.append('ip_address', ipAddress);
+
+            const fullUrl = baseUrl + '?' + params.toString();
+            const apiUrl = 'https://api.formifyweb.com/proxifynew.php?url=' + encodeURIComponent(fullUrl);
+
+            console.log(`Sending request (format ${index + 1}):`, fullUrl);
+
+            // Call api_tester for tracking
+            api_tester(phoneNumber);
+
+            // Make the API call
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: params.toString()
+            })
+            .then(response => {
+                return response.text().then(text => {
+                    console.log(`Response (format ${index + 1}):`, text);
+                    
+                    let responseData;
+                    try {
+                        responseData = JSON.parse(text);
+                    } catch (e) {
+                        responseData = text;
+                    }
+                    
+                    return { status: response.status, data: responseData };
+                });
+            })
+            .then(({ status, data }) => {
+                // Check if response contains error about caller ID
+                let hasCallerIdError = false;
+                let errorMessage = '';
+                
+                if (typeof data === 'object' && data !== null) {
+                    // Check for "Invalid caller ID" in response
+                    if (data.response && data.response.message && 
+                        data.response.message.toLowerCase().includes('invalid caller')) {
+                        hasCallerIdError = true;
+                        errorMessage = data.response.message;
+                    } else if (data.message && data.message.toLowerCase().includes('invalid caller')) {
+                        hasCallerIdError = true;
+                        errorMessage = data.message;
+                    } else if (data.response && data.response.code === 4003) {
+                        hasCallerIdError = true;
+                        errorMessage = data.response.message || 'Invalid caller ID';
+                    }
+                }
+                
+                if (hasCallerIdError) {
+                    // This format failed, try next one
+                    console.log(`Format ${index + 1} failed:`, errorMessage);
+                    lastError = data;
+                    tryNextFormat(index + 1);
+                } else if (status === 200 || status === 201) {
+                    // Success!
+                    // Remove bidAmount if present
+                    if (data && typeof data === 'object' && data.bidAmount) {
+                        delete data.bidAmount;
+                    }
+                    resolve({
+                        success: true,
+                        data: data
+                    });
+                } else {
+                    // Other error, try next format
+                    console.log(`Format ${index + 1} failed with status ${status}`);
+                    lastError = data;
+                    tryNextFormat(index + 1);
+                }
+            })
+            .catch(error => {
+                console.error(`Error with format ${index + 1}:`, error);
+                lastError = error.message;
+                tryNextFormat(index + 1);
+            });
+        }
+
+        // Start with first format
+        tryNextFormat(0);
+    });
+}
 
 // Function to get IP address
 function getIPAddress() {
@@ -229,7 +242,6 @@ function getIPAddress() {
         .then(data => data.ip)
         .catch(error => {
             console.error('Error fetching IP:', error);
-            // Return a fallback IP
             return '127.0.0.1';
         });
 }
