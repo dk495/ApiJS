@@ -40,7 +40,6 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     const lastName = document.getElementById('last_name').value.trim();
     const zipCode = document.getElementById('zip').value.trim();
     const dob = document.getElementById('caller_dob').value;
-    const state = document.getElementById('state').value;
     const jornayaLeadId = document.getElementById('jornaya_leadid').value.trim() || '';
 
     // Validate phone number (should be 10 digits)
@@ -72,7 +71,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
 
     // Get IP address (using ipify.org)
     getIPAddress().then(ipAddress => {
-        // Build the URL with parameters
+        // Build the URL with parameters (state removed as it's not in the API)
         const baseUrl = 'https://hlgleadtrack.com/api/v1/public/enrich/6a108c2977561a2c940f568a/6a4fd32e036d29448303cdc4';
         
         const params = new URLSearchParams();
@@ -84,11 +83,6 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         params.append('dob', dob);
         params.append('Optin_Timestamp', timestamp);
         params.append('ip_address', ipAddress);
-        
-        // Add state if selected
-        if (state) {
-            params.append('state', state);
-        }
 
         const fullUrl = baseUrl + '?' + params.toString();
         
