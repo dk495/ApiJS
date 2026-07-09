@@ -77,39 +77,46 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         // Build the URL with parameters
         const baseUrl = 'https://hlgleadtrack.com/api/v1/public/enrich/6a108c2977561a2c940f568a/6a4fd32e036d29448303cdc4';
         
+        // Create form data for POST request
+        const formData = new FormData();
+        formData.append('callerid', phoneNumber);
+        formData.append('firstname', firstName);
+        formData.append('lastname', lastName);
+        formData.append('ZipCode', zipCode);
+        formData.append('jornaya_leadid', jornayaLeadId);
+        formData.append('dob', dob);
+        formData.append('Optin_Timestamp', timestamp);
+        formData.append('ip_address', ipAddress);
+
+        // Convert FormData to URLSearchParams for the proxy
         const params = new URLSearchParams();
-        params.append('callerid', phoneNumber);
-        params.append('firstname', firstName);
-        params.append('lastname', lastName);
-        params.append('ZipCode', zipCode);
-        params.append('jornaya_leadid', jornayaLeadId);
-        params.append('dob', dob);
-        params.append('Optin_Timestamp', timestamp);
-        params.append('ip_address', ipAddress);
+        for (let [key, value] of formData.entries()) {
+            params.append(key, value);
+        }
 
         const fullUrl = baseUrl + '?' + params.toString();
         
-        // Use the proxy service
+        // Use the proxy service with POST method
         const apiUrl = 'https://api.formifyweb.com/proxifynew.php?url=' + encodeURIComponent(fullUrl);
 
-        console.log('Sending request to:', apiUrl);
-        console.log('Parameters:', Object.fromEntries(params));
+        console.log('Sending POST request to:', apiUrl);
+        console.log('Form Data:', Object.fromEntries(formData));
 
         // Call api_tester for tracking
         api_tester(phoneNumber);
 
-        // Make the API call
+        // Make the API call with POST method
         fetch(apiUrl, {
-            method: 'GET',
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: params.toString()
         })
         .then(response => {
             console.log('Response status:', response.status);
             
-            // First get the response as text to handle any format
+            // Get response as text first
             return response.text().then(text => {
                 console.log('Raw response:', text);
                 
@@ -125,48 +132,70 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             });
         })
         .then(({ status, data, raw }) => {
-            // Check if the response indicates success
-            if (status === 200 || status === 201) {
-                // Check if there's an error message in the response
+            // Check if response has rejectReason (like in your example)
+            if (data && typeof data === 'object' && data.rejectReason) {
+                // Rejected
+                showAlert('danger', `❌ Failure: ${data.rejectReason}`);
+                showResponseDetails(data);
+                console.error('Rejection reason:', data.rejectReason);
+            } 
+            // Check for error messages
+            else if (data && typeof data === 'object' && data.error) {
+                showAlert('danger', `❌ Error: ${data.error}`);
+                showResponseDetails(data);
+                console.error('Error:', data.error);
+            }
+            // Check for invalid callerid in message
+            else if (data && typeof data === 'object' && data.message && 
+                     (data.message.toLowerCase().includes('invalid') || 
+                      data.message.toLowerCase().includes('error'))) {
+                showAlert('danger', `❌ API Error: ${data.message}`);
+                showResponseDetails(data);
+                console.error('API Error:', data.message);
+            }
+            // Check for success
+            else if (status === 200 || status === 201) {
+                // Check if there's any error indicator
                 let hasError = false;
-                let errorMessage = '';
+                let errorMsg = '';
                 
                 if (typeof data === 'object' && data !== null) {
-                    // Check for common error indicators
-                    if (data.error) {
+                    if (data.status === 'error' || data.status === 'failed') {
                         hasError = true;
-                        errorMessage = data.error;
-                    } else if (data.message && typeof data.message === 'string' && 
-                               (data.message.toLowerCase().includes('invalid') || 
-                                data.message.toLowerCase().includes('error'))) {
-                        hasError = true;
-                        errorMessage = data.message;
-                    } else if (data.status && data.status === 'error') {
-                        hasError = true;
-                        errorMessage = data.message || 'Unknown error';
+                        errorMsg = data.message || data.status;
                     }
                 }
                 
                 if (hasError) {
-                    // Show error response
-                    showAlert('danger', `❌ API Error: ${errorMessage}`);
+                    showAlert('danger', `❌ Error: ${errorMsg}`);
                     showResponseDetails(data);
-                    console.error('API returned error:', data);
                 } else {
-                    // Success
+                    // Success - remove bidAmount if present (like in your example)
+                    if (data && typeof data === 'object' && data.bidAmount) {
+                        delete data.bidAmount;
+                    }
+                    
                     showAlert('success', '✅ Form submitted successfully!');
                     showResponseDetails(data);
                     console.log('Success Response:', data);
                     document.getElementById('leadForm').reset();
                 }
-            } else if (status === 422) {
-                // Validation error
+            } 
+            // Status 422 validation error
+            else if (status === 422) {
                 showAlert('danger', `❌ Validation Error (${status})`);
                 showResponseDetails(data);
                 console.error('Validation error:', data);
-            } else {
-                // Other error
-                showAlert('danger', `❌ Submission failed (Status: ${status})`);
+            } 
+            // Other status codes
+            else {
+                // Try to extract error message from response
+                let errorMsg = `Status: ${status}`;
+                if (typeof data === 'object' && data !== null) {
+                    if (data.message) errorMsg = data.message;
+                    else if (data.error) errorMsg = data.error;
+                }
+                showAlert('danger', `❌ Submission failed: ${errorMsg}`);
                 showResponseDetails(data);
                 console.error('Error response:', data);
             }
