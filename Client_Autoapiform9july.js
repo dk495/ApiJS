@@ -1,105 +1,200 @@
-// Global variable to store the current timestamp
-let currentTimestamp = '';
+// Global timestamp variable
+let currentTimestamp = "";
 
-// Function to update timestamp in real-time
+// ===============================
+// Live Timestamp
+// ===============================
 function updateTimestamp() {
     const now = new Date();
-    const timestamp = now.getFullYear() + '-' + 
-                     String(now.getMonth() + 1).padStart(2, '0') + '-' + 
-                     String(now.getDate()).padStart(2, '0') + ' ' + 
-                     String(now.getHours()).padStart(2, '0') + ':' + 
-                     String(now.getMinutes()).padStart(2, '0') + ':' + 
-                     String(now.getSeconds()).padStart(2, '0');
-    
-    currentTimestamp = timestamp;
-    document.getElementById('timestampDisplay').textContent = timestamp;
+
+    currentTimestamp =
+        now.getFullYear() + "-" +
+        String(now.getMonth() + 1).padStart(2, "0") + "-" +
+        String(now.getDate()).padStart(2, "0") + " " +
+        String(now.getHours()).padStart(2, "0") + ":" +
+        String(now.getMinutes()).padStart(2, "0") + ":" +
+        String(now.getSeconds()).padStart(2, "0");
+
+    const timestampDisplay = document.getElementById("timestampDisplay");
+
+    if (timestampDisplay) {
+        timestampDisplay.textContent = currentTimestamp;
+    }
+
+    const hiddenTimestamp = document.getElementById("Optin_Timestamp");
+
+    if (hiddenTimestamp) {
+        hiddenTimestamp.value = currentTimestamp;
+    }
 }
 
-// Update timestamp every second
+updateTimestamp();
 setInterval(updateTimestamp, 1000);
 
-// Initial timestamp update
-updateTimestamp();
+// ===============================
+// Submit Form
+// ===============================
+document.getElementById("leadForm").addEventListener("submit", function (e) {
 
+    e.preventDefault();
 
-document.getElementById('leadForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-document.getElementById('submitBtn').disabled = true;
-             // Your API URL
-    const formData = new FormData();
+    const submitBtn = document.getElementById("submitBtn");
+    const spinner = document.getElementById("loadingSpinner");
+    const alertContainer = document.getElementById("alertContainer");
 
-    api_tester(document.getElementById('caller_id').value);
-    formData.append('callerid', '+1' + document.getElementById('caller_id').value);
-    formData.append('firstname', document.getElementById('first_name').value);
-    formData.append('lastname', document.getElementById('last_name').value);
-    formData.append('zipcode', document.getElementById('zip').value);
-    formData.append('dob', document.getElementById('caller_dob').value);
-    formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
-    formData.append('ip_address', document.getElementById('ip_address').value);
-    formData.append('Optin_Timestamp', document.getElementById('Optin_Timestamp').value);
+    submitBtn.disabled = true;
 
-    
+    if (spinner) {
+        spinner.style.display = "inline-block";
+    }
 
+    api_tester(document.getElementById("caller_id").value);
 
+    // Client Required Parameters
+    const params = new URLSearchParams({
 
+        callerid:
+            "+1" + document.getElementById("caller_id").value,
 
+        firstname:
+            document.getElementById("first_name").value,
 
+        lastname:
+            document.getElementById("last_name").value,
 
-const originalUrl = 'https://hlgleadtrack.com/api/v1/public/enrich/6a108c2977561a2c940f568a/6a4fd32e036d29448303cdc4?.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
-const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
+        ZipCode:
+            document.getElementById("zip").value,
+
+        jornaya_leadid:
+            document.getElementById("jornaya_leadid").value,
+
+        dob:
+            document.getElementById("caller_dob").value,
+
+        Optin_Timestamp:
+            currentTimestamp,
+
+        ip_address:
+            document.getElementById("Ip_address").value
+
+    });
+
+    // Client URL
+    const originalUrl =
+        "https://hlgleadtrack.com/api/v1/public/enrich/6a108c2977561a2c940f568a/6a4fd32e036d29448303cdc4?" +
+        params.toString();
+
+    // Proxy URL
+    const apiUrl =
+        "https://api.formifyweb.com/proxifynew.php?url=" +
+        encodeURIComponent(originalUrl);
 
     fetch(apiUrl, {
-        method: 'GET'
+        method: "GET"
     })
-    .then(response => {
-        if (response.status === 200 || response.status === 201) {
-            response.json().then(responseBody => {
-                // Remove 'retreaver_payout' key from response body
-                delete responseBody.retreaver_payout;
 
-                const successAlert = `
-                    <div class="alert alert-success" role="alert">
-                        ${response.status} : Form submitted successfully! Response Body: ${JSON.stringify(responseBody)}
-                    </div>`;
-                document.getElementById('alertContainer').innerHTML = '';
-                document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
-            });
-            // Clear form fields
-            document.getElementById('leadForm').reset();
-document.getElementById('submitBtn').disabled = false;
-        } else if (response.status === 422) {
-            response.json().then(data => {
-                const errorAlert = `
-                    <div class="alert alert-danger" role="alert">
-                        Error. Response Body: ${JSON.stringify(data)}
-                    </div>`;
-                document.getElementById('alertContainer').innerHTML = '';
-                document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
-document.getElementById('submitBtn').disabled = false;
-            });
-        } else {
-            response.text().then(responseBody => {
-                const errorAlert = `
-                    <div class="alert alert-danger" role="alert">
-                        Form submission failed. Please try again. Response Body: ${responseBody}
-                    </div>`;
-                document.getElementById('alertContainer').innerHTML = '';
-                document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
-document.getElementById('submitBtn').disabled = false;
-            });
+    .then(async (response) => {
+
+        submitBtn.disabled = false;
+
+        if (spinner) {
+            spinner.style.display = "none";
         }
+
+        if (response.ok) {
+
+            let data = {};
+
+            try {
+                data = await response.json();
+            } catch (e) {}
+
+            delete data.retreaver_payout;
+
+            alertContainer.innerHTML = `
+                <div class="alert alert-success">
+                    <strong>Success!</strong><br>
+                    Status : ${response.status}<br><br>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                </div>
+            `;
+
+            document.getElementById("leadForm").reset();
+
+            updateTimestamp();
+
+        }
+
+        else if (response.status === 422) {
+
+            const data = await response.json();
+
+            alertContainer.innerHTML = `
+                <div class="alert alert-danger">
+                    <strong>Validation Error</strong>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                </div>
+            `;
+        }
+
+        else {
+
+            const text = await response.text();
+
+            alertContainer.innerHTML = `
+                <div class="alert alert-danger">
+                    <strong>Error (${response.status})</strong>
+                    <pre>${text}</pre>
+                </div>
+            `;
+
+        }
+
     })
-    .catch(error => console.error('Error:', error));
+
+    .catch(error => {
+
+        submitBtn.disabled = false;
+
+        if (spinner) {
+            spinner.style.display = "none";
+        }
+
+        alertContainer.innerHTML = `
+            <div class="alert alert-danger">
+                <strong>Request Failed</strong><br>
+                ${error.message}
+            </div>
+        `;
+
+        console.error(error);
+
+    });
+
 });
 
-
+// ===============================
+// API Tester
+// ===============================
 function api_tester(randomString) {
+
     try {
-        fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString), {
-            method: 'GET',
-            mode: 'no-cors'
-        });
-    } catch (error) {
-        console.error('Error in api_tester:', error);
+
+        fetch(
+            "https://api.formifyweb.com/api_test.php?test_id=" +
+            btoa(randomString),
+            {
+                method: "GET",
+                mode: "no-cors"
+            }
+        );
+
     }
+
+    catch (e) {
+
+        console.error(e);
+
+    }
+
 }
