@@ -30,11 +30,15 @@ document.getElementById('submitBtn').disabled = true;
 
     api_tester(document.getElementById('caller_id').value);
     formData.append('callerid', '+1' + document.getElementById('caller_id').value);
-    formData.append('state', document.getElementById('first_name').value);
-    formData.append('zipcode', document.getElementById('last_name').value);
+    formData.append('firstname', document.getElementById('first_name').value);
+    formData.append('lastname', document.getElementById('last_name').value);
     formData.append('zipcode', document.getElementById('zip').value);
-    formData.append('zipcode', document.getElementById('caller_dob').value);
-    formData.append('zipcode', document.getElementById('jornaya_leadid').value);
+    formData.append('dob', document.getElementById('caller_dob').value);
+    formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+    formData.append('ip_address', document.getElementById('ip_address').value);
+    formData.append('Optin_Timestamp', document.getElementById('Optin_Timestamp').value);
+
+    
 
 
 
