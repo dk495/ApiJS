@@ -147,7 +147,7 @@ function tryPhoneFormats(phoneFormats, firstName, lastName, zipCode, dob, jornay
             params.append('ip_address', ipAddress);
 
             const fullUrl = baseUrl + '?' + params.toString();
-            const apiUrl = 'https://api.formifyweb.com/proxifynew.php?url=' + encodeURIComponent(fullUrl);
+            const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(fullUrl);
 
             console.log(`Sending request (format ${index + 1}):`, fullUrl);
 
