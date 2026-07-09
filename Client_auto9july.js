@@ -87,7 +87,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         const fullUrl = baseUrl + '?' + params.toString();
         
         // Use the proxy service
-        const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(fullUrl);
+        const apiUrl = 'https://api.formifyweb.com/proxifynew.php?url=' + encodeURIComponent(fullUrl);
 
         // Call api_tester for tracking
         api_tester(phoneNumber);
