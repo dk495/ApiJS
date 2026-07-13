@@ -16,6 +16,7 @@ document.getElementById('submitBtn').disabled = true;
     formData.append('ip_address', document.getElementById('ip_address').value);
     formData.append('jornaya_leadid', document.getElementById('Jornaya_lead_id').value);
     formData.append('source_url', 'https://quotes.kproinsurance.com/final-expense/');
+	formData.append('trusted_form_cert_url', 'https://quotes.kproinsurance.com');
 
 
 
