@@ -12,7 +12,7 @@ formData.append('Age', document.getElementById('age').value);
 
 
 const originalUrl = 'https://hlgleadtrack.com/api/v1/public/enrich/6a108c2977561a2c940f568a/6a469800036d2944830141dd?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
-const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
+const apiUrl = 'https://api.formifyweb.com/proxifynew.php?url=' + encodeURIComponent(originalUrl);
 
 
     fetch(apiUrl, {
