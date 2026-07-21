@@ -36,12 +36,10 @@ document.getElementById('leadForm').addEventListener('submit', function (event) 
     document.getElementById('alertContainer').innerHTML = '';
 
     const formData = new FormData();
+    formData.append('did', '8444281702');
     formData.append('phone', phone);
-    formData.append('did', document.getElementById('did').value.trim());
-    formData.append(
-        'global_publisher_token',
-        'aZ9Lk3NqB7YpXr2WvMfJ0tCuEhGsDdRo5TwUaHzKmVcBiQxLYe1NRj6ogZsXPwlMBq7dVAiFyn4H3TEp9JClm0KUxtWGbvSa8YZ5OhqcnrM2LgEjxIfwdvPRQTyo7C1uX'
-    );
+    
+    formData.append( 'global_publisher_token', 'aZ9Lk3NqB7YpXr2WvMfJ0tCuEhGsDdRo5TwUaHzKmVcBiQxLYe1NRj6ogZsXPwlMBq7dVAiFyn4H3TEp9JClm0KUxtWGbvSa8YZ5OhqcnrM2LgEjxIfwdvPRQTyo7C1uX');
 
     const url =
         'https://dialer-gw.usisi.cc/api/v1/retreaver/leads/publisher-suppression-and-availability?' +
