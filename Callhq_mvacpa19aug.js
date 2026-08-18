@@ -13,7 +13,7 @@ document.getElementById('submitBtn').disabled = true;
 
 
 
-const originalUrl = 'https://rtb.ringba.com/v1/production/3028791732654311375.json?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
+const originalUrl = 'https://rtb.ringba.com/v1/production/3028791732654311375.json?' + new URLSearchParams(formData).toString();
 const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
     fetch(apiUrl, {
