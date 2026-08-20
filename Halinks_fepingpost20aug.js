@@ -8,7 +8,7 @@ function pingAPI() {
     formData.append('traffic_source_id', '1003');
     api_tester(document.getElementById('caller_id').value);
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
-
+    formData.append('age',document.getElementById('age').value);
 
     
 const originalUrl = 'https://halinks99.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_fe_buyers?' + new URLSearchParams(formData).toString();
@@ -46,6 +46,7 @@ function postPingId(pingId) {
         trackdrive_number: "+18335229898",
         traffic_source_id: "1003",
         caller_id: '+1' + document.getElementById('caller_id').value,
+		age: document.getElementById('age').value,
         ping_id: pingId,
 	
 		
