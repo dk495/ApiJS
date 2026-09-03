@@ -7,12 +7,12 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
 
     formData.append('key', 'df5582e6-c330-4302-ae5e-ec9ed69749d4');
     formData.append('publisher_id', 'JordanMEDCPA');
-    formData.append('caller_number', phone_home);
+    formData.append('CID', phone_home);
     api_tester(document.getElementById('caller_id').value);
     document.getElementById('alertContainer').innerHTML = '';
-    formData.append('caller_zip', document.getElementById('zip').value);
-    formData.append('caller_state', document.getElementById('state').value);
-    formData.append('age', document.getElementById('age').value);
+    formData.append('first_name', document.getElementById('first_name').value); 
+    formData.append('last_name', document.getElementById('last_name').value); 
+    formData.append('incident_state', document.getElementById('state').value);
 
 
 
