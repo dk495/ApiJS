@@ -6,7 +6,7 @@ document.getElementById('leadForm').addEventListener('submit', function(event) {
     const formData = new FormData();
 
     formData.append('key', '9e6b8186-a1db-4307-90e7-47070015c68d');
-    formData.append('publisher_id', 'BCMABCMA');
+    formData.append('publisher_id', 'BCMA');
     formData.append('caller_number', phone_home);
     api_tester(document.getElementById('caller_id').value);
     document.getElementById('alertContainer').innerHTML = '';
