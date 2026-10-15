@@ -13,7 +13,7 @@ document.getElementById('submitBtn').disabled = true;
 
 
 
-const originalUrl = 'PING : https://api.enrollhere.com/dialer/availability/byQueue/92f83d13-63af-4ec3-8d43-ec0c0b908bc4?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
+const originalUrl = 'https://api.enrollhere.com/dialer/availability/byQueue/92f83d13-63af-4ec3-8d43-ec0c0b908bc4?exposeCallerId=yes&' + new URLSearchParams(formData).toString();
 const apiUrl = 'https://api.formifyweb.com/proxify.php?url=' + encodeURIComponent(originalUrl);
 
     fetch(apiUrl, {
