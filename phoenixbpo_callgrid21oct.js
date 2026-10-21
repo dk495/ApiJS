@@ -6,9 +6,6 @@
 formData.append('CallerId', document.getElementById('caller_id').value);
 formData.append('InboundStateCode', document.getElementById('state').value);
 formData.append('InboundZipCode', document.getElementById('zip').value);
-formData.append('first_name', document.getElementById('first_name').value);
-formData.append('last_name', document.getElementById('last_name').value);
-
 
 
 
